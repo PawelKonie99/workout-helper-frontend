@@ -6,11 +6,11 @@ import { SuspenseComponent } from "."
 const Register = SuspenseComponent(lazy(() => import("../pages/Register/Register")))
 
 export const authRoutes = {
-    element: (
-        <GuestGuard>
-            <AuthLayout />
-        </GuestGuard>
-    ),
+    // element: (
+    //     <GuestGuard>
+    //         <AuthLayout />
+    //     </GuestGuard>
+    // ),
     children: [
         {
             path: "register",
