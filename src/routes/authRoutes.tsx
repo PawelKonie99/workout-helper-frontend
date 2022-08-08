@@ -4,6 +4,7 @@ import { GuestGuard } from "./guards"
 import { SuspenseComponent } from "."
 
 const Register = SuspenseComponent(lazy(() => import("../pages/Register/Register")))
+const Login = SuspenseComponent(lazy(() => import("../pages/Login/Login")))
 
 export const authRoutes = {
     // element: (
@@ -26,9 +27,9 @@ export const authRoutes = {
                 // },
             ],
         },
-        // {
-        //     path: "login",
-        //     element: Login,
-        // },
+        {
+            path: "login",
+            element: Login,
+        },
     ],
 }
