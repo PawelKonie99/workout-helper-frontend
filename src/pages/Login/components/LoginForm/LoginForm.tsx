@@ -1,5 +1,6 @@
 import { useForm, Controller, SubmitHandler } from "react-hook-form"
 import { useNavigate } from "react-router"
+import { useDispatch } from "react-redux"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { FormButton, TextInput } from "@/components"
 import { ILoginFormSchema } from "@/types"
@@ -14,6 +15,7 @@ const defaultFormValues: ILoginFormSchema = {
 
 export const LoginForm = () => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const {
         handleSubmit,
@@ -27,7 +29,7 @@ export const LoginForm = () => {
     })
 
     const onSubmit: SubmitHandler<ILoginFormSchema> = (data) => {
-        submitLoginForm(data, navigate)
+        submitLoginForm(data, navigate, dispatch)
         reset()
     }
 
