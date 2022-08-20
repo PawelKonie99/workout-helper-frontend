@@ -12,12 +12,18 @@ const options = [
 interface Props {
     onChange: (...event: any[]) => void
     inputRef: RefCallBack
-    value: string
+    value: {
+        value: string
+        label: string
+    }
     isError?: FieldError
     errorMessage?: string
+    name: string
 }
 
-export const CustomSelect = ({ onChange, inputRef, value, isError, errorMessage }: Props) => {
+export const CustomSelect = ({ onChange, inputRef, value, isError, errorMessage, name }: Props) => {
+    console.log(errorMessage)
+
     return (
         <>
             <Select
@@ -27,6 +33,7 @@ export const CustomSelect = ({ onChange, inputRef, value, isError, errorMessage 
                 onChange={onChange}
                 ref={inputRef}
                 value={value}
+                name={name}
             />
             <FormErrorMessage isError={isError} errorMessage={errorMessage} />
         </>

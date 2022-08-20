@@ -6,9 +6,8 @@ import { FormErrorMessage } from ".."
 interface Props {
     name: string
     label: string
-    value: string
+    value?: number
     onChange: (...event: any[]) => void
-    inputRef: RefCallBack
     isError?: FieldError
     errorMessage?: string
     inputType?: INPUT_TYPES
@@ -17,12 +16,11 @@ interface Props {
     classname?: string
 }
 
-export const TextInput = ({
+export const RepInput = ({
     isError,
     name,
     label,
     onChange,
-    inputRef,
     value,
     errorMessage,
     inputType = INPUT_TYPES.TEXT,
@@ -56,7 +54,6 @@ export const TextInput = ({
                 id={name}
                 label={label}
                 onChange={onChange}
-                ref={inputRef}
                 value={value}
                 variant="outlined"
                 placeholder={placeholder}

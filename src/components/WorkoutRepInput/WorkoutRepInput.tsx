@@ -9,6 +9,7 @@ interface Props {
     errorMessage?: string
 }
 
+//TODO deprecated to remove
 export const WorkoutRepInput = ({ onChange, inputRef, value, isError, errorMessage }: Props) => {
     return (
         <div className="flex flex-col">

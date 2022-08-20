@@ -1,12 +1,11 @@
 import { useForm, SubmitHandler, Controller, useFieldArray } from "react-hook-form"
 
 import { yupResolver } from "@hookform/resolvers/yup"
-import { CustomSelect, FormButton, TextInput, WorkoutRepInput } from "@/components"
+import { BasicForm, CustomSelect, FormButton, TextInput, WorkoutRepInput } from "@/components"
 import { IWorkoutSeriesSchema } from "@/types"
 import { workoutSeriesSchema } from "@/schema"
 import { INPUT_TYPES } from "@/enums"
 import { INITIAL_REP_COUNT } from "@/constants"
-import BasicForm from "@/components/BasicForm"
 
 const defaultFormValues = {
     exerciseData: [
@@ -45,23 +44,23 @@ const Workout = () => {
     //     name: "cart",
     //     control
     //   });
-    const {
-        handleSubmit,
-        control,
-        formState: { errors },
-        reset,
-    } = useForm<testInterface>({
-        resolver: yupResolver(workoutSeriesSchema()),
-        defaultValues: defaultFormValues,
-        mode: "all",
-    })
+    // const {
+    //     handleSubmit,
+    //     control,
+    //     formState: { errors },
+    //     reset,
+    // } = useForm<testInterface>({
+    //     resolver: yupResolver(workoutSeriesSchema()),
+    //     defaultValues: defaultFormValues,
+    //     mode: "all",
+    // })
 
     const onSubmit: SubmitHandler<IWorkoutSeriesSchema> = (data) => {
         // submitLoginForm(data, navigate, dispatch)
         // reset()
     }
 
-    const { fields, append, remove } = useFieldArray({ name: "exerciseData", control })
+    // const { fields, append, remove } = useFieldArray({ name: "exerciseData", control })
 
     // const setsArray = [
     //     {
