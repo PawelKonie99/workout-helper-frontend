@@ -7,6 +7,7 @@ interface ISelectValue {
     label: string
 }
 interface Props {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onChange: (...event: any[]) => void
     inputRef: RefCallBack
     value?: ISelectValue
@@ -46,7 +47,8 @@ export const CustomSelect = ({
 //TODO move to another file
 const selectWorkoutStyles: StylesConfig = {
     control: (styles) => ({ ...styles, margin: "0.5rem 0.5rem 0.5rem 0" }),
-    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+    // option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+    option: (styles) => {
         return {
             ...styles,
             margin: "2px",

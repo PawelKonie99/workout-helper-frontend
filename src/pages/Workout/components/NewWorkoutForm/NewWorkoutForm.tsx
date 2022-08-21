@@ -48,7 +48,6 @@ export const NewWorkoutForm = () => {
 
     const onSubmit = (data: IWorkoutSeriesSchema) => {
         reset()
-        console.log("data", data)
     }
 
     return (

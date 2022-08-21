@@ -43,8 +43,6 @@ export const TextInput = ({
     //     },
     // }
 
-    console.log(errorMessage)
-
     return (
         <div className={`${classname} w-full`}>
             {/* This MaterialUI Layout can be easily replaced by input from another lib or custom one, just pass all off the props */}
