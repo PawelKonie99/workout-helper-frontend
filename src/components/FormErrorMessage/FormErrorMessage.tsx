@@ -6,5 +6,5 @@ interface Props {
 }
 
 export const FormErrorMessage = ({ isError, errorMessage }: Props) => {
-    return isError ? <p className="text-red-200">{errorMessage}</p> : null
+    return isError ? <p className="text-errorRed mr-4">{errorMessage}</p> : null
 }

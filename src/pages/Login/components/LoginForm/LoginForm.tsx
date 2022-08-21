@@ -2,10 +2,10 @@ import { useForm, Controller, SubmitHandler } from "react-hook-form"
 import { useNavigate } from "react-router"
 import { useDispatch } from "react-redux"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { FormButton, TextInput } from "@/components"
+import { NormalButton, TextInput } from "@/components"
 import { ILoginFormSchema } from "@/types"
 import { submitLoginForm } from "@/helpers"
-import { INPUT_TYPES } from "@/enums"
+import { BUTTON_TYPES, INPUT_TYPES } from "@/enums"
 import { loginSchema } from "@/schema"
 
 const defaultFormValues: ILoginFormSchema = {
@@ -79,7 +79,7 @@ export const LoginForm = () => {
                                 />
                             )}
                         />
-                        <FormButton label="Zaloguj sie" />
+                        <NormalButton label="Zaloguj sie" type={BUTTON_TYPES.SUBMIT} />
                     </form>
                 </div>
                 {/* <div className="flex">

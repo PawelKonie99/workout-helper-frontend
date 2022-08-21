@@ -1,10 +1,10 @@
 import { useForm, Controller, SubmitHandler } from "react-hook-form"
 import { useNavigate } from "react-router"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { FormButton, TextInput } from "@/components"
+import { NormalButton, TextInput } from "@/components"
 import { IRegisterFormSchema } from "@/types"
 import { submitRegisterForm } from "@/helpers"
-import { INPUT_TYPES } from "@/enums"
+import { BUTTON_TYPES, INPUT_TYPES } from "@/enums"
 import { registerSchema } from "@/schema"
 
 const defaultFormValues: IRegisterFormSchema = {
@@ -96,7 +96,7 @@ export const RegisterForm = () => {
                                 />
                             )}
                         />
-                        <FormButton label="Zarejestruj sie" />
+                        <NormalButton label="Zarejestruj sie" type={BUTTON_TYPES.SUBMIT} />
                     </form>
                 </div>
                 {/* <div className="flex">
