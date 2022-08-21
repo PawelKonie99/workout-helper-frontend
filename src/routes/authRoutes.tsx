@@ -1,6 +1,6 @@
 import { lazy } from "react"
-import { AuthLayout } from "@/layouts"
-import { GuestGuard } from "./guards"
+// import { AuthLayout } from "@/layouts"
+// import { GuestGuard } from "./guards"
 import { SuspenseComponent } from "."
 
 const Register = SuspenseComponent(lazy(() => import("../pages/Register/Register")))

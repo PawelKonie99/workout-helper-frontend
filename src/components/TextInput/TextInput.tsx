@@ -7,6 +7,7 @@ interface Props {
     name: string
     label: string
     value: string
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onChange: (...event: any[]) => void
     inputRef: RefCallBack
     isError?: FieldError
