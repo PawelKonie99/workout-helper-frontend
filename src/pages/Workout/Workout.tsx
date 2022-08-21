@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler, Controller, useFieldArray } from "react-hook-form"
 
 import { yupResolver } from "@hookform/resolvers/yup"
-import { BasicForm, CustomSelect, FormButton, TextInput, WorkoutRepInput } from "@/components"
+import { BasicForm, CustomSelect, NormalButton, TextInput, WorkoutRepInput } from "@/components"
 import { IWorkoutSeriesSchema } from "@/types"
 import { workoutSeriesSchema } from "@/schema"
 import { INPUT_TYPES } from "@/enums"
@@ -132,7 +132,7 @@ const Workout = () => {
         //                     )}
         //                 />
         //             </div>
-        //             <FormButton label="Podsumuj testowo" />
+        //             <NormalButton label="Podsumuj testowo" />
         //         </form>
         //         {/* <div className="flex w-full">
         //             <Select

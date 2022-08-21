@@ -2,41 +2,44 @@ import { FieldError, RefCallBack } from "react-hook-form"
 import Select, { StylesConfig } from "react-select"
 import { FormErrorMessage } from "../FormErrorMessage/FormErrorMessage"
 
-//TODO move to another file
-const options = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-]
-
+interface ISelectValue {
+    value: string | number
+    label: string
+}
 interface Props {
     onChange: (...event: any[]) => void
     inputRef: RefCallBack
-    value: {
-        value: string
-        label: string
-    }
+    value?: ISelectValue
+    options: ISelectValue[]
+    placeholder: string
+    name: string
     isError?: FieldError
     errorMessage?: string
-    name: string
 }
 
-export const CustomSelect = ({ onChange, inputRef, value, isError, errorMessage, name }: Props) => {
-    console.log(errorMessage)
-
+export const CustomSelect = ({
+    onChange,
+    inputRef,
+    value,
+    placeholder,
+    name,
+    options,
+    isError,
+    errorMessage,
+}: Props) => {
     return (
-        <>
+        <div className="flex flex-col mx-2">
             <Select
                 options={options}
                 styles={selectWorkoutStyles}
-                placeholder="Wybierz ćwiczenie"
+                placeholder={placeholder}
                 onChange={onChange}
                 ref={inputRef}
                 value={value}
                 name={name}
             />
             <FormErrorMessage isError={isError} errorMessage={errorMessage} />
-        </>
+        </div>
     )
 }
 

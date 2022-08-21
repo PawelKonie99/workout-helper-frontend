@@ -10,6 +10,18 @@ export interface IWorkoutSeriesSchema {
             value: string
             label: string
         }
+        repsQuantity: {
+            value: string
+            label: string
+        }
+        seriesQuantity: {
+            value: string
+            label: string
+        }
+        weightQuantity: {
+            value: string
+            label: string
+        }
         // numberOfReps?: number
     }[]
 }
