@@ -2,10 +2,9 @@ import { useForm, useFieldArray, Controller } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { IWorkoutSeriesSchema } from "@/types"
 import { workoutSeriesSchema } from "@/schema"
-import { CustomSelect } from "./CustomSelect/CustomSelect"
 import { EXERCISE_NAME, REPS_QUANTITY, SERIES_QUANTITY, WEIGHT_QUANTITY } from "@/constants"
-import { NormalButton } from "./NormalButton/NormalButton"
 import { BUTTON_TYPES, BUTTON_VARIANT } from "@/enums"
+import { CustomSelect, NormalButton } from "@/components"
 
 const defaultFormValues: IWorkoutSeriesSchema = {
     exerciseData: [
@@ -30,7 +29,7 @@ const defaultFormValues: IWorkoutSeriesSchema = {
     ],
 }
 
-export const BasicForm = () => {
+export const NewWorkoutForm = () => {
     const {
         handleSubmit,
         control,
@@ -47,7 +46,7 @@ export const BasicForm = () => {
         name: "exerciseData",
     })
 
-    const onSubmit = (data: any) => {
+    const onSubmit = (data: IWorkoutSeriesSchema) => {
         reset()
         console.log("data", data)
     }
