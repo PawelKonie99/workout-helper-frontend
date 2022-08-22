@@ -1,8 +1,15 @@
-import { NavigateFunction } from "react-router"
 import { IRegisterFormSchema } from "@/types"
+import { registerUser } from "@/api"
 
-export const submitRegisterForm = (data: IRegisterFormSchema, navigate: NavigateFunction) => {
-    // console.log("Register data", data)
+export const submitRegisterForm = async (data: IRegisterFormSchema) => {
+    const { username, password } = data
 
-    navigate("./here")
+    const registerUserPayload = {
+        username: username,
+        password: password,
+    }
+
+    const { code, message, success } = await registerUser(registerUserPayload)
+
+    return { code, message, success }
 }

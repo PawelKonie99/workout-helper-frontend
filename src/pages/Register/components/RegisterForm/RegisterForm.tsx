@@ -1,3 +1,4 @@
+import { useContext } from "react"
 import { useForm, Controller, SubmitHandler } from "react-hook-form"
 import { useNavigate } from "react-router"
 import { yupResolver } from "@hookform/resolvers/yup"
@@ -6,14 +7,16 @@ import { IRegisterFormSchema } from "@/types"
 import { submitRegisterForm } from "@/helpers"
 import { BUTTON_TYPES, INPUT_TYPES } from "@/enums"
 import { registerSchema } from "@/schema"
+import { PopUpContext } from "@/contexts/PopupContext"
 
 const defaultFormValues: IRegisterFormSchema = {
-    email: "",
+    username: "",
     password: "",
     confirmPassword: "",
 }
 
 export const RegisterForm = () => {
+    const { openPopup, closePopup } = useContext(PopUpContext)
     const navigate = useNavigate()
 
     const {
@@ -27,9 +30,38 @@ export const RegisterForm = () => {
         mode: "all",
     })
 
-    const onSubmit: SubmitHandler<IRegisterFormSchema> = (data) => {
-        submitRegisterForm(data, navigate)
-        reset()
+    const onSubmit: SubmitHandler<IRegisterFormSchema> = async (data) => {
+        const { success } = await submitRegisterForm(data) //TODO zastanowic sie czy nie wywalic tej funkcji i nie wpisac te logiki tutaj
+
+        if (success) {
+            console.log("elo")
+
+            openPopup(
+                <div className="fixed z-50">
+                    <p>Sukces!</p>
+                    <button
+                        onClick={() => {
+                            console.log("elo")
+
+                            closePopup()
+                            navigate("/login")
+                        }}
+                    >
+                        Zaloguj sie
+                    </button>
+                </div>,
+            )
+        } else {
+            console.log("nara")
+            openPopup(
+                <div>
+                    <p>Niepowodzenie!</p>
+                    <button onClick={() => closePopup()}>Zaloguj sie</button>
+                </div>,
+            )
+        }
+
+        // reset()
     }
 
     return (
@@ -43,18 +75,18 @@ export const RegisterForm = () => {
                         className="flex flex-col items-center w-full"
                     >
                         <Controller
-                            name="email"
+                            name="username"
                             control={control}
                             render={({ field: { name, onChange, ref, value } }) => (
                                 <TextInput
-                                    isError={errors.email}
+                                    isError={errors.username}
                                     name={name}
-                                    label="Email"
+                                    label="Username"
                                     onChange={onChange}
                                     inputRef={ref}
                                     value={value}
-                                    errorMessage={errors.email?.message}
-                                    placeholder="Email"
+                                    errorMessage={errors.username?.message}
+                                    placeholder="Username"
                                     classname="pb-4"
                                 />
                             )}

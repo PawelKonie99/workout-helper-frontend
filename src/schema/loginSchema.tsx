@@ -3,7 +3,10 @@ import { ILoginFormSchema } from "@/types"
 
 export const loginSchema = () => {
     const schema: yup.SchemaOf<ILoginFormSchema> = yup.object().shape({
-        email: yup.string().required("Email jest wymagany").email("Zły format maila"),
+        username: yup
+            .string()
+            .required("Nazwa uzytkownika jest wymagana")
+            .min(3, "Nazwa uzytkownika jest za krótka"),
         password: yup.string().required("Hasło jest wymagane").min(6, "Hasło jest za krótkie"),
     })
 

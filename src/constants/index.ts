@@ -1,4 +1,6 @@
 export { USER } from "./sliceNames"
+export { RESPONSE_CODE } from "./apiResponseCodes"
+export { USER_REGISTER } from "./apiRoutes"
 export {
     INITIAL_REP_COUNT,
     EXERCISE_NAME,

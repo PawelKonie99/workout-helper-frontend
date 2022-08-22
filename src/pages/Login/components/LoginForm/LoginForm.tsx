@@ -9,7 +9,7 @@ import { BUTTON_TYPES, INPUT_TYPES } from "@/enums"
 import { loginSchema } from "@/schema"
 
 const defaultFormValues: ILoginFormSchema = {
-    email: "",
+    username: "",
     password: "",
 }
 
@@ -44,18 +44,18 @@ export const LoginForm = () => {
                         className="flex flex-col items-center w-full"
                     >
                         <Controller
-                            name="email"
+                            name="username"
                             control={control}
                             render={({ field: { name, onChange, ref, value } }) => (
                                 <TextInput
-                                    isError={errors.email}
+                                    isError={errors.username}
                                     name={name}
-                                    label="Email"
+                                    label="Username"
                                     onChange={onChange}
                                     inputRef={ref}
                                     value={value}
-                                    errorMessage={errors.email?.message}
-                                    placeholder="Email"
+                                    errorMessage={errors.username?.message}
+                                    placeholder="Username"
                                     classname="pb-4"
                                 />
                             )}
