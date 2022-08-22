@@ -34,15 +34,12 @@ export const RegisterForm = () => {
         const { success } = await submitRegisterForm(data) //TODO zastanowic sie czy nie wywalic tej funkcji i nie wpisac te logiki tutaj
 
         if (success) {
-            console.log("elo")
-
+            reset()
             openPopup(
                 <div className="fixed z-50">
                     <p>Sukces!</p>
                     <button
                         onClick={() => {
-                            console.log("elo")
-
                             closePopup()
                             navigate("/login")
                         }}
@@ -52,7 +49,7 @@ export const RegisterForm = () => {
                 </div>,
             )
         } else {
-            console.log("nara")
+            reset()
             openPopup(
                 <div>
                     <p>Niepowodzenie!</p>
