@@ -11,6 +11,7 @@ module.exports = {
                 primaryBlueDark: "#1a9286",
                 errorRed: "#d53541",
                 errorRedDark: "#6e161d",
+                grey: "#AEB2B6",
             },
         },
     },

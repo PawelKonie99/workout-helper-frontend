@@ -2,12 +2,12 @@ import { useContext } from "react"
 import { useForm, Controller, SubmitHandler } from "react-hook-form"
 import { useNavigate } from "react-router"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { NormalButton, TextInput } from "@/components"
+import { NormalButton, TextInput, TextLink } from "@/components"
 import { IRegisterFormSchema } from "@/types"
-import { submitRegisterForm } from "@/helpers"
-import { BUTTON_TYPES, INPUT_TYPES } from "@/enums"
+import { BUTTON_TYPES, BUTTON_VARIANT, INPUT_TYPES } from "@/enums"
 import { registerSchema } from "@/schema"
 import { PopUpContext } from "@/contexts/PopupContext"
+import { registerUser } from "@/api"
 
 const defaultFormValues: IRegisterFormSchema = {
     username: "",
@@ -31,40 +31,50 @@ export const RegisterForm = () => {
     })
 
     const onSubmit: SubmitHandler<IRegisterFormSchema> = async (data) => {
-        const { success } = await submitRegisterForm(data) //TODO zastanowic sie czy nie wywalic tej funkcji i nie wpisac te logiki tutaj
+        const { username, password } = data
+
+        const registerUserPayload = {
+            username: username,
+            password: password,
+        }
+
+        const { success } = await registerUser(registerUserPayload)
 
         if (success) {
-            reset()
             openPopup(
-                <div className="fixed z-50">
-                    <p>Sukces!</p>
-                    <button
+                <div className="w-full flex flex-col justify-center items-center">
+                    <h1 className="mb-16 text-4xl">Zarejestrowano pomyślnie!</h1>
+                    <NormalButton
+                        label="Zaloguj się"
                         onClick={() => {
                             closePopup()
                             navigate("/login")
                         }}
-                    >
-                        Zaloguj sie
-                    </button>
+                        buttonVariant={BUTTON_VARIANT.SECONDARY}
+                    />
                 </div>,
             )
         } else {
-            reset()
             openPopup(
-                <div>
-                    <p>Niepowodzenie!</p>
-                    <button onClick={() => closePopup()}>Zaloguj sie</button>
+                <div className="w-full flex flex-col justify-center items-center">
+                    <h1 className="mb-16 text-4xl">Niepowodzenie!</h1>
+                    <NormalButton
+                        label="Spróbuj ponownie!"
+                        onClick={() => {
+                            closePopup()
+                        }}
+                        buttonVariant={BUTTON_VARIANT.SECONDARY}
+                    />
                 </div>,
             )
         }
 
-        // reset()
+        reset()
     }
 
     return (
         <div className="py-12 flex justify-center items-center">
-            <div className="bg-white px-12 py-12 flex flex-col items-center w-520px rounded-lg">
-                {/* Consider to make h1 var in tailwind config */}
+            <div className="bg-white px-12 py-12 flex flex-col items-center w-96 rounded-lg">
                 <h1 className="text-3xl pb-8">Zarejestruj sie</h1>
                 <div className="w-full mx-auto flex justify-center">
                     <form
@@ -128,10 +138,7 @@ export const RegisterForm = () => {
                         <NormalButton label="Zarejestruj sie" type={BUTTON_TYPES.SUBMIT} />
                     </form>
                 </div>
-                {/* <div className="flex">
-                    <p className="text-sm pr-4">{t("haveNotGotAccount")}</p>
-                    <UnderlinedLink label={t("signIn")} href="#" />
-                </div> */}
+                <TextLink href="login" label="Masz juz konto? Zaloguj się!" />
             </div>
         </div>
     )
