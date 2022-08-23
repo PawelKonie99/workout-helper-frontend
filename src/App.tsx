@@ -4,6 +4,8 @@ import { StyledEngineProvider } from "@mui/styled-engine"
 // import { ThemeProvider } from "@mui/material/styles"
 import { Router } from "@/routes"
 import { store } from "./store/store"
+import { PopupProvider } from "./contexts"
+import { Popup } from "./components"
 // import { materialUITheme } from "./utils"
 
 function App() {
@@ -12,7 +14,10 @@ function App() {
             <StyledEngineProvider injectFirst>
                 {/* <ThemeProvider theme={materialUITheme}> */}
                 <BrowserRouter>
-                    <Router />
+                    <PopupProvider>
+                        <Popup />
+                        <Router />
+                    </PopupProvider>
                 </BrowserRouter>
                 {/* </ThemeProvider> */}
             </StyledEngineProvider>

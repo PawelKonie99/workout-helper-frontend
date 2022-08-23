@@ -3,7 +3,10 @@ import { IRegisterFormSchema } from "@/types"
 
 export const registerSchema = () => {
     const schema: yup.SchemaOf<IRegisterFormSchema> = yup.object().shape({
-        email: yup.string().required("Email jest wymagany").email("Zły format maila"),
+        username: yup
+            .string()
+            .required("Nazwa uzytkownika jest wymagana")
+            .min(3, "Nazwa uzytkownika jest za krótka"),
         password: yup.string().required("Hasło jest wymagane").min(6, "Hasło jest za krótkie"),
         confirmPassword: yup
             .string()
