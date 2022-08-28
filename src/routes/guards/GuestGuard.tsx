@@ -1,3 +1,5 @@
+import { RootState } from "@/store/store"
+import { useSelector } from "react-redux"
 import { Navigate } from "react-router-dom"
 
 interface Props {
@@ -6,7 +8,7 @@ interface Props {
 
 export const GuestGuard = ({ children }: Props) => {
     //Here token need to be checked, or smth else that recognize logged user
-    const isAuthenticated = false
+    const isLoggedIn = useSelector((state: RootState) => state.userReducer.loggedIn)
 
-    return isAuthenticated ? <Navigate to="/" /> : <>{children}</>
+    return isLoggedIn ? <Navigate to="/" /> : <>{children}</>
 }
