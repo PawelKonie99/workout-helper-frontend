@@ -3,7 +3,7 @@ import { IWorkoutSeriesSchema } from "@/types"
 
 export const workoutSeriesSchema = () => {
     const schema: yup.SchemaOf<IWorkoutSeriesSchema> = yup.object().shape({
-        exerciseData: yup.array().of(
+        workoutData: yup.array().of(
             yup.object().shape({
                 // exerciseName: yup.string().required("Wybór ćwiczenia jest wymagany"),
                 exerciseName: yup.object().shape({
