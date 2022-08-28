@@ -48,20 +48,20 @@ export const NewWorkoutForm = () => {
     })
 
     const onSubmit = async (data: IWorkoutSeriesSchema) => {
-        const parsedSubmitedForm = data.workoutData.map((object) => ({
-            exerciseName: object.exerciseName.value,
-            repsQuantity: Number(object.repsQuantity.value),
-            seriesQuantity: Number(object.seriesQuantity.value),
-            weightQuantity: Number(object.weightQuantity.value),
-        }))
+        // const parsedSubmitedForm = data.workoutData.map((object) => ({
+        //     exerciseName: object.exerciseName.value,
+        //     repsQuantity: Number(object.repsQuantity.value),
+        //     seriesQuantity: Number(object.seriesQuantity.value),
+        //     weightQuantity: Number(object.weightQuantity.value),
+        // }))
 
-        const newWorkoutPayload = {
-            workoutData: parsedSubmitedForm,
-        }
+        // const newWorkoutPayload = {
+        //     workoutData: parsedSubmitedForm,
+        // }
 
-        const response = await addNewWorkout(newWorkoutPayload)
+        // const response = await addNewWorkout(newWorkoutPayload)
 
-        console.log("response", response)
+        // console.log("response", response)
 
         reset()
         return data
