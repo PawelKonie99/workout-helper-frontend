@@ -1,11 +1,13 @@
+import { useContext } from "react"
 import { useForm, useFieldArray, Controller } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { IWorkoutSeriesSchema } from "@/types"
 import { workoutSeriesSchema } from "@/schema"
 import { EXERCISE_NAME, REPS_QUANTITY, SERIES_QUANTITY, WEIGHT_QUANTITY } from "@/constants"
-import { BUTTON_TYPES, BUTTON_VARIANT } from "@/enums"
+import { BUTTON_TYPES, BUTTON_VARIANT, RESPONSE_CODE } from "@/enums"
 import { CustomSelect, NormalButton } from "@/components"
 import { addNewWorkout } from "@/api"
+import { PopUpContext } from "@/contexts"
 
 const defaultFormValues: IWorkoutSeriesSchema = {
     workoutData: [
@@ -31,6 +33,8 @@ const defaultFormValues: IWorkoutSeriesSchema = {
 }
 
 export const NewWorkoutForm = () => {
+    const { openPopup, closePopup } = useContext(PopUpContext)
+
     const {
         handleSubmit,
         control,
@@ -48,20 +52,46 @@ export const NewWorkoutForm = () => {
     })
 
     const onSubmit = async (data: IWorkoutSeriesSchema) => {
-        // const parsedSubmitedForm = data.workoutData.map((object) => ({
-        //     exerciseName: object.exerciseName.value,
-        //     repsQuantity: Number(object.repsQuantity.value),
-        //     seriesQuantity: Number(object.seriesQuantity.value),
-        //     weightQuantity: Number(object.weightQuantity.value),
-        // }))
+        const parsedSubmitedForm = data.workoutData.map((object) => ({
+            exerciseName: object.exerciseName.value,
+            repsQuantity: Number(object.repsQuantity.value),
+            seriesQuantity: Number(object.seriesQuantity.value),
+            weightQuantity: Number(object.weightQuantity.value),
+        }))
 
-        // const newWorkoutPayload = {
-        //     workoutData: parsedSubmitedForm,
-        // }
+        const newWorkoutPayload = {
+            workoutData: parsedSubmitedForm,
+        }
 
-        // const response = await addNewWorkout(newWorkoutPayload)
+        const { code } = await addNewWorkout(newWorkoutPayload)
 
-        // console.log("response", response)
+        if (code === RESPONSE_CODE.success) {
+            openPopup(
+                <div className="w-full flex flex-col justify-center items-center">
+                    <h1 className="mb-16 text-4xl">Trening dodany pomyślnie!</h1>
+                    <NormalButton
+                        label="Zamknij!"
+                        onClick={() => {
+                            closePopup()
+                        }}
+                        buttonVariant={BUTTON_VARIANT.SECONDARY}
+                    />
+                </div>,
+            )
+        } else {
+            openPopup(
+                <div className="w-full flex flex-col justify-center items-center">
+                    <h1 className="mb-16 text-4xl">Błąd podczas dodawania treningu!</h1>
+                    <NormalButton
+                        label="Zamknij!"
+                        onClick={() => {
+                            closePopup()
+                        }}
+                        buttonVariant={BUTTON_VARIANT.SECONDARY}
+                    />
+                </div>,
+            )
+        }
 
         reset()
         return data

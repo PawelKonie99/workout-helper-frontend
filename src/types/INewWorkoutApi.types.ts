@@ -1,3 +1,5 @@
+import { RESPONSE_CODE } from "@/enums"
+
 export interface INewWorkoutPayload {
     workoutData: {
         exerciseName: string
@@ -5,4 +7,10 @@ export interface INewWorkoutPayload {
         seriesQuantity: number
         weightQuantity: number
     }[]
+}
+
+export interface INewWorkoutResponse {
+    code: RESPONSE_CODE
+    message: string
+    success: string
 }

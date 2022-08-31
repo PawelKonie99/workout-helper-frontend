@@ -1,1 +1,1 @@
-export {}
+export { getStorageItem } from "./getStorageItem"

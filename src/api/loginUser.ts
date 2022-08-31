@@ -4,7 +4,7 @@ import { IUserLoginResponse } from "@/types/IUserApi.types"
 import { USER_LOGIN } from "@/constants"
 
 export const loginUser = async (userPayload: IUserLoginPayload) => {
-    const response = await axios.post<IUserLoginResponse>(USER_LOGIN, userPayload)
+    const { data } = await axios.post<IUserLoginResponse>(USER_LOGIN, userPayload)
 
-    return response.data
+    return data
 }

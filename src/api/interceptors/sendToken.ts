@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios"
+import { getStorageItem } from "@/helpers"
 
 export const instance = axios.create({
     baseURL: "http://localhost:3000", //TODO zmienic potem na odpowiedni link
@@ -6,19 +7,19 @@ export const instance = axios.create({
 
 instance.interceptors.request.use(
     (config: AxiosRequestConfig) => {
-        const storage = localStorage.getItem("userReducer") //TODO move to seprate file
+        const storage = getStorageItem("persist:root") //TODO move to seprate file
 
         if (config.headers === undefined) {
             config.headers = {}
         }
-        config.headers.token = "I am only a header!"
 
-        // const token = localStorageService.getAccessToken()
-        // if (token) {
-        //   config.headers['Authorization'] = 'Bearer ' + token
-        // }
+        if (storage) {
+            const token = JSON.parse(JSON.parse(storage).userReducer).token
 
-        // console.log("interceptor storage", storage)
+            if (token) {
+                config.headers["Authorization"] = "Bearer " + token
+            }
+        }
 
         return config
     },
