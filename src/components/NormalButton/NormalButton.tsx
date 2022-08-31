@@ -21,7 +21,7 @@ export const NormalButton = ({
 }: Props) => {
     const buttonAppearance = classNames({
         "bg-primary hover:bg-primaryDark": buttonVariant === BUTTON_VARIANT.PRIMARY,
-        "bg-primaryBlue hover:bg-primaryBlueDark": buttonVariant === BUTTON_VARIANT.SECONDARY,
+        "bg-primaryBlue hover:bg-primaryBlue": buttonVariant === BUTTON_VARIANT.SECONDARY,
         "bg-errorRed hover:bg-errorRedDark": buttonVariant === BUTTON_VARIANT.DELETE,
     })
 

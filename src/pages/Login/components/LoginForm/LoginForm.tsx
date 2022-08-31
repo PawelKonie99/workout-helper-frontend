@@ -8,7 +8,7 @@ import { saveUserLogin } from "@/store/userReducer/actions/saveUserLogin"
 import { ILoginFormSchema } from "@/types"
 import { BUTTON_TYPES, BUTTON_VARIANT, INPUT_TYPES, RESPONSE_CODE } from "@/enums"
 import { loginSchema } from "@/schema"
-import { LoginUser } from "@/api"
+import { loginUser } from "@/api"
 import { PopUpContext } from "@/contexts"
 
 const defaultFormValues: ILoginFormSchema = {
@@ -33,7 +33,7 @@ export const LoginForm = () => {
     })
 
     const onSubmit: SubmitHandler<ILoginFormSchema> = async (data) => {
-        const { loggedUser, code } = await LoginUser(data)
+        const { loggedUser, code } = await loginUser(data)
 
         if (loggedUser?.token) {
             saveUserLogin(dispatch, loggedUser?.token)

@@ -1,11 +1,11 @@
 // export interface IWorkoutSeriesSchema {
-//     exerciseData: {
+//     workoutData: {
 //         exerciseName: string
 //         numberOfReps: string
 //     }[]
 // }
 export interface IWorkoutSeriesSchema {
-    exerciseData: {
+    workoutData: {
         exerciseName: {
             value: string
             label: string

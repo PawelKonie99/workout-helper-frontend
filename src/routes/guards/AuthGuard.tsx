@@ -1,12 +1,13 @@
+import { useSelector } from "react-redux"
 import { Navigate } from "react-router-dom"
+import { RootState } from "@/store/store"
 
 interface Props {
     children: React.ReactNode
 }
 
 export const AuthGuard = ({ children }: Props) => {
-    //Here token need to be checked, or smth else that recognize logged user
-    const isAuthenticated = true
+    const isLoggedIn = useSelector((state: RootState) => state.userReducer.loggedIn)
 
-    return !isAuthenticated ? <Navigate to="/login" /> : <>{children}</>
+    return !isLoggedIn ? <Navigate to="/login" /> : <>{children}</>
 }

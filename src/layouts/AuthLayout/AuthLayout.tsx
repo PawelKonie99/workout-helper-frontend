@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom"
-import { Navbar, Footer } from ".."
+import { Footer } from "../components"
 
 export const AuthLayout = () => {
     return (
         <>
-            <Navbar />
+            {/* <Navbar /> */}
             <div className="bg-background px-6">
                 <Outlet />
             </div>

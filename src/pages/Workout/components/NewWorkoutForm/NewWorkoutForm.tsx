@@ -1,13 +1,16 @@
+import { useContext } from "react"
 import { useForm, useFieldArray, Controller } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { IWorkoutSeriesSchema } from "@/types"
 import { workoutSeriesSchema } from "@/schema"
 import { EXERCISE_NAME, REPS_QUANTITY, SERIES_QUANTITY, WEIGHT_QUANTITY } from "@/constants"
-import { BUTTON_TYPES, BUTTON_VARIANT } from "@/enums"
+import { BUTTON_TYPES, BUTTON_VARIANT, RESPONSE_CODE } from "@/enums"
 import { CustomSelect, NormalButton } from "@/components"
+import { addNewWorkout } from "@/api"
+import { PopUpContext } from "@/contexts"
 
 const defaultFormValues: IWorkoutSeriesSchema = {
-    exerciseData: [
+    workoutData: [
         {
             exerciseName: {
                 value: "",
@@ -30,6 +33,8 @@ const defaultFormValues: IWorkoutSeriesSchema = {
 }
 
 export const NewWorkoutForm = () => {
+    const { openPopup, closePopup } = useContext(PopUpContext)
+
     const {
         handleSubmit,
         control,
@@ -43,10 +48,51 @@ export const NewWorkoutForm = () => {
 
     const { fields, append, remove } = useFieldArray({
         control,
-        name: "exerciseData",
+        name: "workoutData",
     })
 
-    const onSubmit = (data: IWorkoutSeriesSchema) => {
+    const onSubmit = async (data: IWorkoutSeriesSchema) => {
+        const parsedSubmitedForm = data.workoutData.map((object) => ({
+            exerciseName: object.exerciseName.value,
+            repsQuantity: Number(object.repsQuantity.value),
+            seriesQuantity: Number(object.seriesQuantity.value),
+            weightQuantity: Number(object.weightQuantity.value),
+        }))
+
+        const newWorkoutPayload = {
+            workoutData: parsedSubmitedForm,
+        }
+
+        const { code } = await addNewWorkout(newWorkoutPayload)
+
+        if (code === RESPONSE_CODE.success) {
+            openPopup(
+                <div className="w-full flex flex-col justify-center items-center">
+                    <h1 className="mb-16 text-4xl">Trening dodany pomyślnie!</h1>
+                    <NormalButton
+                        label="Zamknij!"
+                        onClick={() => {
+                            closePopup()
+                        }}
+                        buttonVariant={BUTTON_VARIANT.SECONDARY}
+                    />
+                </div>,
+            )
+        } else {
+            openPopup(
+                <div className="w-full flex flex-col justify-center items-center">
+                    <h1 className="mb-16 text-4xl">Błąd podczas dodawania treningu!</h1>
+                    <NormalButton
+                        label="Zamknij!"
+                        onClick={() => {
+                            closePopup()
+                        }}
+                        buttonVariant={BUTTON_VARIANT.SECONDARY}
+                    />
+                </div>,
+            )
+        }
+
         reset()
         return data
     }
@@ -57,7 +103,7 @@ export const NewWorkoutForm = () => {
                 return (
                     <div key={item.id} className="flex items-start my-2">
                         <Controller
-                            name={`exerciseData.${index}.exerciseName`}
+                            name={`workoutData.${index}.exerciseName`}
                             control={control}
                             defaultValue={item.exerciseName}
                             render={({ field: { name, onChange, ref, value } }) => (
@@ -68,15 +114,15 @@ export const NewWorkoutForm = () => {
                                     onChange={onChange}
                                     inputRef={ref}
                                     value={EXERCISE_NAME.find((c) => c.value === value.value)}
-                                    isError={errors?.exerciseData?.[index]?.exerciseName?.label}
+                                    isError={errors?.workoutData?.[index]?.exerciseName?.label}
                                     errorMessage={
-                                        errors?.exerciseData?.[index]?.exerciseName?.label?.message
+                                        errors?.workoutData?.[index]?.exerciseName?.label?.message
                                     }
                                 />
                             )}
                         />
                         <Controller
-                            name={`exerciseData.${index}.repsQuantity`}
+                            name={`workoutData.${index}.repsQuantity`}
                             control={control}
                             defaultValue={item.repsQuantity}
                             render={({ field: { name, onChange, ref, value } }) => (
@@ -87,15 +133,15 @@ export const NewWorkoutForm = () => {
                                     onChange={onChange}
                                     inputRef={ref}
                                     value={REPS_QUANTITY.find((c) => c.value === value.value)}
-                                    isError={errors?.exerciseData?.[index]?.repsQuantity?.label}
+                                    isError={errors?.workoutData?.[index]?.repsQuantity?.label}
                                     errorMessage={
-                                        errors?.exerciseData?.[index]?.repsQuantity?.label?.message
+                                        errors?.workoutData?.[index]?.repsQuantity?.label?.message
                                     }
                                 />
                             )}
                         />
                         <Controller
-                            name={`exerciseData.${index}.seriesQuantity`}
+                            name={`workoutData.${index}.seriesQuantity`}
                             control={control}
                             defaultValue={item.seriesQuantity}
                             render={({ field: { name, onChange, ref, value } }) => (
@@ -106,16 +152,15 @@ export const NewWorkoutForm = () => {
                                     onChange={onChange}
                                     inputRef={ref}
                                     value={SERIES_QUANTITY.find((c) => c.value === value.value)}
-                                    isError={errors?.exerciseData?.[index]?.seriesQuantity?.label}
+                                    isError={errors?.workoutData?.[index]?.seriesQuantity?.label}
                                     errorMessage={
-                                        errors?.exerciseData?.[index]?.seriesQuantity?.label
-                                            ?.message
+                                        errors?.workoutData?.[index]?.seriesQuantity?.label?.message
                                     }
                                 />
                             )}
                         />
                         <Controller
-                            name={`exerciseData.${index}.weightQuantity`}
+                            name={`workoutData.${index}.weightQuantity`}
                             control={control}
                             defaultValue={item.weightQuantity}
                             render={({ field: { name, onChange, ref, value } }) => (
@@ -126,10 +171,9 @@ export const NewWorkoutForm = () => {
                                     onChange={onChange}
                                     inputRef={ref}
                                     value={WEIGHT_QUANTITY.find((c) => c.value === value.value)}
-                                    isError={errors?.exerciseData?.[index]?.weightQuantity?.label}
+                                    isError={errors?.workoutData?.[index]?.weightQuantity?.label}
                                     errorMessage={
-                                        errors?.exerciseData?.[index]?.weightQuantity?.label
-                                            ?.message
+                                        errors?.workoutData?.[index]?.weightQuantity?.label?.message
                                     }
                                 />
                             )}
@@ -148,7 +192,7 @@ export const NewWorkoutForm = () => {
                     buttonVariant={BUTTON_VARIANT.SECONDARY}
                     label="Dodaj ćwiczenie"
                     onClick={() => {
-                        append(defaultFormValues.exerciseData)
+                        append(defaultFormValues.workoutData)
                     }}
                     className="mb-4"
                 />
