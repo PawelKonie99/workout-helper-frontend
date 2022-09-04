@@ -1,4 +1,5 @@
 import { useContext } from "react"
+import { toast } from "react-toastify"
 import { useForm, useFieldArray, Controller } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { IWorkoutSeriesSchema } from "@/types"
@@ -8,6 +9,7 @@ import { BUTTON_TYPES, BUTTON_VARIANT, RESPONSE_CODE } from "@/enums"
 import { CustomSelect, NormalButton } from "@/components"
 import { addNewWorkout } from "@/api"
 import { PopUpContext } from "@/contexts"
+import "react-toastify/dist/ReactToastify.css"
 
 const defaultFormValues: IWorkoutSeriesSchema = {
     workoutData: [
@@ -66,18 +68,7 @@ export const NewWorkoutForm = () => {
         const { code } = await addNewWorkout(newWorkoutPayload)
 
         if (code === RESPONSE_CODE.success) {
-            openPopup(
-                <div className="w-full flex flex-col justify-center items-center">
-                    <h1 className="mb-16 text-4xl">Trening dodany pomyślnie!</h1>
-                    <NormalButton
-                        label="Zamknij!"
-                        onClick={() => {
-                            closePopup()
-                        }}
-                        buttonVariant={BUTTON_VARIANT.SECONDARY}
-                    />
-                </div>,
-            )
+            toast.success("Trening dodany pomyślnie!")
         } else {
             openPopup(
                 <div className="w-full flex flex-col justify-center items-center">
@@ -91,6 +82,7 @@ export const NewWorkoutForm = () => {
                     />
                 </div>,
             )
+            toast.error("Błąd podczas dodawania treningu!")
         }
 
         reset()

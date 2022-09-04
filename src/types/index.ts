@@ -1,7 +1,13 @@
 export type { IRegisterFormSchema } from "./IRegisterFormSchema.types"
 export type { ILoginFormSchema } from "./ILoginFormSchema.types"
 export type { IWorkoutSeriesSchema } from "./IWorkoutSeriesSchema.types"
-export type { INewWorkoutPayload } from "./INewWorkoutApi.types"
+export type { INewWorkoutPayload } from "./IWorkoutApi.types"
+export type {
+    IGetAllUserWorkoutsResponse,
+    IUserWorkoutDataFromDatabase,
+    IUserWorkoutData,
+    IWorkoutFields,
+} from "./IWorkoutApi.types"
 export type {
     IUserRegisterPayload,
     IUserRegisterResponse,

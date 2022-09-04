@@ -5,7 +5,7 @@ import { StyledEngineProvider } from "@mui/styled-engine"
 import { Router } from "@/routes"
 import { store } from "./store/store"
 import { PopupProvider } from "./contexts"
-import { Popup } from "./components"
+import { CustomToastContainer, Popup } from "./components"
 // import { materialUITheme } from "./utils"
 
 function App() {
@@ -20,6 +20,7 @@ function App() {
                     </PopupProvider>
                 </BrowserRouter>
                 {/* </ThemeProvider> */}
+                <CustomToastContainer />
             </StyledEngineProvider>
         </Provider>
     )
