@@ -28,6 +28,7 @@ const Profile = () => {
         navigate("/login")
     }
 
+    //TODO to bedzie pewnie do rozbudowy
     return (
         <ContentContainer>
             <div className="flex w-full">

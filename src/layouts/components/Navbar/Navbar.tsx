@@ -12,6 +12,11 @@ export const Navbar = () => {
                     </Link>
                 </li>
                 <li className="ml-8">
+                    <Link to="/meal">
+                        <span className="text-lg">Dodaj posiłek</span>
+                    </Link>
+                </li>
+                <li className="ml-8">
                     <Link to="/profile">
                         <span className="text-lg">Profil</span>
                     </Link>
