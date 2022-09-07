@@ -1,3 +1,4 @@
+import { ChangeEvent } from "react"
 import { FieldError, RefCallBack } from "react-hook-form"
 import { TextField } from "@mui/material"
 import { INPUT_TYPES } from "@/enums"
@@ -8,8 +9,8 @@ interface Props {
     label: string
     value: string
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    onChange: (...event: any[]) => void
-    inputRef: RefCallBack
+    onChange: (event: ChangeEvent<HTMLInputElement>) => void
+    inputRef?: RefCallBack
     isError?: FieldError
     errorMessage?: string
     inputType?: INPUT_TYPES
