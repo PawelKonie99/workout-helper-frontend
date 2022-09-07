@@ -20,7 +20,7 @@ export const AddProductForm = ({ timeOfTheMeal, title }: Props) => {
         const productData = await getByProductData(productName)
 
         //Tutaj powinno leciec zapisanie posilki do bazy danych
-        console.log("productData", productData)
+        console.log("productData", productData, timeOfTheMeal)
     }
 
     return (

@@ -27,7 +27,6 @@
     "plugins": ["react", "@typescript-eslint", "testing-library"],
     "rules": {
         "no-shadow": "off",
-        "no-console": "warn",
         "prefer-const": "error",
         "no-useless-escape": "off",
         "import/no-unresolved": "off",
