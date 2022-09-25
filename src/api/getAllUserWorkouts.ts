@@ -1,4 +1,4 @@
-import { ALL_USER_WORKOUTS } from "@/constants/apiRoutes"
+import { ALL_USER_WORKOUTS } from "@/constants"
 import { IGetAllUserWorkoutsResponse } from "@/types/IWorkoutApi.types"
 import { instance } from "./interceptors/sendToken"
 

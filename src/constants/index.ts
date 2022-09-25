@@ -1,5 +1,11 @@
 export { USER } from "./sliceNames"
-export { USER_REGISTER, USER_LOGIN, NEW_WORKOUT } from "./apiRoutes"
+export {
+    USER_REGISTER,
+    USER_LOGIN,
+    NEW_WORKOUT,
+    ALL_USER_WORKOUTS,
+    FOOD_PRODUCT,
+} from "./apiRoutes"
 export {
     INITIAL_REP_COUNT,
     EXERCISE_NAME,
