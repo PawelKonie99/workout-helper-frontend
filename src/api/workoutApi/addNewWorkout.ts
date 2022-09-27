@@ -1,6 +1,6 @@
 import { INewWorkoutPayload } from "@/types"
 import { NEW_WORKOUT } from "@/constants/apiRoutes"
-import { instance } from "./interceptors/sendToken"
+import { instance } from "../interceptors/sendToken"
 import { INewWorkoutResponse } from "@/types/IWorkoutApi.types"
 
 export const addNewWorkout = async (workoutPayload: INewWorkoutPayload) => {

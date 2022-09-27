@@ -5,6 +5,7 @@ export {
     NEW_WORKOUT,
     ALL_USER_WORKOUTS,
     FOOD_PRODUCT,
+    TODAY_FOOD_PRODUCT,
 } from "./apiRoutes"
 export {
     INITIAL_REP_COUNT,

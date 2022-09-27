@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 export const Navbar = () => {
     return (
-        <div className="fixed w-full flex m-auto justify-between px-16 py-6 bg-primaryYellow">
+        <div className="fixed w-full flex m-auto justify-between px-16 py-6 bg-primaryYellow z-50">
             {/* //TODO replace to img */}
             <p>logo</p>
             <ul className="flex">

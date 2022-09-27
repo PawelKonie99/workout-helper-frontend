@@ -7,7 +7,7 @@ import { AuthGuard } from "./guards"
 const Home = SuspenseComponent(lazy(() => import("../pages/Home/Home")))
 const Workout = SuspenseComponent(lazy(() => import("../pages/Workout/Workout")))
 const Profile = SuspenseComponent(lazy(() => import("../pages/Profile/Profile")))
-const AddMeal = SuspenseComponent(lazy(() => import("../pages/AddMeal/AddMeal")))
+const AddProduct = SuspenseComponent(lazy(() => import("../pages/AddProduct/AddProduct")))
 
 export const homeRoutes = {
     element: (
@@ -30,7 +30,7 @@ export const homeRoutes = {
         },
         {
             path: "/meal",
-            element: AddMeal,
+            element: AddProduct,
         },
     ],
 }
