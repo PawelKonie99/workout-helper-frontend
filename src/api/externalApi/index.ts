@@ -1,0 +1,1 @@
+export { getByProductData } from "./getProductData"

@@ -1,6 +1,6 @@
 export const INITIAL_REP_COUNT = 5
 
-//TODO w przyszlosci przeniesc to do hookow, wartosci beda pobierane z backendu i ustawiane w reduxie
+//TODO w przyszlosci przeniesc to do hookow/helperow, wartosci beda pobierane z backendu i ustawiane w reduxie
 export const EXERCISE_NAME = [
     { value: "Wyciskanie na lawce plaskiej", label: "Wyciskanie na lawce plaskiej" },
     { value: "Wyciskanie zolnierskie", label: "Wyciskanie zolnierskie" },

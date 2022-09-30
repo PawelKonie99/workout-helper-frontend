@@ -7,7 +7,7 @@ export const instance = axios.create({
 
 instance.interceptors.request.use(
     (config: AxiosRequestConfig) => {
-        const storage = getStorageItem("persist:root") //TODO move to seprate file
+        const storage = getStorageItem("persist:root")
 
         if (config.headers === undefined) {
             config.headers = {}
