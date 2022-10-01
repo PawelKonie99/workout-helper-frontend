@@ -8,6 +8,7 @@ export type {
     ITodayProductsResponse,
     ITodayProducts,
     IDatabaseProduct,
+    IProductsSummary,
 } from "./IMealApi.types"
 export type { INewWorkoutPayload } from "./IWorkoutApi.types"
 export type {

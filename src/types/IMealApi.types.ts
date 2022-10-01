@@ -21,6 +21,7 @@ export interface IDatabaseProduct {
     proteins: string
     carbons: string
     fat: string
+    _id: string
 }
 
 export interface IAllProductsResponse {
@@ -43,6 +44,7 @@ export interface ITodayProductsResponse {
     code: RESPONSE_CODE
     success: boolean
     todayUserProducts?: ITodayProducts
+    dailySummary?: IProductsSummary
 }
 
 export interface ITodayProducts {
@@ -55,4 +57,11 @@ export interface ITodayProducts {
         supper: IDatabaseProduct[]
     }
     id: string
+}
+
+export interface IProductsSummary {
+    totalKcal: number
+    totalProteins: number
+    totalFat: number
+    totalCarbons: number
 }
