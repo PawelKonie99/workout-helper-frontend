@@ -15,26 +15,31 @@ export interface ISaveProductResponse {
     success: boolean
 }
 
+export interface IDeleteProductResponse {
+    code: RESPONSE_CODE
+    success: boolean
+}
+
 export interface IDatabaseProduct {
     productName: string
     kcal: string
     proteins: string
     carbons: string
     fat: string
+    _id: string
 }
 
 export interface IAllProductsResponse {
     code: RESPONSE_CODE
     success: boolean
     allUserProducts?: {
-        allDayMeals: {
-            mealDate: string
-            breakfast: IDatabaseProduct[]
-            brunch: IDatabaseProduct[]
-            dinner: IDatabaseProduct[]
-            dessert: IDatabaseProduct[]
-            supper: IDatabaseProduct[]
-        }
+        mealDate: string
+        breakfast: IDatabaseProduct[]
+        brunch: IDatabaseProduct[]
+        dinner: IDatabaseProduct[]
+        dessert: IDatabaseProduct[]
+        supper: IDatabaseProduct[]
+
         id: string
     }[]
 }
@@ -43,16 +48,22 @@ export interface ITodayProductsResponse {
     code: RESPONSE_CODE
     success: boolean
     todayUserProducts?: ITodayProducts
+    dailySummary?: IProductsSummary
 }
 
 export interface ITodayProducts {
-    allDayMeals: {
-        mealDate: string
-        breakfast: IDatabaseProduct[]
-        brunch: IDatabaseProduct[]
-        dinner: IDatabaseProduct[]
-        dessert: IDatabaseProduct[]
-        supper: IDatabaseProduct[]
-    }
+    mealDate: string
+    breakfast: IDatabaseProduct[]
+    brunch: IDatabaseProduct[]
+    dinner: IDatabaseProduct[]
+    dessert: IDatabaseProduct[]
+    supper: IDatabaseProduct[]
     id: string
+}
+
+export interface IProductsSummary {
+    totalKcal: number
+    totalProteins: number
+    totalFat: number
+    totalCarbons: number
 }
