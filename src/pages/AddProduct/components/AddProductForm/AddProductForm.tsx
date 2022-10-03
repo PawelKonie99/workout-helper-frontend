@@ -3,7 +3,7 @@ import { toast } from "react-toastify"
 import { getByProductData } from "@/api/externalApi"
 import { NormalButton, TextInput } from "@/components"
 import { BUTTON_TYPES, MEAL_TYPES, RESPONSE_CODE } from "@/enums"
-import { addNewProduct } from "@/api"
+import { addNewProduct, deleteProduct } from "@/api"
 import { IDatabaseProduct, IProductPayload } from "@/types"
 import "react-toastify/dist/ReactToastify.css"
 
@@ -11,7 +11,9 @@ interface Props {
     timeOfTheMeal: MEAL_TYPES
     title: string
     handleSetNewlyAddedProductName: (newProduct: string) => void
+    handleSetRemovedProductId: (productId: string) => void
     alreadyAddedProducts?: IDatabaseProduct[]
+    allDayMealsId?: string
 }
 
 export const AddProductForm = ({
@@ -19,17 +21,19 @@ export const AddProductForm = ({
     title,
     alreadyAddedProducts,
     handleSetNewlyAddedProductName,
+    handleSetRemovedProductId,
+    allDayMealsId,
 }: Props) => {
-    const [productName, setProductName] = useState("")
+    const [productNameInput, setProductNameInput] = useState("")
 
     const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setProductName(event.target.value)
+        setProductNameInput(event.target.value)
     }
 
     const handleOnSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         try {
-            const [productData] = await getByProductData(productName)
+            const [productData] = await getByProductData(productNameInput)
 
             const { food_name, nf_calories, nf_protein, nf_total_carbohydrate, nf_total_fat } =
                 productData
@@ -42,7 +46,7 @@ export const AddProductForm = ({
                 proteins: nf_protein,
                 typeOfMeal: timeOfTheMeal,
             }
-            setProductName("")
+            setProductNameInput("")
 
             const { code } = await addNewProduct(newProductPayload)
 
@@ -52,10 +56,24 @@ export const AddProductForm = ({
                 toast.error("Błąd podczas dodawania produktu!")
             }
 
+            console.log("food_name", food_name)
             handleSetNewlyAddedProductName(food_name)
         } catch (error: unknown) {
-            setProductName("")
+            setProductNameInput("")
             toast.error("Błąd podczas dodawania produktu!")
+        }
+    }
+
+    const handleDeleteProduct = async (productId: string, productName: string) => {
+        if (allDayMealsId) {
+            const { code } = await deleteProduct(allDayMealsId, productId)
+            handleSetRemovedProductId(productId)
+
+            if (code === RESPONSE_CODE.success) {
+                toast.success(`${productName} usunięty pomyślnie!`)
+            } else {
+                toast.error("Błąd podczas usuwania produktu!")
+            }
         }
     }
 
@@ -67,7 +85,7 @@ export const AddProductForm = ({
                     name="product-name"
                     label="Nazwa produktu"
                     placeholder="Nazwa produktu"
-                    value={productName}
+                    value={productNameInput}
                     onChange={handleOnChange}
                     classname="pb-4"
                 />
@@ -78,15 +96,26 @@ export const AddProductForm = ({
             ) : null}
             <div className="mt-4 flex flex-col items-center">
                 <div className="flex justify-start mt-2">
-                    {alreadyAddedProducts?.map((product, index) => (
-                        <div key={`${product.productName}${index}`} className="flex flex-col ml-4">
-                            <span className="text-xs">Nazwa produktu: {product.productName}</span>
-                            <span className="text-xs">kcal: {product.kcal}</span>
-                            <span className="text-xs">białko: {product.proteins}</span>
-                            <span className="text-xs">węglowodany: {product.carbons}</span>
-                            <span className="text-xs">tłuszcz: {product.fat}</span>
-                        </div>
-                    ))}
+                    {alreadyAddedProducts?.map(
+                        ({ productName, kcal, proteins, carbons, fat, _id }, index) => (
+                            <div
+                                key={`${productName}${index}`}
+                                className="flex flex-col ml-8 relative"
+                            >
+                                <div
+                                    className="absolute -right-3 -top-4"
+                                    onClick={() => handleDeleteProduct(_id, productName)}
+                                >
+                                    x
+                                </div>
+                                <span className="text-xs">Nazwa produktu: {productName}</span>
+                                <span className="text-xs">kcal: {kcal}</span>
+                                <span className="text-xs">białko: {proteins}</span>
+                                <span className="text-xs">węglowodany: {carbons}</span>
+                                <span className="text-xs">tłuszcz: {fat}</span>
+                            </div>
+                        ),
+                    )}
                 </div>
             </div>
         </div>

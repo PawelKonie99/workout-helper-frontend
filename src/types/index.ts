@@ -9,6 +9,7 @@ export type {
     ITodayProducts,
     IDatabaseProduct,
     IProductsSummary,
+    IDeleteProductResponse,
 } from "./IMealApi.types"
 export type { INewWorkoutPayload } from "./IWorkoutApi.types"
 export type {
