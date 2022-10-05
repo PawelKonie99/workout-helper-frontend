@@ -13,7 +13,7 @@ export const WorkoutHistory = ({ workoutHistory }: Props) => {
                     return <SingleWorkoutHistory key={id} workoutData={workoutData} date={date} />
                 })
             ) : (
-                <p>Brak dancyh o historii treningów</p>
+                <p>Brak danych o historii treningów</p>
             )}
         </div>
     )
