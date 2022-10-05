@@ -10,6 +10,9 @@ export type {
     IDatabaseProduct,
     IProductsSummary,
     IDeleteProductResponse,
+    IMealHistoryResponse,
+    IMealHistory,
+    IMealMacros,
 } from "./IMealApi.types"
 export type { INewWorkoutPayload } from "./IWorkoutApi.types"
 export type {

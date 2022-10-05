@@ -67,3 +67,34 @@ export interface IProductsSummary {
     totalFat: number
     totalCarbons: number
 }
+
+export interface IMealHistoryResponse {
+    mealHistory?: {
+        dailySummary: IProductsSummary
+        mealDate: string
+        breakfast: IMealMacros
+        brunch: IMealMacros
+        dinner: IMealMacros
+        dessert: IMealMacros
+        supper: IMealMacros
+    }[]
+    code: RESPONSE_CODE
+    success: boolean
+}
+
+export interface IMealHistory {
+    dailySummary: IProductsSummary
+    mealDate: string
+    breakfast: IMealMacros
+    brunch: IMealMacros
+    dinner: IMealMacros
+    dessert: IMealMacros
+    supper: IMealMacros
+}
+
+export interface IMealMacros {
+    kcal: number
+    proteins: number
+    carbons: number
+    fat: number
+}
