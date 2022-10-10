@@ -100,7 +100,7 @@ export const NewWorkoutForm = () => {
         getWorkoutOptions()
     }, [])
 
-    const handleExerciseNameChange = (option: IWorkoutOption) => {
+    const handleExerciseNameChange = (option: IWorkoutOption | unknown) => {
         console.log(typeof option)
 
         console.log("event", option)

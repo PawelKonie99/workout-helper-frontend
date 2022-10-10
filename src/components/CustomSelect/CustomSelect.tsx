@@ -16,7 +16,7 @@ interface Props {
     placeholder: string
     name: string
     label: string
-    onChangeCustom?: (option: IWorkoutOption) => void
+    onChangeCustom?: (option: IWorkoutOption | unknown) => void
     value?: ISelectValue
     isError?: FieldError
     errorMessage?: string
@@ -34,7 +34,7 @@ export const CustomSelect = ({
     isError,
     errorMessage,
 }: Props) => {
-    const handleChange = (event: any) => {
+    const handleChange = (event: unknown) => {
         onChange(event)
         onChangeCustom && onChangeCustom(event)
     }
