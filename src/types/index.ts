@@ -20,6 +20,8 @@ export type {
     IUserWorkoutDataFromDatabase,
     IUserWorkoutData,
     IWorkoutFields,
+    IAllWorkoutOptionsResponse,
+    IWorkoutOption,
 } from "./IWorkoutApi.types"
 export type {
     IUserRegisterPayload,
