@@ -22,6 +22,7 @@ export type {
     IWorkoutFields,
     IAllWorkoutOptionsResponse,
     IWorkoutOption,
+    IBestExerciseResponse,
 } from "./IWorkoutApi.types"
 export type {
     IUserRegisterPayload,

@@ -49,3 +49,11 @@ export interface IWorkoutOption {
     value: string
     label: string
 }
+
+export interface IBestExerciseResponse {
+    code: RESPONSE_CODE
+    success: boolean
+    exerciseWithRecord?: {
+        workoutData: IWorkoutFields
+    }
+}
