@@ -1,14 +1,16 @@
 import { toast } from "react-toastify"
-import { useForm, useFieldArray, Controller } from "react-hook-form"
+import { useForm, useFieldArray } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { IWorkoutSeriesSchema } from "@/types"
 import { workoutSeriesSchema } from "@/schema"
-import { EXERCISE_NAME, REPS_QUANTITY, SERIES_QUANTITY, WEIGHT_QUANTITY } from "@/constants"
 import { BUTTON_TYPES, BUTTON_VARIANT, RESPONSE_CODE } from "@/enums"
-import { CustomSelect, NormalButton } from "@/components"
+import { NormalButton } from "@/components"
 import { addNewWorkout } from "@/api"
 import "react-toastify/dist/ReactToastify.css"
 
+import { WorkoutFormFields } from "../WorkoutFormFields/WorkoutFormFields"
+
+//TODO move it
 const defaultFormValues: IWorkoutSeriesSchema = {
     workoutData: [
         {
@@ -77,90 +79,14 @@ export const NewWorkoutForm = () => {
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center">
             {fields.map((item, index) => {
                 return (
-                    <div key={item.id} className="flex items-start my-2">
-                        <Controller
-                            name={`workoutData.${index}.exerciseName`}
-                            control={control}
-                            defaultValue={item.exerciseName}
-                            render={({ field: { name, onChange, ref, value } }) => (
-                                <CustomSelect
-                                    placeholder="Wybierz ćwiczenie"
-                                    options={EXERCISE_NAME}
-                                    name={name}
-                                    onChange={onChange}
-                                    inputRef={ref}
-                                    value={EXERCISE_NAME.find((c) => c.value === value.value)}
-                                    isError={errors?.workoutData?.[index]?.exerciseName?.label}
-                                    errorMessage={
-                                        errors?.workoutData?.[index]?.exerciseName?.label?.message
-                                    }
-                                />
-                            )}
-                        />
-                        <Controller
-                            name={`workoutData.${index}.repsQuantity`}
-                            control={control}
-                            defaultValue={item.repsQuantity}
-                            render={({ field: { name, onChange, ref, value } }) => (
-                                <CustomSelect
-                                    placeholder="Dodaj ilość powtórzeń"
-                                    options={REPS_QUANTITY}
-                                    name={name}
-                                    onChange={onChange}
-                                    inputRef={ref}
-                                    value={REPS_QUANTITY.find((c) => c.value === value.value)}
-                                    isError={errors?.workoutData?.[index]?.repsQuantity?.label}
-                                    errorMessage={
-                                        errors?.workoutData?.[index]?.repsQuantity?.label?.message
-                                    }
-                                />
-                            )}
-                        />
-                        <Controller
-                            name={`workoutData.${index}.seriesQuantity`}
-                            control={control}
-                            defaultValue={item.seriesQuantity}
-                            render={({ field: { name, onChange, ref, value } }) => (
-                                <CustomSelect
-                                    placeholder="Dodaj ilość serii"
-                                    options={SERIES_QUANTITY}
-                                    name={name}
-                                    onChange={onChange}
-                                    inputRef={ref}
-                                    value={SERIES_QUANTITY.find((c) => c.value === value.value)}
-                                    isError={errors?.workoutData?.[index]?.seriesQuantity?.label}
-                                    errorMessage={
-                                        errors?.workoutData?.[index]?.seriesQuantity?.label?.message
-                                    }
-                                />
-                            )}
-                        />
-                        <Controller
-                            name={`workoutData.${index}.weightQuantity`}
-                            control={control}
-                            defaultValue={item.weightQuantity}
-                            render={({ field: { name, onChange, ref, value } }) => (
-                                <CustomSelect
-                                    placeholder="Dodaj wagę obciązenia"
-                                    options={WEIGHT_QUANTITY}
-                                    name={name}
-                                    onChange={onChange}
-                                    inputRef={ref}
-                                    value={WEIGHT_QUANTITY.find((c) => c.value === value.value)}
-                                    isError={errors?.workoutData?.[index]?.weightQuantity?.label}
-                                    errorMessage={
-                                        errors?.workoutData?.[index]?.weightQuantity?.label?.message
-                                    }
-                                />
-                            )}
-                        />
-                        <NormalButton
-                            onClick={() => remove(index)}
-                            buttonVariant={BUTTON_VARIANT.DELETE}
-                            className="ml-2 mt-2"
-                            label="Usuń ćwiczenie"
-                        />
-                    </div>
+                    <WorkoutFormFields
+                        control={control}
+                        errors={errors}
+                        index={index}
+                        item={item}
+                        remove={remove}
+                        key={item.id}
+                    />
                 )
             })}
             <div className="flex flex-col pt-8">

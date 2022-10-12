@@ -1,32 +1,10 @@
-import { useEffect, useState } from "react"
-import { getTodayProduct } from "@/api/foodProductsApi/getTodayProducts"
 import { MEAL_TYPES } from "@/enums"
-import { IProductsSummary, ITodayProducts } from "@/types"
 import { AddProductForm } from "./components"
+import { useGetTodayProduct } from "@/hooks"
 
 const AddProduct = () => {
-    const [newlyAddedProductName, setNewlyAddedProductName] = useState("")
-    const [removedProductId, setRemovedProductId] = useState("")
-
-    const [todayProductsData, setTodayProductsData] = useState<{
-        todayProducts?: ITodayProducts
-        todaySummary?: IProductsSummary
-        allDayMealsId?: string
-    }>()
-
-    useEffect(() => {
-        const fetchTodayProduct = async () => {
-            const products = await getTodayProduct()
-
-            setTodayProductsData({
-                todayProducts: products.todayUserProducts,
-                todaySummary: products.dailySummary,
-                allDayMealsId: products?.todayUserProducts?.id,
-            })
-        }
-
-        fetchTodayProduct()
-    }, [newlyAddedProductName, removedProductId])
+    const { todayProductsData, setNewlyAddedProductName, setRemovedProductId } =
+        useGetTodayProduct()
 
     const { breakfast, brunch, dinner, dessert, supper } = todayProductsData?.todayProducts ?? {}
 

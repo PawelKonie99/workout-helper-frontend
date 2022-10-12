@@ -1,5 +1,7 @@
+import { InputLabel } from "@mui/material"
 import { FieldError, RefCallBack } from "react-hook-form"
 import Select, { StylesConfig } from "react-select"
+import { IWorkoutOption } from "@/types"
 import { FormErrorMessage } from "../FormErrorMessage/FormErrorMessage"
 
 interface ISelectValue {
@@ -10,10 +12,12 @@ interface Props {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onChange: (...event: any[]) => void
     inputRef: RefCallBack
-    value?: ISelectValue
     options: ISelectValue[]
     placeholder: string
     name: string
+    label: string
+    onChangeCustom?: (option: IWorkoutOption | unknown) => void
+    value?: ISelectValue
     isError?: FieldError
     errorMessage?: string
 }
@@ -21,20 +25,29 @@ interface Props {
 export const CustomSelect = ({
     onChange,
     inputRef,
-    value,
     placeholder,
     name,
     options,
+    label,
+    onChangeCustom,
+    value,
     isError,
     errorMessage,
 }: Props) => {
+    const handleChange = (event: unknown) => {
+        onChange(event)
+        onChangeCustom && onChangeCustom(event)
+    }
+
     return (
         <div className="flex flex-col mx-2">
+            <InputLabel id={label}>{label}</InputLabel>
             <Select
+                inputId={label}
                 options={options}
                 styles={selectWorkoutStyles}
                 placeholder={placeholder}
-                onChange={onChange}
+                onChange={handleChange}
                 ref={inputRef}
                 value={value}
                 name={name}

@@ -7,6 +7,7 @@ export {
     FOOD_PRODUCT,
     TODAY_FOOD_PRODUCT,
     FOOD_PRODUCT_HISTORY,
+    BEST_WORKOUT_EXERCISE,
 } from "./apiRoutes"
 export {
     INITIAL_REP_COUNT,

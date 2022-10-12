@@ -35,3 +35,25 @@ export interface IUserWorkoutData {
     date: string
     workoutData: IWorkoutFields[]
 }
+
+export interface IAllWorkoutOptionsResponse {
+    code: RESPONSE_CODE
+    success: boolean
+    exercise?: IWorkoutOption[]
+    weight?: IWorkoutOption[]
+    reps?: IWorkoutOption[]
+    series?: IWorkoutOption[]
+}
+
+export interface IWorkoutOption {
+    value: string
+    label: string
+}
+
+export interface IBestExerciseResponse {
+    code: RESPONSE_CODE
+    success: boolean
+    exerciseWithRecord?: {
+        workoutData: IWorkoutFields
+    }
+}
