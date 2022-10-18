@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getTodayProduct } from "@/api/foodProductsApi/getTodayProducts"
+import { getTodayMeals } from "@/api/foodApi/getTodayMeals"
 import { ITodayProducts, IProductsSummary } from "@/types"
 
 export const useGetTodayProduct = () => {
@@ -14,7 +14,7 @@ export const useGetTodayProduct = () => {
 
     useEffect(() => {
         const fetchTodayProduct = async () => {
-            const products = await getTodayProduct()
+            const products = await getTodayMeals()
 
             setTodayProductsData({
                 todayProducts: products.todayUserProducts,

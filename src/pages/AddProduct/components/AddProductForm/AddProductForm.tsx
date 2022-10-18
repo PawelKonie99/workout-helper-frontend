@@ -56,7 +56,6 @@ export const AddProductForm = ({
                 toast.error("Błąd podczas dodawania produktu!")
             }
 
-            console.log("food_name", food_name)
             handleSetNewlyAddedProductName(food_name)
         } catch (error: unknown) {
             setProductNameInput("")
