@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getTodayMeals } from "@/api/foodProductsApi/getTodayMeals"
+import { getTodayMeals } from "@/api/foodApi/getTodayMeals"
 import { ITodayProducts, IProductsSummary } from "@/types"
 
 export const useGetTodayProduct = () => {
