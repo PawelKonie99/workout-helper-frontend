@@ -8,4 +8,4 @@ export { getBestExercise } from "./workoutApi/getBestExercise"
 
 export { addNewProduct } from "./foodProductsApi/addNewProduct"
 export { deleteProduct } from "./foodProductsApi/deleteProduct"
-export { getProductsHistory } from "./foodProductsApi/getProductsHistory"
+export { getMealsHistory } from "./foodProductsApi/getMealsHistory"
