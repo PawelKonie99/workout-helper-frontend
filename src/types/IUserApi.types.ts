@@ -3,6 +3,7 @@ import { RESPONSE_CODE } from "@/enums"
 export interface IUserRegisterPayload {
     username: string
     password: string
+    isTrainer: boolean
 }
 
 export interface IUserRegisterResponse {
@@ -19,8 +20,9 @@ export interface IUserLoginPayload {
 export interface IUserLoginResponse {
     code: RESPONSE_CODE
     message: string
-    loggedUser?: {
+    loggedUser: {
         username: string
         token: string
-    }
+        isTrainer: boolean
+    } | null
 }

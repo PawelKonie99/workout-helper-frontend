@@ -12,6 +12,7 @@ export const registerSchema = () => {
             .string()
             .required("Powtorzenie hasła jest wymagane")
             .oneOf([yup.ref("password"), null], "Hasła nie zgadzają się"),
+        isTrainer: yup.bool(),
     })
 
     return schema

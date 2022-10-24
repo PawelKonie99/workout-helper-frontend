@@ -47,8 +47,8 @@ export interface IAllProductsResponse {
 export interface ITodayProductsResponse {
     code: RESPONSE_CODE
     success: boolean
-    todayUserProducts?: ITodayProducts
-    dailySummary?: IProductsSummary
+    todayUserProducts: ITodayProducts | null
+    dailySummary: IProductsSummary | null
 }
 
 export interface ITodayProducts {

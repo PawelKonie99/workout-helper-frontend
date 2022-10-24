@@ -1,3 +1,4 @@
+import { Checkbox, FormControlLabel } from "@mui/material"
 import { useContext } from "react"
 import { useForm, Controller, SubmitHandler } from "react-hook-form"
 import { useNavigate } from "react-router"
@@ -13,6 +14,7 @@ const defaultFormValues: IRegisterFormSchema = {
     username: "",
     password: "",
     confirmPassword: "",
+    isTrainer: false,
 }
 
 export const RegisterForm = () => {
@@ -31,11 +33,12 @@ export const RegisterForm = () => {
     })
 
     const onSubmit: SubmitHandler<IRegisterFormSchema> = async (data) => {
-        const { username, password } = data
+        const { username, password, isTrainer } = data
 
         const registerUserPayload = {
-            username: username,
-            password: password,
+            username,
+            password,
+            isTrainer: isTrainer ? isTrainer : false,
         }
 
         const { success } = await registerUser(registerUserPayload)
@@ -79,7 +82,7 @@ export const RegisterForm = () => {
                 <div className="w-full mx-auto flex justify-center">
                     <form
                         onSubmit={handleSubmit(onSubmit)}
-                        className="flex flex-col items-center w-full"
+                        className="flex flex-col items-center justify-center w-full"
                     >
                         <Controller
                             name="username"
@@ -131,7 +134,24 @@ export const RegisterForm = () => {
                                     inputRef={ref}
                                     errorMessage={errors.confirmPassword?.message}
                                     placeholder={"Potwierdź hasło"}
-                                    classname="pb-8"
+                                />
+                            )}
+                        />
+                        <Controller
+                            name="isTrainer"
+                            control={control}
+                            render={({ field: { name, onChange, ref, value } }) => (
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            ref={ref}
+                                            name={name}
+                                            onChange={onChange}
+                                            checked={value}
+                                        />
+                                    }
+                                    label="Jestem trenerem personalnym"
+                                    className="mb-4 mt-2"
                                 />
                             )}
                         />

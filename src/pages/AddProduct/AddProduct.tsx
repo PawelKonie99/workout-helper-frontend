@@ -3,7 +3,7 @@ import { AddProductForm } from "./components"
 import { useGetTodayProduct } from "@/hooks"
 
 const AddProduct = () => {
-    const { todayProductsData, setNewlyAddedProductName, setRemovedProductId } =
+    const { todayProductsData, setNewlyAddedProductName, setRemovedProductId, statusCode } =
         useGetTodayProduct()
 
     const { breakfast, brunch, dinner, dessert, supper } = todayProductsData?.todayProducts ?? {}
@@ -62,13 +62,15 @@ const AddProduct = () => {
                     handleSetRemovedProductId={handleSetRemovedProductId}
                 />
             </div>
-            <div className="ml-16">
-                <h3 className="text-xl mb-4">Podsumowanie dzisiejszego dnia:</h3>
-                <p>Kcal: {totalKcal?.toFixed(2)}</p>
-                <p>Białko: {totalProteins?.toFixed(2)}</p>
-                <p>Tłuszcz: {totalFat?.toFixed(2)}</p>
-                <p>Węglowodany: {totalCarbons?.toFixed(2)}</p>
-            </div>
+            {todayProductsData && (
+                <div className="ml-16">
+                    <h3 className="text-xl mb-4">Podsumowanie dzisiejszego dnia:</h3>
+                    <p>Kcal: {totalKcal?.toFixed(2)}</p>
+                    <p>Białko: {totalProteins?.toFixed(2)}</p>
+                    <p>Tłuszcz: {totalFat?.toFixed(2)}</p>
+                    <p>Węglowodany: {totalCarbons?.toFixed(2)}</p>
+                </div>
+            )}
         </div>
     )
 }

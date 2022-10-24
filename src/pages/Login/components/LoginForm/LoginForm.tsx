@@ -35,11 +35,11 @@ export const LoginForm = () => {
     const onSubmit: SubmitHandler<ILoginFormSchema> = async (data) => {
         const { loggedUser, code } = await loginUser(data)
 
-        if (loggedUser?.token) {
-            saveUserLogin(dispatch, loggedUser?.token)
+        if (loggedUser?.token && loggedUser?.isTrainer) {
+            saveUserLogin(dispatch, loggedUser.token, loggedUser.isTrainer)
         }
 
-        if (code === RESPONSE_CODE.success) {
+        if (loggedUser) {
             navigate("/workout")
         } else {
             openPopup(
