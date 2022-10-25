@@ -3,7 +3,7 @@ import { AddProductForm } from "./components"
 import { useGetTodayProduct } from "@/hooks"
 
 const AddProduct = () => {
-    const { todayProductsData, setNewlyAddedProductName, setRemovedProductId, statusCode } =
+    const { todayProductsData, setNewlyAddedProductName, setRemovedProductId } =
         useGetTodayProduct()
 
     const { breakfast, brunch, dinner, dessert, supper } = todayProductsData?.todayProducts ?? {}

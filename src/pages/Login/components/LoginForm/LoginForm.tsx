@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { NormalButton, TextInput, TextLink } from "@/components"
 import { saveUserLogin } from "@/store/userReducer/actions/saveUserLogin"
 import { ILoginFormSchema } from "@/types"
-import { BUTTON_TYPES, BUTTON_VARIANT, INPUT_TYPES, RESPONSE_CODE } from "@/enums"
+import { BUTTON_TYPES, BUTTON_VARIANT, INPUT_TYPES } from "@/enums"
 import { loginSchema } from "@/schema"
 import { loginUser } from "@/api"
 import { PopUpContext } from "@/contexts"
@@ -33,7 +33,7 @@ export const LoginForm = () => {
     })
 
     const onSubmit: SubmitHandler<ILoginFormSchema> = async (data) => {
-        const { loggedUser, code } = await loginUser(data)
+        const { loggedUser } = await loginUser(data)
 
         if (loggedUser?.token && loggedUser?.isTrainer) {
             saveUserLogin(dispatch, loggedUser.token, loggedUser.isTrainer)

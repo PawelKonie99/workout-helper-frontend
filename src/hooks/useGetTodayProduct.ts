@@ -5,7 +5,7 @@ import { ITodayProducts, IProductsSummary } from "@/types"
 export const useGetTodayProduct = () => {
     const [newlyAddedProductName, setNewlyAddedProductName] = useState("")
     const [removedProductId, setRemovedProductId] = useState("")
-    const [statusCode, setStatusCode] = useState(0)
+
     const [todayProductsData, setTodayProductsData] = useState<{
         todayProducts?: ITodayProducts
         todaySummary?: IProductsSummary
@@ -14,9 +14,7 @@ export const useGetTodayProduct = () => {
 
     useEffect(() => {
         const fetchTodayProduct = async () => {
-            const { todayUserProducts, dailySummary, code } = await getTodayMeals()
-
-            setStatusCode(code)
+            const { todayUserProducts, dailySummary } = await getTodayMeals()
 
             if (todayUserProducts && dailySummary) {
                 setTodayProductsData({
@@ -30,5 +28,5 @@ export const useGetTodayProduct = () => {
         fetchTodayProduct()
     }, [newlyAddedProductName, removedProductId])
 
-    return { todayProductsData, setRemovedProductId, setNewlyAddedProductName, statusCode }
+    return { todayProductsData, setRemovedProductId, setNewlyAddedProductName }
 }
