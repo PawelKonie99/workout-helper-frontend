@@ -1,5 +1,4 @@
-export type { IRegisterFormSchema } from "./IRegisterFormSchema.types"
-export type { ILoginFormSchema } from "./ILoginFormSchema.types"
+export type { IRegisterFormSchema, ILoginFormSchema } from "./IAuthorization.types"
 export type { IWorkoutSeriesSchema } from "./IWorkoutSeriesSchema.types"
 export type { INutritionProductResponse, IFood } from "./IExternalApi.types"
 export type {
@@ -16,7 +15,7 @@ export type {
 } from "./IMealApi.types"
 export type { INewWorkoutPayload } from "./IWorkoutApi.types"
 export type {
-    IGetAllUserWorkoutsResponse,
+    IAllWorkoutsResponse,
     IUserWorkoutDataFromDatabase,
     IUserWorkoutData,
     IWorkoutFields,

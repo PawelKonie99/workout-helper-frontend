@@ -20,9 +20,11 @@ export interface IUserLoginPayload {
 export interface IUserLoginResponse {
     code: RESPONSE_CODE
     message: string
-    loggedUser: {
-        username: string
-        token: string
-        isTrainer: boolean
-    } | null
+    loggedUser:
+        | {
+              username: string
+              token: string
+              isTrainer: boolean
+          }
+        | Record<string, never>
 }

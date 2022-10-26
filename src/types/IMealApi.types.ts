@@ -32,23 +32,23 @@ export interface IDatabaseProduct {
 export interface IAllProductsResponse {
     code: RESPONSE_CODE
     success: boolean
-    allUserProducts?: {
-        mealDate: string
-        breakfast: IDatabaseProduct[]
-        brunch: IDatabaseProduct[]
-        dinner: IDatabaseProduct[]
-        dessert: IDatabaseProduct[]
-        supper: IDatabaseProduct[]
-
-        id: string
-    }[]
+    allUserProducts:
+        | {
+              mealDate: string
+              breakfast: IDatabaseProduct[]
+              brunch: IDatabaseProduct[]
+              dinner: IDatabaseProduct[]
+              dessert: IDatabaseProduct[]
+              supper: IDatabaseProduct[]
+          }[]
+        | []
 }
 
 export interface ITodayProductsResponse {
     code: RESPONSE_CODE
     success: boolean
-    todayUserProducts: ITodayProducts | null
-    dailySummary: IProductsSummary | null
+    todayUserProducts: ITodayProducts | Record<string, never>
+    dailySummary: IProductsSummary | Record<string, never>
 }
 
 export interface ITodayProducts {
@@ -69,19 +69,20 @@ export interface IProductsSummary {
 }
 
 export interface IMealHistoryResponse {
-    mealHistory?: {
-        dailySummary: IProductsSummary
-        mealDate: string
-        breakfast: IMealMacros
-        brunch: IMealMacros
-        dinner: IMealMacros
-        dessert: IMealMacros
-        supper: IMealMacros
-    }[]
+    mealHistory:
+        | {
+              dailySummary: IProductsSummary
+              mealDate: string
+              breakfast: IMealMacros
+              brunch: IMealMacros
+              dinner: IMealMacros
+              dessert: IMealMacros
+              supper: IMealMacros
+          }[]
+        | []
     code: RESPONSE_CODE
     success: boolean
 }
-
 export interface IMealHistory {
     dailySummary: IProductsSummary
     mealDate: string

@@ -10,6 +10,7 @@ import { BUTTON_TYPES, BUTTON_VARIANT, INPUT_TYPES } from "@/enums"
 import { loginSchema } from "@/schema"
 import { loginUser } from "@/api"
 import { PopUpContext } from "@/contexts"
+import { isObjectFilled } from "@/helpers"
 
 const defaultFormValues: ILoginFormSchema = {
     username: "",
@@ -39,7 +40,7 @@ export const LoginForm = () => {
             saveUserLogin(dispatch, loggedUser.token, loggedUser.isTrainer)
         }
 
-        if (loggedUser) {
+        if (isObjectFilled(loggedUser)) {
             navigate("/workout")
         } else {
             openPopup(
