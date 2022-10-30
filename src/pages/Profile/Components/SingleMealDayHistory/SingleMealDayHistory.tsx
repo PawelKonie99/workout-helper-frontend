@@ -1,4 +1,3 @@
-import { formatDate } from "@/helpers"
 import { IMealHistory } from "@/types"
 import { MealSummary } from "../MealSummary/MealSummary"
 
@@ -8,13 +7,13 @@ interface Props {
 
 export const SingleMealDayHistory = ({ singleMealDay }: Props) => {
     const { breakfast, brunch, dailySummary, dessert, dinner, mealDate, supper } = singleMealDay
-    const formatedDate = formatDate(mealDate)
+    const { totalKcal, totalProteins, totalCarbons, totalFat } = dailySummary
 
     return (
         <div className="mb-4">
-            <span>{formatedDate}</span>
+            <span>{mealDate}</span>
 
-            <div className="flex">
+            <div className="flex mt-2">
                 <MealSummary timeOfMeal={breakfast} title="Śniadanie:" />
                 <MealSummary timeOfMeal={brunch} title="Drugie śniadanie:" />
                 <MealSummary timeOfMeal={dinner} title="Obiad:" />
@@ -22,10 +21,10 @@ export const SingleMealDayHistory = ({ singleMealDay }: Props) => {
                 <MealSummary timeOfMeal={supper} title="Kolacja:" />
                 <div className="flex flex-col">
                     <span>W sumie:</span>
-                    <span>Kalorie: {dailySummary.totalKcal}</span>
-                    <span>Białko: {dailySummary.totalProteins}</span>
-                    <span>Węglowodany: {dailySummary.totalCarbons}</span>
-                    <span>Tłuszcze: {dailySummary.totalFat}</span>
+                    <span>Kalorie: {totalKcal?.toFixed(2)}</span>
+                    <span>Białko: {totalProteins?.toFixed(2)}</span>
+                    <span>Węglowodany: {totalCarbons?.toFixed(2)}</span>
+                    <span>Tłuszcze: {totalFat?.toFixed(2)}</span>
                 </div>
             </div>
         </div>

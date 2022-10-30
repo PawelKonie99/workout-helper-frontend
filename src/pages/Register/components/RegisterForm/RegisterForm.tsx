@@ -41,7 +41,7 @@ export const RegisterForm = () => {
             isTrainer: isTrainer ? isTrainer : false,
         }
 
-        const { success } = await registerUser(registerUserPayload)
+        const { success, message } = await registerUser(registerUserPayload)
 
         if (success) {
             openPopup(
@@ -52,6 +52,19 @@ export const RegisterForm = () => {
                         onClick={() => {
                             closePopup()
                             navigate("/login")
+                        }}
+                        buttonVariant={BUTTON_VARIANT.SECONDARY}
+                    />
+                </div>,
+            )
+        } else if (message === "User already exists") {
+            openPopup(
+                <div className="w-full flex flex-col justify-center items-center">
+                    <h1 className="mb-16 text-4xl">Taki uzytkownik juz istnieje!</h1>
+                    <NormalButton
+                        label="Spróbuj ponownie!"
+                        onClick={() => {
+                            closePopup()
                         }}
                         buttonVariant={BUTTON_VARIANT.SECONDARY}
                     />

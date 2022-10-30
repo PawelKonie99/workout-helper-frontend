@@ -28,3 +28,4 @@ export type {
     IUserRegisterResponse,
     IUserLoginPayload,
 } from "./IUserApi.types"
+export type { ITranslationResponse } from "./ITranslation.types"

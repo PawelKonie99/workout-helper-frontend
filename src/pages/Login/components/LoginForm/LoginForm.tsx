@@ -36,7 +36,7 @@ export const LoginForm = () => {
     const onSubmit: SubmitHandler<ILoginFormSchema> = async (data) => {
         const { loggedUser } = await loginUser(data)
 
-        if (loggedUser?.token && loggedUser?.isTrainer) {
+        if (loggedUser.token) {
             saveUserLogin(dispatch, loggedUser.token, loggedUser.isTrainer)
         }
 

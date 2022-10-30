@@ -1,7 +1,7 @@
 import axios from "axios"
 import { IFood, INutritionProductResponse } from "@/types"
 
-export const getByProductData = async (productName: string): Promise<IFood[]> => {
+export const getProductData = async (productName: string): Promise<IFood[]> => {
     const { REACT_APP_NUTRITION_APP_ID, REACT_APP_NUTRITION_KEY } = process.env
 
     const productData = await axios.post<INutritionProductResponse>(
