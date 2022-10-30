@@ -9,3 +9,5 @@ export { getBestExercise } from "./workoutApi/getBestExercise"
 export { addNewProduct } from "./foodApi/addNewProduct"
 export { deleteProduct } from "./foodApi/deleteProduct"
 export { getMealsHistory } from "./foodApi/getMealsHistory"
+
+export { addStudent } from "./trainerApi/addStudent"

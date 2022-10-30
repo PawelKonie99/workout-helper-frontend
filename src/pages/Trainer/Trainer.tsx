@@ -1,5 +1,7 @@
+import { AddStudentForm } from "./components"
+
 const Trainer = () => {
-    return <div>trener</div>
+    return <AddStudentForm />
 }
 
 export default Trainer
