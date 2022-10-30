@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const GuestGuard = ({ children }: Props) => {
-    //Here token need to be checked, or smth else that recognize logged user
+    //TODO Here token need to be checked, or smth else that recognize logged user
     const isLoggedIn = useSelector((state: RootState) => state.userReducer.loggedIn)
 
     return isLoggedIn ? <Navigate to="/" /> : <>{children}</>

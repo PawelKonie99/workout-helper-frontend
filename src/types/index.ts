@@ -1,5 +1,3 @@
-export type { IRegisterFormSchema } from "./IRegisterFormSchema.types"
-export type { ILoginFormSchema } from "./ILoginFormSchema.types"
 export type { IWorkoutSeriesSchema } from "./IWorkoutSeriesSchema.types"
 export type { INutritionProductResponse, IFood } from "./IExternalApi.types"
 export type {
@@ -16,7 +14,7 @@ export type {
 } from "./IMealApi.types"
 export type { INewWorkoutPayload } from "./IWorkoutApi.types"
 export type {
-    IGetAllUserWorkoutsResponse,
+    IAllWorkoutsResponse,
     IUserWorkoutDataFromDatabase,
     IUserWorkoutData,
     IWorkoutFields,
@@ -28,4 +26,8 @@ export type {
     IUserRegisterPayload,
     IUserRegisterResponse,
     IUserLoginPayload,
+    IRegisterFormSchema,
+    ILoginFormSchema,
 } from "./IUserApi.types"
+export type { ITranslationResponse } from "./ITranslation.types"
+export type { IAddStudentSchema } from "./ITrainer.types"

@@ -6,10 +6,11 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { NormalButton, TextInput, TextLink } from "@/components"
 import { saveUserLogin } from "@/store/userReducer/actions/saveUserLogin"
 import { ILoginFormSchema } from "@/types"
-import { BUTTON_TYPES, BUTTON_VARIANT, INPUT_TYPES, RESPONSE_CODE } from "@/enums"
+import { BUTTON_TYPES, BUTTON_VARIANT, INPUT_TYPES } from "@/enums"
 import { loginSchema } from "@/schema"
 import { loginUser } from "@/api"
 import { PopUpContext } from "@/contexts"
+import { isObjectFilled } from "@/helpers"
 
 const defaultFormValues: ILoginFormSchema = {
     username: "",
@@ -33,13 +34,13 @@ export const LoginForm = () => {
     })
 
     const onSubmit: SubmitHandler<ILoginFormSchema> = async (data) => {
-        const { loggedUser, code } = await loginUser(data)
+        const { loggedUser } = await loginUser(data)
 
-        if (loggedUser?.token) {
-            saveUserLogin(dispatch, loggedUser?.token)
+        if (loggedUser.token) {
+            saveUserLogin(dispatch, loggedUser.token, loggedUser.isTrainer)
         }
 
-        if (code === RESPONSE_CODE.success) {
+        if (isObjectFilled(loggedUser)) {
             navigate("/workout")
         } else {
             openPopup(

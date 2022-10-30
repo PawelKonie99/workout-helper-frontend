@@ -3,7 +3,7 @@ import { useForm, useFieldArray } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { IWorkoutSeriesSchema } from "@/types"
 import { workoutSeriesSchema } from "@/schema"
-import { BUTTON_TYPES, BUTTON_VARIANT, RESPONSE_CODE } from "@/enums"
+import { BUTTON_TYPES, BUTTON_VARIANT } from "@/enums"
 import { NormalButton } from "@/components"
 import { addNewWorkout } from "@/api"
 import "react-toastify/dist/ReactToastify.css"
@@ -63,9 +63,9 @@ export const NewWorkoutForm = () => {
             workoutData: parsedSubmitedForm,
         }
 
-        const { code } = await addNewWorkout(newWorkoutPayload)
+        const { success } = await addNewWorkout(newWorkoutPayload)
 
-        if (code === RESPONSE_CODE.success) {
+        if (success) {
             toast.success("Trening dodany pomyślnie!")
         } else {
             toast.error("Błąd podczas dodawania treningu!")

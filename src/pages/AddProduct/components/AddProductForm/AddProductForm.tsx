@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from "react"
 import { toast } from "react-toastify"
-import { getByProductData } from "@/api/externalApi"
+import { getProductData, translateProduct } from "@/api/externalApi"
 import { NormalButton, TextInput } from "@/components"
 import { BUTTON_TYPES, MEAL_TYPES, RESPONSE_CODE } from "@/enums"
 import { addNewProduct, deleteProduct } from "@/api"
@@ -33,13 +33,14 @@ export const AddProductForm = ({
     const handleOnSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         try {
-            const [productData] = await getByProductData(productNameInput)
+            const translatedProductName = await translateProduct(productNameInput)
+            const [productData] = await getProductData(translatedProductName)
 
             const { food_name, nf_calories, nf_protein, nf_total_carbohydrate, nf_total_fat } =
                 productData
 
             const newProductPayload: IProductPayload = {
-                productName: food_name,
+                productName: productNameInput,
                 carbons: nf_total_carbohydrate,
                 fat: nf_total_fat,
                 kcal: nf_calories,
@@ -102,7 +103,7 @@ export const AddProductForm = ({
                                 className="flex flex-col ml-8 relative"
                             >
                                 <div
-                                    className="absolute -right-3 -top-4"
+                                    className="absolute -right-3 -top-4 cursor-pointer"
                                     onClick={() => handleDeleteProduct(_id, productName)}
                                 >
                                     x

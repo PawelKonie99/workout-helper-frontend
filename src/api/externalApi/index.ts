@@ -1,1 +1,2 @@
-export { getByProductData } from "./getProductData"
+export { getProductData } from "./getProductData"
+export { translateProduct } from "./translateProduct"

@@ -18,6 +18,8 @@ const AddProduct = () => {
         setRemovedProductId(productId)
     }
 
+    console.log("totalKcal", totalKcal)
+
     return (
         <div className="bg-offWhite flex justify-center">
             <div>
@@ -62,13 +64,15 @@ const AddProduct = () => {
                     handleSetRemovedProductId={handleSetRemovedProductId}
                 />
             </div>
-            <div className="ml-16">
-                <h3 className="text-xl mb-4">Podsumowanie dzisiejszego dnia:</h3>
-                <p>Kcal: {totalKcal?.toFixed(2)}</p>
-                <p>Białko: {totalProteins?.toFixed(2)}</p>
-                <p>Tłuszcz: {totalFat?.toFixed(2)}</p>
-                <p>Węglowodany: {totalCarbons?.toFixed(2)}</p>
-            </div>
+            {totalKcal && totalKcal > 0 ? (
+                <div className="ml-16">
+                    <h3 className="text-xl mb-4">Podsumowanie dzisiejszego dnia:</h3>
+                    <p>Kcal: {totalKcal?.toFixed(2)}</p>
+                    <p>Białko: {totalProteins?.toFixed(2)}</p>
+                    <p>Tłuszcz: {totalFat?.toFixed(2)}</p>
+                    <p>Węglowodany: {totalCarbons?.toFixed(2)}</p>
+                </div>
+            ) : null}
         </div>
     )
 }
