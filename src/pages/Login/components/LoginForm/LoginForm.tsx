@@ -34,13 +34,14 @@ export const LoginForm = () => {
     })
 
     const onSubmit: SubmitHandler<ILoginFormSchema> = async (data) => {
-        const { loggedUser } = await loginUser(data)
+        const { loggedUser, message } = await loginUser(data)
 
         if (loggedUser.token) {
             saveUserLogin(dispatch, loggedUser.token, loggedUser.isTrainer)
         }
 
-        if (isObjectFilled(loggedUser)) {
+        //TODO message przeniesc do const
+        if (message === "User found in databse") {
             navigate("/workout")
         } else {
             openPopup(

@@ -18,8 +18,6 @@ const AddProduct = () => {
         setRemovedProductId(productId)
     }
 
-    console.log("totalKcal", totalKcal)
-
     return (
         <div className="bg-offWhite flex justify-center">
             <div>

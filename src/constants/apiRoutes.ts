@@ -11,3 +11,4 @@ export const TODAY_FOOD_PRODUCT = "/food/today"
 export const FOOD_PRODUCT_HISTORY = "/food/history"
 
 export const NEW_STUDENT = "/trainer/student"
+export const ALL_STUDENTS = "/trainer/student"
