@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react"
-import { getAllStudents, getAllUserWorkouts, getMealsHistory } from "@/api"
+import { useState } from "react"
 import { ContentContainer } from "@/components"
-import { IUserWorkoutDataFromDatabase, IMealHistory, IStudentData } from "@/types"
-import { MenuListItem, WorkoutHistory, ProductHistory } from "../Profile/Components"
+import { MenuListItem } from "../Profile/Components"
 import { AddStudentForm, AddStudentTrainingPlanForm, MyStudents } from "./components"
 import { useLoadMyStudents } from "@/hooks"
 
@@ -14,10 +12,15 @@ enum VIEWS_TO_DISPLAY_TRAINER {
 
 const Trainer = () => {
     const [viewToDisplay, setViewToDisplay] = useState<VIEWS_TO_DISPLAY_TRAINER>()
-    const myStudents = useLoadMyStudents()
+    const [newStudentName, setNewStudentName] = useState("")
+    const myStudents = useLoadMyStudents(newStudentName)
 
     const loadView = (view: VIEWS_TO_DISPLAY_TRAINER) => {
         setViewToDisplay(view)
+    }
+
+    const handleSetNewStudentName = (studentName: string) => {
+        setNewStudentName(studentName)
     }
 
     return (
@@ -44,7 +47,9 @@ const Trainer = () => {
                 {viewToDisplay === VIEWS_TO_DISPLAY_TRAINER.MY_STUDENTS && (
                     <MyStudents myStudents={myStudents} />
                 )}
-                {viewToDisplay === VIEWS_TO_DISPLAY_TRAINER.ADD_STUDENT && <AddStudentForm />}
+                {viewToDisplay === VIEWS_TO_DISPLAY_TRAINER.ADD_STUDENT && (
+                    <AddStudentForm handleSetNewStudentName={handleSetNewStudentName} />
+                )}
                 {viewToDisplay === VIEWS_TO_DISPLAY_TRAINER.ADD_STUDENT_WORKOUT_PLAN && (
                     <AddStudentTrainingPlanForm myStudents={myStudents} />
                 )}

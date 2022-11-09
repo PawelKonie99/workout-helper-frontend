@@ -12,3 +12,4 @@ export const FOOD_PRODUCT_HISTORY = "/food/history"
 
 export const NEW_STUDENT = "/trainer/student"
 export const ALL_STUDENTS = "/trainer/student"
+export const NEW_TRAINING_PLAN = "/trainer/plan"

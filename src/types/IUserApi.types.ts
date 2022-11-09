@@ -18,12 +18,6 @@ export interface IUserRegisterPayload {
     isTrainer: boolean
 }
 
-export interface IUserRegisterResponse {
-    code: RESPONSE_CODE
-    message: string
-    success: string
-}
-
 export interface IUserLoginPayload {
     username: string
     password: string

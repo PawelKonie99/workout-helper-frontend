@@ -25,12 +25,6 @@ export interface IWorkoutFields {
     weightQuantity: number
 }
 
-export interface INewWorkoutResponse {
-    code: RESPONSE_CODE
-    message: string
-    success: string
-}
-
 export interface IUserWorkoutData {
     date: string
     workoutData: IWorkoutFields[]
@@ -63,4 +57,27 @@ export interface IBestExerciseResponse {
               }
           }
         | Record<string, never>
+}
+
+export interface IWorkoutSeriesSchema {
+    workoutData: IWorkoutFormField[]
+}
+
+export interface IWorkoutFormField {
+    exerciseName: {
+        value: string
+        label: string
+    }
+    repsQuantity: {
+        value: string
+        label: string
+    }
+    seriesQuantity: {
+        value: string
+        label: string
+    }
+    weightQuantity: {
+        value: string
+        label: string
+    }
 }

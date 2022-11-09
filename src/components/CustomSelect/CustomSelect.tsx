@@ -49,7 +49,7 @@ export const CustomSelect = ({
                 placeholder={placeholder}
                 onChange={handleChange}
                 ref={inputRef}
-                value={value}
+                value={value ? value : ""}
                 name={name}
             />
             <FormErrorMessage isError={isError} errorMessage={errorMessage} />
@@ -59,7 +59,7 @@ export const CustomSelect = ({
 
 //TODO move to another file
 const selectWorkoutStyles: StylesConfig = {
-    control: (styles) => ({ ...styles, margin: "0.5rem 0.5rem 0.5rem 0" }),
+    control: (styles) => ({ ...styles, margin: "0.5rem 0.5rem 0 0" }),
     // option: (styles, { data, isDisabled, isFocused, isSelected }) => {
     option: (styles) => {
         return {

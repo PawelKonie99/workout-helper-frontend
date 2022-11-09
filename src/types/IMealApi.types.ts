@@ -9,12 +9,6 @@ export interface IProductPayload {
     fat: number
 }
 
-export interface ISaveProductResponse {
-    code: RESPONSE_CODE
-    message: string
-    success: boolean
-}
-
 export interface IDeleteProductResponse {
     code: RESPONSE_CODE
     success: boolean

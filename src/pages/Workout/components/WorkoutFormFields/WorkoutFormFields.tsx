@@ -1,6 +1,5 @@
 import { useState } from "react"
 import {
-    Control,
     Controller,
     DeepRequired,
     FieldArrayWithId,
@@ -18,12 +17,20 @@ interface Props {
     item: FieldArrayWithId<IWorkoutSeriesSchema, "workoutData", "id">
     index: number
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    control: Control<IWorkoutSeriesSchema, any>
+    control: any //TODO pomyslec nad tym any
     errors: FieldErrorsImpl<DeepRequired<IWorkoutSeriesSchema>>
     remove: UseFieldArrayRemove
+    showBestRecord?: boolean
 }
 
-export const WorkoutFormFields = ({ item, index, control, errors, remove }: Props) => {
+export const WorkoutFormFields = ({
+    item,
+    index,
+    control,
+    errors,
+    remove,
+    showBestRecord = true,
+}: Props) => {
     const { EXERCISE, WEIGHT, REPS, SERIES } = useGetAllWorkoutOptions() ?? {}
     const [bestExercise, setBestExercise] = useState<IWorkoutFields>()
 
@@ -41,7 +48,7 @@ export const WorkoutFormFields = ({ item, index, control, errors, remove }: Prop
     }
 
     return (
-        <div className="flex items-center my-2">
+        <div className="flex items-end my-2">
             {EXERCISE && (
                 <Controller
                     name={`workoutData.${index}.exerciseName`}
@@ -161,13 +168,16 @@ export const WorkoutFormFields = ({ item, index, control, errors, remove }: Prop
                     )}
                 />
             )}
-            <NormalButton
-                onClick={() => remove(index)}
-                buttonVariant={BUTTON_VARIANT.DELETE}
-                className="ml-2"
-                label="Usuń ćwiczenie"
-            />
-            {bestExercise && (
+            {index > 0 && (
+                <NormalButton
+                    onClick={() => remove(index)}
+                    buttonVariant={BUTTON_VARIANT.DELETE}
+                    className="ml-2"
+                    label="Usuń ćwiczenie"
+                />
+            )}
+
+            {bestExercise && showBestRecord && (
                 <div className="flex flex-col ml-6">
                     <span>
                         Twój najlepszy wynik <br /> w tym ćwiczeniu

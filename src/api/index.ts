@@ -12,3 +12,4 @@ export { getMealsHistory } from "./foodApi/getMealsHistory"
 
 export { addStudent } from "./trainerApi/addStudent"
 export { getAllStudents } from "./trainerApi/getAllStudents"
+export { addNewTrainingPlan } from "./trainerApi/addNewTrainingPlan"

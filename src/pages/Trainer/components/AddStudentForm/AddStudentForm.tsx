@@ -8,11 +8,16 @@ import { addStudentSchema } from "@/schema"
 import { IAddStudentSchema } from "@/types"
 import "react-toastify/dist/ReactToastify.css"
 
+interface Props {
+    handleSetNewStudentName: (studentName: string) => void
+}
+
+//TODO przeniesc
 const defaultFormValues: IAddStudentSchema = {
     studentName: "",
 }
 
-export const AddStudentForm = () => {
+export const AddStudentForm = ({ handleSetNewStudentName }: Props) => {
     const {
         handleSubmit,
         control,
@@ -26,6 +31,7 @@ export const AddStudentForm = () => {
 
     const onSubmit: SubmitHandler<IAddStudentSchema> = async (data) => {
         const { studentName } = data
+        handleSetNewStudentName(studentName)
 
         const newStudentPayload = {
             studentName,
