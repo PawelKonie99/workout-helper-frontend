@@ -32,8 +32,6 @@ export const AddStudentTrainingPlanForm = ({ myStudents }: Props) => {
     })
 
     const onSubmit = async (data: IAddStudentPlanSchema) => {
-        console.log("data", data)
-
         const { workoutData, userData } = data
 
         const parsedSubmitedForm = parseSubmitedWorkoutData(workoutData)
