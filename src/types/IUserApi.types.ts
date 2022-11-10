@@ -26,7 +26,7 @@ export interface IUserLoginPayload {
 export interface IUserLoginResponse {
     code: RESPONSE_CODE
     message: string
-    loggedUser:
+    loggedUser?:
         | {
               username: string
               token: string

@@ -31,7 +31,6 @@ export const AddStudentForm = ({ handleSetNewStudentName }: Props) => {
 
     const onSubmit: SubmitHandler<IAddStudentSchema> = async (data) => {
         const { studentName } = data
-        handleSetNewStudentName(studentName)
 
         const newStudentPayload = {
             studentName,
@@ -44,7 +43,7 @@ export const AddStudentForm = ({ handleSetNewStudentName }: Props) => {
         } else {
             toast.error("Błąd podczas dodawania podopiecznego!")
         }
-
+        handleSetNewStudentName(studentName)
         reset()
     }
 

@@ -30,6 +30,7 @@ export type {
     ILoginFormSchema,
 } from "./IUserApi.types"
 export type { ITranslationResponse } from "./ITranslation.types"
+export type { ITrainingPlanResponse } from "./IStudent.types"
 export type {
     IAddStudentSchema,
     IAllStudentsResponse,

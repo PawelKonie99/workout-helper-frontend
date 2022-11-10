@@ -11,6 +11,7 @@ export {
     NEW_STUDENT,
     ALL_STUDENTS,
     NEW_TRAINING_PLAN,
+    GET_TRAINING_PLAN,
 } from "./apiRoutes"
 export {
     INITIAL_REP_COUNT,

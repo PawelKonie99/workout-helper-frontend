@@ -8,6 +8,7 @@ export const useLoadMyStudents = (refreshStudents: string) => {
     useEffect(() => {
         const getStudents = async () => {
             const { allStudents } = await getAllStudents()
+
             allStudents && setMyStudents(allStudents)
         }
         getStudents()

@@ -1,4 +1,3 @@
-import { RESPONSE_CODE } from "@/enums"
 import { IWorkoutFields } from "./IWorkoutApi.types"
 
 export interface IAddStudentSchema {
