@@ -47,7 +47,6 @@ export const AddProductForm = ({
                 proteins: nf_protein,
                 typeOfMeal: timeOfTheMeal,
             }
-            setProductNameInput("")
 
             const { code } = await addNewProduct(newProductPayload)
 
@@ -57,6 +56,7 @@ export const AddProductForm = ({
                 toast.error("Błąd podczas dodawania produktu!")
             }
 
+            setProductNameInput("")
             handleSetNewlyAddedProductName(food_name)
         } catch (error: unknown) {
             setProductNameInput("")
@@ -66,7 +66,7 @@ export const AddProductForm = ({
 
     const handleDeleteProduct = async (productId: string, productName: string) => {
         if (allDayMealsId) {
-            const { code } = await deleteProduct(allDayMealsId, productId)
+            const { code } = await deleteProduct(allDayMealsId, productId, timeOfTheMeal)
             handleSetRemovedProductId(productId)
 
             if (code === RESPONSE_CODE.success) {

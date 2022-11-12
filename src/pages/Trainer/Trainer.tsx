@@ -1,13 +1,20 @@
 import { useState } from "react"
 import { ContentContainer } from "@/components"
 import { MenuListItem } from "../Profile/Components"
-import { AddStudentForm, AddStudentTrainingPlanForm, MyStudents } from "./components"
+import {
+    AddStudentDiet,
+    AddStudentForm,
+    AddStudentTrainingPlanForm,
+    MyStudents,
+} from "./components"
 import { useLoadMyStudents } from "@/hooks"
 
+//TODO przeniesc
 enum VIEWS_TO_DISPLAY_TRAINER {
     MY_STUDENTS = "MY_STUDENTS",
     ADD_STUDENT = "ADD_STUDENT",
     ADD_STUDENT_WORKOUT_PLAN = "ADD_STUDENT_WORKOUT_PLAN",
+    ADD_STUDENT_DIET = "ADD_STUDENT_DIET",
 }
 
 const Trainer = () => {
@@ -42,6 +49,10 @@ const Trainer = () => {
                             }
                             title="Dodaj plan treningowy dla podopiecznego"
                         />
+                        <MenuListItem
+                            onClick={() => loadView(VIEWS_TO_DISPLAY_TRAINER.ADD_STUDENT_DIET)}
+                            title="Dodaj diete dla podopiecznego"
+                        />
                     </ul>
                 </div>
                 {viewToDisplay === VIEWS_TO_DISPLAY_TRAINER.MY_STUDENTS && (
@@ -52,6 +63,9 @@ const Trainer = () => {
                 )}
                 {viewToDisplay === VIEWS_TO_DISPLAY_TRAINER.ADD_STUDENT_WORKOUT_PLAN && (
                     <AddStudentTrainingPlanForm myStudents={myStudents} />
+                )}
+                {viewToDisplay === VIEWS_TO_DISPLAY_TRAINER.ADD_STUDENT_DIET && (
+                    <AddStudentDiet myStudents={myStudents} />
                 )}
             </div>
         </ContentContainer>

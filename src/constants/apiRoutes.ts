@@ -16,3 +16,4 @@ export const ALL_STUDENTS = "/trainer/student"
 export const NEW_TRAINING_PLAN = "/trainer/plan"
 
 export const GET_TRAINING_PLAN = "/student/plan"
+export const GET_DIET = "/student/diet"

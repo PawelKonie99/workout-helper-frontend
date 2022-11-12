@@ -13,6 +13,7 @@ export {
     NEW_TRAINING_PLAN,
     GET_TRAINING_PLAN,
     GET_USER_INFO,
+    GET_DIET,
 } from "./apiRoutes"
 export {
     INITIAL_REP_COUNT,
