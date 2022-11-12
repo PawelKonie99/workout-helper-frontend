@@ -8,7 +8,7 @@ interface Props {
 export const WorkoutHistory = ({ workoutHistory }: Props) => {
     return (
         <div>
-            {workoutHistory ? (
+            {workoutHistory && workoutHistory?.length > 0 ? (
                 workoutHistory.map(({ workout: { workoutData, date }, id }) => {
                     return <SingleWorkoutHistory key={id} workoutData={workoutData} date={date} />
                 })

@@ -15,6 +15,9 @@ export const TrainingPlan = () => {
         if (!success) {
             toast.error("Błąd podczas pobierania planu!")
         }
+        if (trainingPlan?.length === 0) {
+            toast.error("Nie masz aktualnie planu treningowego!")
+        }
 
         setUserTrainingPlan(trainingPlan)
     }

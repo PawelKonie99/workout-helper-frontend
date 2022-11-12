@@ -1,5 +1,6 @@
 export { registerUser } from "./userApi/registerUser"
 export { loginUser } from "./userApi/loginUser"
+export { getUserInfo } from "./userApi/getUserInfo"
 
 export { addNewWorkout } from "./workoutApi/addNewWorkout"
 export { getAllUserWorkouts } from "./workoutApi/getAllUserWorkouts"

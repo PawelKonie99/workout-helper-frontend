@@ -1,6 +1,6 @@
 import { NEW_STUDENT } from "@/constants/apiRoutes"
 import { instance } from "../interceptors/sendToken"
-import { INewStudentPayload } from "@/types/ITrainer.types"
+import { INewStudentPayload } from "@/types/ITrainerApi.types"
 import { IStandardResponse } from "@/types"
 
 export const addStudent = async (newStudentPayload: INewStudentPayload) => {

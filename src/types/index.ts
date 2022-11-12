@@ -1,4 +1,4 @@
-export type { INutritionProductResponse, IFood } from "./IExternalApi.types"
+export type { INutritionProductResponse, IFood } from "./externalApiTypes/IFoodApi.types"
 export type { IStandardResponse } from "./ICommon.types"
 export type {
     IProductPayload,
@@ -28,9 +28,11 @@ export type {
     IUserLoginPayload,
     IRegisterFormSchema,
     ILoginFormSchema,
+    IUserDataResponse,
+    IUserInfo,
 } from "./IUserApi.types"
-export type { ITranslationResponse } from "./ITranslation.types"
-export type { ITrainingPlanResponse } from "./IStudent.types"
+export type { ITranslationResponse } from "./externalApiTypes/ITranslation.types"
+export type { ITrainingPlanResponse } from "./IStudentApi.types"
 export type {
     IAddStudentSchema,
     IAllStudentsResponse,
@@ -38,4 +40,4 @@ export type {
     IAddStudentPlanSchema,
     IStudentPlanOption,
     IAddNewTrainingPlanPayload,
-} from "./ITrainer.types"
+} from "./ITrainerApi.types"

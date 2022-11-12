@@ -8,7 +8,7 @@ interface Props {
 export const ProductHistory = ({ productHistory }: Props) => {
     return (
         <div>
-            {productHistory ? (
+            {productHistory && productHistory?.length > 0 ? (
                 productHistory.map((singleMealDay) => {
                     return (
                         <SingleMealDayHistory
@@ -18,7 +18,7 @@ export const ProductHistory = ({ productHistory }: Props) => {
                     )
                 })
             ) : (
-                <p>Brak dancyh o historii posiłków</p>
+                <p>Brak danych o historii posiłków</p>
             )}
         </div>
     )

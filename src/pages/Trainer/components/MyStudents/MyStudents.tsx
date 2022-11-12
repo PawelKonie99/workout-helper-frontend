@@ -7,7 +7,7 @@ type Props = {
 export const MyStudents = ({ myStudents }: Props) => {
     return (
         <div className="flex flex-col">
-            {!myStudents || myStudents.length <= 0 ? (
+            {myStudents && myStudents.length <= 0 ? (
                 <span>Nie masz zadnych podopiecznych!</span>
             ) : (
                 <>
