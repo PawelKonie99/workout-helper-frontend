@@ -1,8 +1,8 @@
 import * as yup from "yup"
-import { IWorkoutSeriesSchema } from "@/types"
+import { IAddStudentPlanSchema } from "@/types"
 
-export const workoutSeriesSchema = () => {
-    const schema: yup.SchemaOf<IWorkoutSeriesSchema> = yup.object().shape({
+export const addStudentPlanSchema = () => {
+    const schema: yup.SchemaOf<IAddStudentPlanSchema> = yup.object().shape({
         workoutData: yup.array().of(
             yup.object().shape({
                 exerciseName: yup.object().shape({
@@ -23,6 +23,10 @@ export const workoutSeriesSchema = () => {
                 }),
             }),
         ),
+        userData: yup.object().shape({
+            label: yup.string().required("Wybór podopiecznego jest wymagany"),
+            value: yup.string().required("Wybór podopiecznego jest wymagany"),
+        }),
     })
 
     return schema

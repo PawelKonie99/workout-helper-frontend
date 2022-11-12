@@ -9,12 +9,6 @@ export interface IProductPayload {
     fat: number
 }
 
-export interface ISaveProductResponse {
-    code: RESPONSE_CODE
-    message: string
-    success: boolean
-}
-
 export interface IDeleteProductResponse {
     code: RESPONSE_CODE
     success: boolean
@@ -32,7 +26,7 @@ export interface IDatabaseProduct {
 export interface IAllProductsResponse {
     code: RESPONSE_CODE
     success: boolean
-    allUserProducts:
+    allUserProducts?:
         | {
               mealDate: string
               breakfast: IDatabaseProduct[]
@@ -47,8 +41,8 @@ export interface IAllProductsResponse {
 export interface ITodayProductsResponse {
     code: RESPONSE_CODE
     success: boolean
-    todayUserProducts: ITodayProducts | Record<string, never>
-    dailySummary: IProductsSummary | Record<string, never>
+    todayUserProducts?: ITodayProducts | Record<string, never>
+    dailySummary?: IProductsSummary | Record<string, never>
 }
 
 export interface ITodayProducts {
@@ -69,7 +63,7 @@ export interface IProductsSummary {
 }
 
 export interface IMealHistoryResponse {
-    mealHistory:
+    mealHistory?:
         | {
               dailySummary: IProductsSummary
               mealDate: string

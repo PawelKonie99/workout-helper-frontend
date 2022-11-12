@@ -15,7 +15,7 @@ export interface IUserWorkoutDataFromDatabase {
 export interface IAllWorkoutsResponse {
     code: RESPONSE_CODE
     success: boolean
-    allUserWorkouts?: IUserWorkoutDataFromDatabase[]
+    allUserWorkouts?: IUserWorkoutDataFromDatabase[] | []
 }
 
 export interface IWorkoutFields {
@@ -23,12 +23,6 @@ export interface IWorkoutFields {
     repsQuantity: number
     seriesQuantity: number
     weightQuantity: number
-}
-
-export interface INewWorkoutResponse {
-    code: RESPONSE_CODE
-    message: string
-    success: string
 }
 
 export interface IUserWorkoutData {
@@ -39,10 +33,10 @@ export interface IUserWorkoutData {
 export interface IAllWorkoutOptionsResponse {
     code: RESPONSE_CODE
     success: boolean
-    exercise: IWorkoutOption[] | []
-    weight: IWorkoutOption[] | []
-    reps: IWorkoutOption[] | []
-    series: IWorkoutOption[] | []
+    exercise?: IWorkoutOption[] | []
+    weight?: IWorkoutOption[] | []
+    reps?: IWorkoutOption[] | []
+    series?: IWorkoutOption[] | []
 }
 
 export interface IWorkoutOption {
@@ -53,7 +47,7 @@ export interface IWorkoutOption {
 export interface IBestExerciseResponse {
     code: RESPONSE_CODE
     success: boolean
-    exerciseWithRecord:
+    exerciseWithRecord?:
         | {
               workoutData: {
                   exerciseName: string
@@ -63,4 +57,27 @@ export interface IBestExerciseResponse {
               }
           }
         | Record<string, never>
+}
+
+export interface IWorkoutSeriesSchema {
+    workoutData: IWorkoutFormField[]
+}
+
+export interface IWorkoutFormField {
+    exerciseName: {
+        value: string
+        label: string
+    }
+    repsQuantity: {
+        value: string
+        label: string
+    }
+    seriesQuantity: {
+        value: string
+        label: string
+    }
+    weightQuantity: {
+        value: string
+        label: string
+    }
 }

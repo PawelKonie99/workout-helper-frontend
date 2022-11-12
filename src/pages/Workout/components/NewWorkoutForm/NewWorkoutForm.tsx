@@ -2,37 +2,14 @@ import { toast } from "react-toastify"
 import { useForm, useFieldArray } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { IWorkoutSeriesSchema } from "@/types"
-import { workoutSeriesSchema } from "@/schema"
+import { workoutFormValues, workoutSeriesSchema } from "@/schema"
 import { BUTTON_TYPES, BUTTON_VARIANT } from "@/enums"
 import { NormalButton } from "@/components"
 import { addNewWorkout } from "@/api"
 import "react-toastify/dist/ReactToastify.css"
 
 import { WorkoutFormFields } from "../WorkoutFormFields/WorkoutFormFields"
-
-//TODO move it
-const defaultFormValues: IWorkoutSeriesSchema = {
-    workoutData: [
-        {
-            exerciseName: {
-                value: "",
-                label: "",
-            },
-            repsQuantity: {
-                value: "",
-                label: "",
-            },
-            seriesQuantity: {
-                value: "",
-                label: "",
-            },
-            weightQuantity: {
-                value: "",
-                label: "",
-            },
-        },
-    ],
-}
+import { parseSubmitedWorkoutData } from "@/helpers"
 
 export const NewWorkoutForm = () => {
     const {
@@ -42,7 +19,7 @@ export const NewWorkoutForm = () => {
         reset,
     } = useForm<IWorkoutSeriesSchema>({
         resolver: yupResolver(workoutSeriesSchema()),
-        defaultValues: defaultFormValues,
+        defaultValues: workoutFormValues,
         mode: "all",
     })
 
@@ -52,12 +29,7 @@ export const NewWorkoutForm = () => {
     })
 
     const onSubmit = async (data: IWorkoutSeriesSchema) => {
-        const parsedSubmitedForm = data.workoutData.map((object) => ({
-            exerciseName: object.exerciseName.value,
-            repsQuantity: Number(object.repsQuantity.value),
-            seriesQuantity: Number(object.seriesQuantity.value),
-            weightQuantity: Number(object.weightQuantity.value),
-        }))
+        const parsedSubmitedForm = parseSubmitedWorkoutData(data.workoutData)
 
         const newWorkoutPayload = {
             workoutData: parsedSubmitedForm,
@@ -77,24 +49,26 @@ export const NewWorkoutForm = () => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center">
-            {fields.map((item, index) => {
-                return (
-                    <WorkoutFormFields
-                        control={control}
-                        errors={errors}
-                        index={index}
-                        item={item}
-                        remove={remove}
-                        key={item.id}
-                    />
-                )
-            })}
+            <div className="flex flex-col justify-start">
+                {fields.map((item, index) => {
+                    return (
+                        <WorkoutFormFields
+                            control={control}
+                            errors={errors}
+                            index={index}
+                            item={item}
+                            remove={remove}
+                            key={item.id}
+                        />
+                    )
+                })}
+            </div>
             <div className="flex flex-col pt-8">
                 <NormalButton
                     buttonVariant={BUTTON_VARIANT.SECONDARY}
                     label="Dodaj ćwiczenie"
                     onClick={() => {
-                        append(defaultFormValues.workoutData)
+                        append(workoutFormValues.workoutData)
                     }}
                     className="mb-4"
                 />

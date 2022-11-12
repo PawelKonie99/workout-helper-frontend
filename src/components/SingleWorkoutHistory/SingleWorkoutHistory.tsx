@@ -3,15 +3,13 @@ import { IWorkoutFields } from "@/types"
 
 interface Props {
     workoutData: IWorkoutFields[]
-    date: string
+    date?: string
 }
 
 export const SingleWorkoutHistory = ({ workoutData, date }: Props) => {
-    const formatedDate = formatDate(date)
-
     return (
         <div className="mb-4">
-            <span>{formatedDate}</span>
+            {date && <span>{formatDate(date)}</span>}
             {workoutData.map(({ exerciseName, repsQuantity, seriesQuantity, weightQuantity }) => (
                 <div key={exerciseName} className="flex">
                     <span className="mr-4 text-primaryDark">Nazwa ćwiczenia: {exerciseName}</span>

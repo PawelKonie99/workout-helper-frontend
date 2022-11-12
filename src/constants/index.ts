@@ -9,6 +9,9 @@ export {
     FOOD_PRODUCT_HISTORY,
     BEST_WORKOUT_EXERCISE,
     NEW_STUDENT,
+    ALL_STUDENTS,
+    NEW_TRAINING_PLAN,
+    GET_TRAINING_PLAN,
 } from "./apiRoutes"
 export {
     INITIAL_REP_COUNT,

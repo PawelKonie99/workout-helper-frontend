@@ -10,8 +10,8 @@ import { BUTTON_TYPES, BUTTON_VARIANT, INPUT_TYPES } from "@/enums"
 import { loginSchema } from "@/schema"
 import { loginUser } from "@/api"
 import { PopUpContext } from "@/contexts"
-import { isObjectFilled } from "@/helpers"
 
+//TODO przeniesc
 const defaultFormValues: ILoginFormSchema = {
     username: "",
     password: "",
@@ -34,13 +34,14 @@ export const LoginForm = () => {
     })
 
     const onSubmit: SubmitHandler<ILoginFormSchema> = async (data) => {
-        const { loggedUser } = await loginUser(data)
+        const { loggedUser, message } = await loginUser(data)
 
-        if (loggedUser.token) {
+        if (loggedUser) {
             saveUserLogin(dispatch, loggedUser.token, loggedUser.isTrainer)
         }
 
-        if (isObjectFilled(loggedUser)) {
+        //TODO message przeniesc do const
+        if (message === "User found in databse") {
             navigate("/workout")
         } else {
             openPopup(

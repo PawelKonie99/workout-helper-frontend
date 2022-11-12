@@ -18,12 +18,6 @@ export interface IUserRegisterPayload {
     isTrainer: boolean
 }
 
-export interface IUserRegisterResponse {
-    code: RESPONSE_CODE
-    message: string
-    success: string
-}
-
 export interface IUserLoginPayload {
     username: string
     password: string
@@ -32,7 +26,7 @@ export interface IUserLoginPayload {
 export interface IUserLoginResponse {
     code: RESPONSE_CODE
     message: string
-    loggedUser:
+    loggedUser?:
         | {
               username: string
               token: string

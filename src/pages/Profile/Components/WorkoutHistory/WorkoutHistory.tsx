@@ -1,5 +1,5 @@
+import { SingleWorkoutHistory } from "@/components"
 import { IUserWorkoutDataFromDatabase } from "@/types"
-import { SingleWorkoutHistory } from "../SingleWorkoutHistory/SingleWorkoutHistory"
 
 interface Props {
     workoutHistory?: IUserWorkoutDataFromDatabase[]

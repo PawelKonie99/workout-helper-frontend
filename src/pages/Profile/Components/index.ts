@@ -1,4 +1,3 @@
-export { SingleWorkoutHistory } from "./SingleWorkoutHistory/SingleWorkoutHistory"
 export { SingleMealDayHistory } from "./SingleMealDayHistory/SingleMealDayHistory"
 export { WorkoutHistory } from "./WorkoutHistory/WorkoutHistory"
 export { MenuListItem } from "./MenuListItem/MenuListItem"

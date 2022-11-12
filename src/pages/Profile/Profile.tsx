@@ -7,7 +7,8 @@ import { IMealHistory, IUserWorkoutDataFromDatabase } from "@/types"
 import { MenuListItem, ProductHistory, WorkoutHistory } from "./Components"
 import { saveUserLogout } from "@/store/userReducer/actions/saveUserLogout"
 
-enum VIEWS_TO_DISPLAY {
+//TODO przeniesc
+enum VIEWS_TO_DISPLAY_PROFILE {
     WORKOUT_HISTORY = "WORKOUT_HISTORY",
     MEAL_HISTORY = "MEAL_HISTORY",
 }
@@ -15,19 +16,19 @@ enum VIEWS_TO_DISPLAY {
 const Profile = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [viewToDisplay, setViewToDisplay] = useState<VIEWS_TO_DISPLAY>()
+    const [viewToDisplay, setViewToDisplay] = useState<VIEWS_TO_DISPLAY_PROFILE>()
     const [workoutHistory, setWorkoutHistory] = useState<IUserWorkoutDataFromDatabase[]>()
     const [mealsHistory, setMealsHistory] = useState<IMealHistory[]>()
 
     const loadAllUserWorkouts = async () => {
         const { allUserWorkouts } = await getAllUserWorkouts()
-        allUserWorkouts && setWorkoutHistory(allUserWorkouts) //TODO To raczej do reduxa, chwilowo zapisze to tutaj w stanie
-        setViewToDisplay(VIEWS_TO_DISPLAY.WORKOUT_HISTORY)
+        allUserWorkouts && setWorkoutHistory(allUserWorkouts)
+        setViewToDisplay(VIEWS_TO_DISPLAY_PROFILE.WORKOUT_HISTORY)
     }
     const loadUserMealsHistory = async () => {
         const { mealHistory } = await getMealsHistory()
-        mealHistory && setMealsHistory(mealHistory) //TODO To raczej do reduxa, chwilowo zapisze to tutaj w stanie
-        setViewToDisplay(VIEWS_TO_DISPLAY.MEAL_HISTORY)
+        mealHistory && setMealsHistory(mealHistory)
+        setViewToDisplay(VIEWS_TO_DISPLAY_PROFILE.MEAL_HISTORY)
     }
 
     const logut = () => {
@@ -46,10 +47,10 @@ const Profile = () => {
                         <MenuListItem onClick={logut} title="Wyloguj" />
                     </ul>
                 </div>
-                {viewToDisplay === VIEWS_TO_DISPLAY.WORKOUT_HISTORY && (
+                {viewToDisplay === VIEWS_TO_DISPLAY_PROFILE.WORKOUT_HISTORY && (
                     <WorkoutHistory workoutHistory={workoutHistory} />
                 )}
-                {viewToDisplay === VIEWS_TO_DISPLAY.MEAL_HISTORY && (
+                {viewToDisplay === VIEWS_TO_DISPLAY_PROFILE.MEAL_HISTORY && (
                     <ProductHistory productHistory={mealsHistory} />
                 )}
             </div>
