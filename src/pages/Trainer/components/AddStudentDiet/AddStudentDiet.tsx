@@ -1,39 +1,26 @@
-import { useEffect, useState } from "react"
-import { IDietMeals, ISelectOption, IStudentData } from "@/types"
-import { CustomSelect } from "@/components"
+import { useState } from "react"
+import { IProductPayload, ISelectOption, IStudentData } from "@/types"
+import { AllMealsForm, CustomSelect } from "@/components"
 import "react-toastify/dist/ReactToastify.css"
 import { isSelectOptionTypeGuard } from "@/helpers"
-import { getDiet } from "@/api"
-import { MEAL_TYPES } from "@/enums"
-import { AddProductForm } from "@/pages/AddProduct/components"
+import { addNewDietProduct } from "@/api"
+import { useGetStudentDiet } from "@/hooks"
 
 type Props = {
     myStudents?: IStudentData[]
 }
 
 export const AddStudentDiet = ({ myStudents }: Props) => {
-    const [userDiet, setUserDiet] = useState<IDietMeals | Record<string, never>>()
     const [choosenStudent, setChoosenStudent] = useState<ISelectOption>()
-
-    const { breakfast, brunch, dinner, dessert, supper } = userDiet ?? {}
+    const { userDiet, setNewlyAddedProductName, setRemovedProductId } =
+        useGetStudentDiet(choosenStudent)
 
     const handleSetNewlyAddedProductName = (newProductName: string) => {
-        console.log("newProductName", newProductName)
+        setNewlyAddedProductName(`${newProductName}${Math.random()}`) //TODO refactor
     }
     const handleSetRemovedProductId = (productId: string) => {
-        console.log("productId", productId)
+        setRemovedProductId(productId)
     }
-
-    useEffect(() => {
-        const getUserDiet = async () => {
-            if (choosenStudent) {
-                const { diet } = await getDiet(choosenStudent)
-
-                diet && setUserDiet(diet)
-            }
-        }
-        getUserDiet()
-    }, [choosenStudent])
 
     const handleChooseStudent = (option: ISelectOption | unknown) => {
         if (isSelectOptionTypeGuard(option)) {
@@ -41,7 +28,20 @@ export const AddStudentDiet = ({ myStudents }: Props) => {
         }
     }
 
-    console.log("userDiet", userDiet)
+    const handleAddDietProduct = async (
+        product: IProductPayload,
+    ): Promise<{ success: boolean }> => {
+        if (choosenStudent) {
+            const { success } = await addNewDietProduct({
+                productPayload: product,
+                studentId: choosenStudent?.value,
+            })
+
+            return { success }
+        }
+
+        return { success: false }
+    }
 
     const transformStudentArray = (students: IStudentData[]) =>
         students.map(({ studentName, id }) => ({ value: id, label: studentName }))
@@ -61,43 +61,12 @@ export const AddStudentDiet = ({ myStudents }: Props) => {
                 />
             )}
             {userDiet && (
-                <div>
-                    <AddProductForm
-                        timeOfTheMeal={MEAL_TYPES.BREAKFAST}
-                        title="Śniadanie"
-                        alreadyAddedProducts={breakfast}
-                        handleSetNewlyAddedProductName={handleSetNewlyAddedProductName}
-                        handleSetRemovedProductId={handleSetRemovedProductId}
-                    />
-                    <AddProductForm
-                        timeOfTheMeal={MEAL_TYPES.BRUNCH}
-                        title="Drugie Śniadanie"
-                        alreadyAddedProducts={brunch}
-                        handleSetNewlyAddedProductName={handleSetNewlyAddedProductName}
-                        handleSetRemovedProductId={handleSetRemovedProductId}
-                    />
-                    <AddProductForm
-                        timeOfTheMeal={MEAL_TYPES.DINNER}
-                        title="Obiad"
-                        alreadyAddedProducts={dinner}
-                        handleSetNewlyAddedProductName={handleSetNewlyAddedProductName}
-                        handleSetRemovedProductId={handleSetRemovedProductId}
-                    />
-                    <AddProductForm
-                        timeOfTheMeal={MEAL_TYPES.DESSERT}
-                        title="Podwieczorek"
-                        alreadyAddedProducts={dessert}
-                        handleSetNewlyAddedProductName={handleSetNewlyAddedProductName}
-                        handleSetRemovedProductId={handleSetRemovedProductId}
-                    />
-                    <AddProductForm
-                        timeOfTheMeal={MEAL_TYPES.SUPPER}
-                        title="Kolacja"
-                        alreadyAddedProducts={supper}
-                        handleSetNewlyAddedProductName={handleSetNewlyAddedProductName}
-                        handleSetRemovedProductId={handleSetRemovedProductId}
-                    />
-                </div>
+                <AllMealsForm
+                    addedProducts={userDiet}
+                    handleSendProductData={handleAddDietProduct}
+                    handleSetNewlyAddedProductName={handleSetNewlyAddedProductName}
+                    handleSetRemovedProductId={handleSetRemovedProductId}
+                />
             )}
         </>
     )

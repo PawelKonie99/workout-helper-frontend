@@ -4,11 +4,9 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { IWorkoutSeriesSchema } from "@/types"
 import { workoutFormValues, workoutSeriesSchema } from "@/schema"
 import { BUTTON_TYPES, BUTTON_VARIANT } from "@/enums"
-import { NormalButton } from "@/components"
+import { NormalButton, WorkoutFormFields } from "@/components"
 import { addNewWorkout } from "@/api"
 import "react-toastify/dist/ReactToastify.css"
-
-import { WorkoutFormFields } from "../WorkoutFormFields/WorkoutFormFields"
 import { parseSubmitedWorkoutData } from "@/helpers"
 
 export const NewWorkoutForm = () => {

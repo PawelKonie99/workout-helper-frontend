@@ -1,12 +1,10 @@
-import { MEAL_TYPES } from "@/enums"
-import { AddProductForm } from "./components"
 import { useGetTodayProduct } from "@/hooks"
+import { addNewProduct } from "@/api"
+import { AllMealsForm } from "@/components"
 
 const AddProduct = () => {
     const { todayProductsData, setNewlyAddedProductName, setRemovedProductId } =
         useGetTodayProduct()
-
-    const { breakfast, brunch, dinner, dessert, supper } = todayProductsData?.todayProducts ?? {}
 
     const { totalKcal, totalProteins, totalFat, totalCarbons } =
         todayProductsData?.todaySummary ?? {}
@@ -20,48 +18,13 @@ const AddProduct = () => {
 
     return (
         <div className="bg-offWhite flex justify-center">
-            <div>
-                <AddProductForm
-                    timeOfTheMeal={MEAL_TYPES.BREAKFAST}
-                    title="Śniadanie"
-                    alreadyAddedProducts={breakfast}
-                    handleSetNewlyAddedProductName={handleSetNewlyAddedProductName}
-                    allDayMealsId={todayProductsData?.allDayMealsId}
-                    handleSetRemovedProductId={handleSetRemovedProductId}
-                />
-                <AddProductForm
-                    timeOfTheMeal={MEAL_TYPES.BRUNCH}
-                    title="Drugie Śniadanie"
-                    alreadyAddedProducts={brunch}
-                    handleSetNewlyAddedProductName={handleSetNewlyAddedProductName}
-                    allDayMealsId={todayProductsData?.allDayMealsId}
-                    handleSetRemovedProductId={handleSetRemovedProductId}
-                />
-                <AddProductForm
-                    timeOfTheMeal={MEAL_TYPES.DINNER}
-                    title="Obiad"
-                    alreadyAddedProducts={dinner}
-                    handleSetNewlyAddedProductName={handleSetNewlyAddedProductName}
-                    allDayMealsId={todayProductsData?.allDayMealsId}
-                    handleSetRemovedProductId={handleSetRemovedProductId}
-                />
-                <AddProductForm
-                    timeOfTheMeal={MEAL_TYPES.DESSERT}
-                    title="Podwieczorek"
-                    alreadyAddedProducts={dessert}
-                    handleSetNewlyAddedProductName={handleSetNewlyAddedProductName}
-                    allDayMealsId={todayProductsData?.allDayMealsId}
-                    handleSetRemovedProductId={handleSetRemovedProductId}
-                />
-                <AddProductForm
-                    timeOfTheMeal={MEAL_TYPES.SUPPER}
-                    title="Kolacja"
-                    alreadyAddedProducts={supper}
-                    handleSetNewlyAddedProductName={handleSetNewlyAddedProductName}
-                    allDayMealsId={todayProductsData?.allDayMealsId}
-                    handleSetRemovedProductId={handleSetRemovedProductId}
-                />
-            </div>
+            <AllMealsForm
+                addedProducts={todayProductsData?.todayProducts}
+                handleSendProductData={addNewProduct}
+                handleSetNewlyAddedProductName={handleSetNewlyAddedProductName}
+                handleSetRemovedProductId={handleSetRemovedProductId}
+                allDayMealsId={todayProductsData?.allDayMealsId}
+            />
             {totalKcal && totalKcal > 0 ? (
                 <div className="ml-16">
                     <h3 className="text-xl mb-4">Podsumowanie dzisiejszego dnia:</h3>

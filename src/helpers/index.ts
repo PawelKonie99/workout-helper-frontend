@@ -1,7 +1,6 @@
 export { getStorageItem } from "./getStorageItem"
 export { formatDate } from "./formatDate"
 export { isSelectOptionTypeGuard } from "./selectOptionGuard"
-export { isObjectFilled } from "./isObjectFilled"
 export { parseSubmitedWorkoutData } from "./parseSubmitedWorkoutData"
 export { isTodayProductsTypeGuard, isProductsSummaryTypeGuard } from "./productAndMealsGuards"
 export { parseSubmitedUserData } from "./parseSubmitedUserData"

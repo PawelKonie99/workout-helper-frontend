@@ -40,4 +40,5 @@ export type {
     IAddStudentPlanSchema,
     IStudentPlanOption,
     IAddNewTrainingPlanPayload,
+    IAddNewDietPayload,
 } from "./ITrainerApi.types"

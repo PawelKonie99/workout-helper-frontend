@@ -14,6 +14,7 @@ export {
     GET_TRAINING_PLAN,
     GET_USER_INFO,
     GET_DIET,
+    ADD_NEW_DIET_PRODUCT,
 } from "./apiRoutes"
 export {
     INITIAL_REP_COUNT,

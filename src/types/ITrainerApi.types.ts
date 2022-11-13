@@ -1,3 +1,4 @@
+import { IProductPayload } from "./IMealApi.types"
 import { IWorkoutFields } from "./IWorkoutApi.types"
 
 export interface IAddStudentSchema {
@@ -56,4 +57,9 @@ export interface IAddNewTrainingPlanPayload {
         id: string
         userName: string
     }
+}
+
+export interface IAddNewDietPayload {
+    studentId: string
+    productPayload: IProductPayload
 }

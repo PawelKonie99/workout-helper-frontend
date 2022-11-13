@@ -1,4 +1,4 @@
-import { Button } from "@mui/material"
+import LoadingButton from "@mui/lab/LoadingButton"
 import classNames from "classnames"
 import { BUTTON_TYPES, BUTTON_VARIANT } from "@/enums"
 
@@ -9,6 +9,7 @@ interface Props {
     buttonVariant?: BUTTON_VARIANT
     onClick?: () => void
     isFullWidth?: boolean
+    isLoading?: boolean
 }
 
 export const NormalButton = ({
@@ -18,6 +19,7 @@ export const NormalButton = ({
     onClick,
     buttonVariant = BUTTON_VARIANT.PRIMARY,
     isFullWidth,
+    isLoading,
 }: Props) => {
     const buttonAppearance = classNames({
         "bg-primary hover:bg-primaryDark": buttonVariant === BUTTON_VARIANT.PRIMARY,
@@ -26,14 +28,15 @@ export const NormalButton = ({
     })
 
     return (
-        <Button
+        <LoadingButton
             type={type}
             variant="contained"
             fullWidth={isFullWidth}
             className={`${buttonAppearance} shadow-none ${className}`}
             onClick={onClick}
+            loading={isLoading}
         >
             {label}
-        </Button>
+        </LoadingButton>
     )
 }

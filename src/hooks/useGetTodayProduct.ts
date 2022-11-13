@@ -8,10 +8,10 @@ export const useGetTodayProduct = () => {
     const [removedProductId, setRemovedProductId] = useState("")
 
     const [todayProductsData, setTodayProductsData] = useState<{
-        todayProducts: ITodayProducts
-        todaySummary: IProductsSummary
-        allDayMealsId: string
-    }>()
+        todayProducts: ITodayProducts | Record<string, never>
+        todaySummary?: IProductsSummary
+        allDayMealsId?: string
+    }>({ todayProducts: {} })
 
     useEffect(() => {
         const fetchTodayProduct = async () => {
