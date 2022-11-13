@@ -1,6 +1,7 @@
 import { useGetTodayProduct } from "@/hooks"
-import { addNewProduct } from "@/api"
+import { addNewProduct, deleteProduct } from "@/api"
 import { AllMealsForm } from "@/components"
+import { MEAL_TYPES } from "@/enums"
 
 const AddProduct = () => {
     const { todayProductsData, setNewlyAddedProductName, setRemovedProductId } =
@@ -12,8 +13,23 @@ const AddProduct = () => {
     const handleSetNewlyAddedProductName = (newProductName: string) => {
         setNewlyAddedProductName(newProductName)
     }
-    const handleSetRemovedProductId = (productId: string) => {
-        setRemovedProductId(productId)
+
+    const handleDeleteProduct = async (
+        productId: string,
+        timeOfTheMeal: MEAL_TYPES,
+    ): Promise<{ success: boolean }> => {
+        if (todayProductsData?.allDayMealsId) {
+            const { success } = await deleteProduct(
+                todayProductsData?.allDayMealsId,
+                productId,
+                timeOfTheMeal,
+            )
+            setRemovedProductId(productId)
+
+            return { success }
+        }
+
+        return { success: false }
     }
 
     return (
@@ -22,8 +38,7 @@ const AddProduct = () => {
                 addedProducts={todayProductsData?.todayProducts}
                 handleSendProductData={addNewProduct}
                 handleSetNewlyAddedProductName={handleSetNewlyAddedProductName}
-                handleSetRemovedProductId={handleSetRemovedProductId}
-                allDayMealsId={todayProductsData?.allDayMealsId}
+                handleDeleteProduct={handleDeleteProduct}
             />
             {totalKcal && totalKcal > 0 ? (
                 <div className="ml-16">

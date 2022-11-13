@@ -2,8 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react"
 import { toast } from "react-toastify"
 import { getProductData, translateProduct } from "@/api/externalApi"
 import { NormalButton, TextInput } from "@/components"
-import { BUTTON_TYPES, MEAL_TYPES, RESPONSE_CODE } from "@/enums"
-import { deleteProduct } from "@/api"
+import { BUTTON_TYPES, MEAL_TYPES } from "@/enums"
 import { IDatabaseProduct, IProductPayload } from "@/types"
 import "react-toastify/dist/ReactToastify.css"
 
@@ -11,20 +10,21 @@ interface Props {
     timeOfTheMeal: MEAL_TYPES
     title: string
     handleSetNewlyAddedProductName: (newProduct: string) => void
-    handleSetRemovedProductId: (productId: string) => void
     handleSendProductData: (product: IProductPayload) => Promise<{ success: boolean }>
+    handleDeleteProduct: (
+        productId: string,
+        timeOfTheMeal: MEAL_TYPES,
+    ) => Promise<{ success: boolean }>
     alreadyAddedProducts?: IDatabaseProduct[]
-    allDayMealsId?: string
 }
 
 export const AddProductForm = ({
     timeOfTheMeal,
     title,
     handleSetNewlyAddedProductName,
-    handleSetRemovedProductId,
     handleSendProductData,
+    handleDeleteProduct,
     alreadyAddedProducts,
-    allDayMealsId,
 }: Props) => {
     const [productNameInput, setProductNameInput] = useState("")
     const [isLoading, setIsLoading] = useState(false)
@@ -70,16 +70,13 @@ export const AddProductForm = ({
         }
     }
 
-    const handleDeleteProduct = async (productId: string, productName: string) => {
-        if (allDayMealsId) {
-            const { code } = await deleteProduct(allDayMealsId, productId, timeOfTheMeal)
-            handleSetRemovedProductId(productId)
+    const handleDelete = async (productId: string, productName: string) => {
+        const { success } = await handleDeleteProduct(productId, timeOfTheMeal)
 
-            if (code === RESPONSE_CODE.success) {
-                toast.success(`${productName} usunięty pomyślnie!`)
-            } else {
-                toast.error("Błąd podczas usuwania produktu!")
-            }
+        if (success) {
+            toast.success(`${productName} usunięty pomyślnie!`)
+        } else {
+            toast.error("Błąd podczas usuwania produktu!")
         }
     }
 
@@ -110,7 +107,7 @@ export const AddProductForm = ({
                             >
                                 <div
                                     className="absolute -right-3 -top-4 cursor-pointer"
-                                    onClick={() => handleDeleteProduct(_id, productName)}
+                                    onClick={() => handleDelete(_id, productName)}
                                 >
                                     x
                                 </div>

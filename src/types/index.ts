@@ -41,4 +41,6 @@ export type {
     IStudentPlanOption,
     IAddNewTrainingPlanPayload,
     IAddNewDietPayload,
+    IRemoveDietProduct,
+    IRemoveDietProductPayload,
 } from "./ITrainerApi.types"

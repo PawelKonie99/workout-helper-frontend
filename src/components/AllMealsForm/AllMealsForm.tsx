@@ -5,17 +5,18 @@ import { IProductPayload, ITodayProducts } from "@/types"
 interface Props {
     addedProducts: Omit<ITodayProducts, "mealDate" | "id"> | Record<string, never>
     handleSetNewlyAddedProductName: (newProduct: string) => void
-    handleSetRemovedProductId: (productId: string) => void
     handleSendProductData: (product: IProductPayload) => Promise<{ success: boolean }>
-    allDayMealsId?: string
+    handleDeleteProduct: (
+        productId: string,
+        timeOfTheMeal: MEAL_TYPES,
+    ) => Promise<{ success: boolean }>
 }
 
 export const AllMealsForm = ({
     addedProducts,
     handleSetNewlyAddedProductName,
-    handleSetRemovedProductId,
     handleSendProductData,
-    allDayMealsId,
+    handleDeleteProduct,
 }: Props) => {
     const { breakfast, brunch, dinner, dessert, supper } = addedProducts
 
@@ -26,45 +27,40 @@ export const AllMealsForm = ({
                 title="Śniadanie"
                 alreadyAddedProducts={breakfast}
                 handleSetNewlyAddedProductName={handleSetNewlyAddedProductName}
-                allDayMealsId={allDayMealsId}
-                handleSetRemovedProductId={handleSetRemovedProductId}
                 handleSendProductData={handleSendProductData}
+                handleDeleteProduct={handleDeleteProduct}
             />
             <AddProductForm
                 timeOfTheMeal={MEAL_TYPES.BRUNCH}
                 title="Drugie Śniadanie"
                 alreadyAddedProducts={brunch}
                 handleSetNewlyAddedProductName={handleSetNewlyAddedProductName}
-                allDayMealsId={allDayMealsId}
-                handleSetRemovedProductId={handleSetRemovedProductId}
                 handleSendProductData={handleSendProductData}
+                handleDeleteProduct={handleDeleteProduct}
             />
             <AddProductForm
                 timeOfTheMeal={MEAL_TYPES.DINNER}
                 title="Obiad"
                 alreadyAddedProducts={dinner}
                 handleSetNewlyAddedProductName={handleSetNewlyAddedProductName}
-                allDayMealsId={allDayMealsId}
-                handleSetRemovedProductId={handleSetRemovedProductId}
                 handleSendProductData={handleSendProductData}
+                handleDeleteProduct={handleDeleteProduct}
             />
             <AddProductForm
                 timeOfTheMeal={MEAL_TYPES.DESSERT}
                 title="Podwieczorek"
                 alreadyAddedProducts={dessert}
                 handleSetNewlyAddedProductName={handleSetNewlyAddedProductName}
-                allDayMealsId={allDayMealsId}
-                handleSetRemovedProductId={handleSetRemovedProductId}
                 handleSendProductData={handleSendProductData}
+                handleDeleteProduct={handleDeleteProduct}
             />
             <AddProductForm
                 timeOfTheMeal={MEAL_TYPES.SUPPER}
                 title="Kolacja"
                 alreadyAddedProducts={supper}
                 handleSetNewlyAddedProductName={handleSetNewlyAddedProductName}
-                allDayMealsId={allDayMealsId}
-                handleSetRemovedProductId={handleSetRemovedProductId}
                 handleSendProductData={handleSendProductData}
+                handleDeleteProduct={handleDeleteProduct}
             />
         </div>
     )

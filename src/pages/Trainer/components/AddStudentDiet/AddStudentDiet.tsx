@@ -3,8 +3,9 @@ import { IProductPayload, ISelectOption, IStudentData } from "@/types"
 import { AllMealsForm, CustomSelect } from "@/components"
 import "react-toastify/dist/ReactToastify.css"
 import { isSelectOptionTypeGuard } from "@/helpers"
-import { addNewDietProduct } from "@/api"
+import { addNewDietProduct, removeDietProduct } from "@/api"
 import { useGetStudentDiet } from "@/hooks"
+import { MEAL_TYPES } from "@/enums"
 
 type Props = {
     myStudents?: IStudentData[]
@@ -17,9 +18,6 @@ export const AddStudentDiet = ({ myStudents }: Props) => {
 
     const handleSetNewlyAddedProductName = (newProductName: string) => {
         setNewlyAddedProductName(`${newProductName}${Math.random()}`) //TODO refactor
-    }
-    const handleSetRemovedProductId = (productId: string) => {
-        setRemovedProductId(productId)
     }
 
     const handleChooseStudent = (option: ISelectOption | unknown) => {
@@ -36,6 +34,28 @@ export const AddStudentDiet = ({ myStudents }: Props) => {
                 productPayload: product,
                 studentId: choosenStudent?.value,
             })
+
+            return { success }
+        }
+
+        return { success: false }
+    }
+
+    const handleDeleteProduct = async (
+        productId: string,
+        timeOfTheMeal: MEAL_TYPES,
+    ): Promise<{ success: boolean }> => {
+        if (choosenStudent) {
+            const removeProductPayload = {
+                studentId: choosenStudent?.value,
+                productToRemove: {
+                    productId,
+                    typeOfMeal: timeOfTheMeal, //TODO ujednolicic nazwy, type i time
+                },
+            }
+
+            const { success } = await removeDietProduct(removeProductPayload)
+            setRemovedProductId(productId)
 
             return { success }
         }
@@ -65,7 +85,7 @@ export const AddStudentDiet = ({ myStudents }: Props) => {
                     addedProducts={userDiet}
                     handleSendProductData={handleAddDietProduct}
                     handleSetNewlyAddedProductName={handleSetNewlyAddedProductName}
-                    handleSetRemovedProductId={handleSetRemovedProductId}
+                    handleDeleteProduct={handleDeleteProduct}
                 />
             )}
         </>

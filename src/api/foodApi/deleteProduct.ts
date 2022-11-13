@@ -8,7 +8,7 @@ export const deleteProduct = async (
     productId: string,
     typeOfMeal: MEAL_TYPES,
 ) => {
-    const { data } = await instance.delete<IDeleteProductResponse>(`${FOOD_PRODUCT}`, {
+    const { data } = await instance.delete<IDeleteProductResponse>(FOOD_PRODUCT, {
         data: { allDayMealsId, productId, typeOfMeal },
     })
 

@@ -1,3 +1,4 @@
+import { MEAL_TYPES } from "@/enums"
 import { IProductPayload } from "./IMealApi.types"
 import { IWorkoutFields } from "./IWorkoutApi.types"
 
@@ -62,4 +63,14 @@ export interface IAddNewTrainingPlanPayload {
 export interface IAddNewDietPayload {
     studentId: string
     productPayload: IProductPayload
+}
+
+export interface IRemoveDietProduct {
+    studentId: string
+    productToRemove: IRemoveDietProductPayload
+}
+
+export interface IRemoveDietProductPayload {
+    productId: string
+    typeOfMeal: MEAL_TYPES
 }
