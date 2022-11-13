@@ -16,6 +16,7 @@ export { getAllStudents } from "./trainerApi/getAllStudents"
 export { addNewTrainingPlan } from "./trainerApi/addNewTrainingPlan"
 export { addNewDietProduct } from "./trainerApi/addNewDietProduct"
 export { removeDietProduct } from "./trainerApi/removeDietProduct"
+export { getSingleStudentData } from "./trainerApi/getSingleStudentData"
 
 export { getTrainingPlan } from "./studentApi/getTrainingPlan"
 export { getDiet } from "./studentApi/getDiet"

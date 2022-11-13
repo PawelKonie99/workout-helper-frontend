@@ -43,4 +43,6 @@ export type {
     IAddNewDietPayload,
     IRemoveDietProduct,
     IRemoveDietProductPayload,
+    IGetSingleStudentDataResponse,
+    IChoosenStudentData,
 } from "./ITrainerApi.types"

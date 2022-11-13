@@ -1,6 +1,6 @@
-import { MEAL_TYPES } from "@/enums"
-import { IProductPayload } from "./IMealApi.types"
-import { IWorkoutFields } from "./IWorkoutApi.types"
+import { MEAL_TYPES, RESPONSE_CODE } from "@/enums"
+import { IMealMacros, IProductPayload, IProductsSummary } from "./IMealApi.types"
+import { IUserWorkoutDataFromDatabase, IWorkoutFields } from "./IWorkoutApi.types"
 
 export interface IAddStudentSchema {
     studentName: string
@@ -73,4 +73,37 @@ export interface IRemoveDietProduct {
 export interface IRemoveDietProductPayload {
     productId: string
     typeOfMeal: MEAL_TYPES
+}
+
+export interface IGetSingleStudentDataResponse {
+    code: RESPONSE_CODE
+    success: boolean
+    allUserWorkouts?: IUserWorkoutDataFromDatabase[] | []
+    mealHistory?:
+        | {
+              dailySummary: IProductsSummary
+              mealDate: string
+              breakfast: IMealMacros
+              brunch: IMealMacros
+              dinner: IMealMacros
+              dessert: IMealMacros
+              supper: IMealMacros
+          }[]
+        | []
+}
+
+export interface IChoosenStudentData {
+    studentName?: string
+    allUserWorkouts?: IUserWorkoutDataFromDatabase[] | []
+    mealHistory?:
+        | {
+              dailySummary: IProductsSummary
+              mealDate: string
+              breakfast: IMealMacros
+              brunch: IMealMacros
+              dinner: IMealMacros
+              dessert: IMealMacros
+              supper: IMealMacros
+          }[]
+        | []
 }

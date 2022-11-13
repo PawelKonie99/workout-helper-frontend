@@ -16,6 +16,7 @@ export {
     GET_DIET,
     ADD_NEW_DIET_PRODUCT,
     REMOVE_DIET_PRODUCT,
+    GET_SINGLE_USER,
 } from "./apiRoutes"
 export {
     INITIAL_REP_COUNT,

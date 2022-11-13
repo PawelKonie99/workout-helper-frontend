@@ -9,7 +9,7 @@ export const useGetUserInfo = () => {
         const getStudents = async () => {
             const { trainerName, username } = await getUserInfo()
 
-            trainerName && username && setUserInfo({ trainerName, username })
+            setUserInfo({ trainerName, username })
         }
         getStudents()
     }, [])
