@@ -76,8 +76,5 @@ export interface IWorkoutFormField {
         value: string
         label: string
     }
-    weightQuantity: {
-        value: string
-        label: string
-    }
+    weightQuantity: string
 }

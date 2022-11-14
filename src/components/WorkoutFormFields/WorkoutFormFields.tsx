@@ -6,8 +6,8 @@ import {
     FieldErrorsImpl,
     UseFieldArrayRemove,
 } from "react-hook-form"
-import { CustomSelect, NormalButton } from "@/components"
-import { BUTTON_VARIANT } from "@/enums"
+import { CustomSelect, NormalButton, TextInput } from "@/components"
+import { BUTTON_VARIANT, INPUT_TYPES } from "@/enums"
 import { ISelectOption, IWorkoutFields, IWorkoutSeriesSchema } from "@/types"
 import { useGetAllWorkoutOptions } from "@/hooks"
 import { getBestExercise } from "@/api"
@@ -144,27 +144,22 @@ export const WorkoutFormFields = ({
                     name={`workoutData.${index}.weightQuantity`}
                     control={control}
                     defaultValue={item.weightQuantity}
-                    render={({
-                        field: {
-                            name,
-                            onChange,
-                            ref,
-                            value: { value },
-                        },
-                    }) => (
-                        <CustomSelect
-                            label="Waga"
-                            placeholder="Dodaj wagę obciązenia"
-                            options={WEIGHT}
-                            name={name}
-                            onChange={onChange}
-                            inputRef={ref}
-                            value={WEIGHT.find((chosenWeight) => chosenWeight.value === value)}
-                            isError={errors?.workoutData?.[index]?.weightQuantity?.label}
-                            errorMessage={
-                                errors?.workoutData?.[index]?.weightQuantity?.label?.message
-                            }
-                        />
+                    render={({ field: { name, onChange, ref, value } }) => (
+                        <div className="ml-2">
+                            <TextInput
+                                inputType={INPUT_TYPES.NUMBER}
+                                label="Waga"
+                                placeholder="Dodaj wagę obciązenia"
+                                name={name}
+                                onChange={onChange}
+                                inputRef={ref}
+                                value={value}
+                                isError={errors?.workoutData?.[index]?.weightQuantity}
+                                errorMessage={errors?.workoutData?.[index]?.weightQuantity?.message}
+                                isSmall
+                                isLabelAbove
+                            />
+                        </div>
                     )}
                 />
             )}

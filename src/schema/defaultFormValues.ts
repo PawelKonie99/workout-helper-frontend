@@ -15,10 +15,7 @@ export const workoutFormValues: IWorkoutSeriesSchema = {
                 value: "",
                 label: "",
             },
-            weightQuantity: {
-                value: "",
-                label: "",
-            },
+            weightQuantity: "",
         },
     ],
 }
@@ -38,10 +35,7 @@ export const studentPlanFormValues: IAddStudentPlanSchema = {
                 value: "",
                 label: "",
             },
-            weightQuantity: {
-                value: "",
-                label: "",
-            },
+            weightQuantity: "",
         },
     ],
     userData: {

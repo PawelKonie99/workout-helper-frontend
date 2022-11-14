@@ -17,6 +17,8 @@ interface Props {
     autoComplete?: string
     placeholder?: string
     classname?: string
+    isSmall?: boolean
+    isLabelAbove?: boolean
 }
 
 export const TextInput = ({
@@ -31,9 +33,12 @@ export const TextInput = ({
     autoComplete,
     placeholder,
     classname,
+    isSmall,
+    isLabelAbove,
 }: Props) => {
     return (
-        <div className={`${classname} w-full`}>
+        <div className={`${classname} flex flex-col`}>
+            {isLabelAbove && <span className="mb-2 text-darkGrey">{label}</span>}
             <TextField
                 fullWidth
                 autoComplete={autoComplete}
@@ -48,6 +53,12 @@ export const TextInput = ({
                 variant="outlined"
                 placeholder={placeholder}
                 className="border-red-300"
+                size={isSmall ? "small" : "medium"}
+                inputProps={{
+                    style: {
+                        padding: isSmall ? 7.5 : 16,
+                    },
+                }}
             />
             <FormErrorMessage isError={isError} errorMessage={errorMessage} />
         </div>

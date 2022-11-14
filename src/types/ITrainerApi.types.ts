@@ -36,10 +36,7 @@ export interface IAddStudentPlanSchema {
             value: string
             label: string
         }
-        weightQuantity: {
-            value: string
-            label: string
-        }
+        weightQuantity: string
     }[]
     userData: {
         value: string
