@@ -1,5 +1,6 @@
 export { registerUser } from "./userApi/registerUser"
 export { loginUser } from "./userApi/loginUser"
+export { getUserInfo } from "./userApi/getUserInfo"
 
 export { addNewWorkout } from "./workoutApi/addNewWorkout"
 export { getAllUserWorkouts } from "./workoutApi/getAllUserWorkouts"
@@ -13,5 +14,9 @@ export { getMealsHistory } from "./foodApi/getMealsHistory"
 export { addStudent } from "./trainerApi/addStudent"
 export { getAllStudents } from "./trainerApi/getAllStudents"
 export { addNewTrainingPlan } from "./trainerApi/addNewTrainingPlan"
+export { addNewDietProduct } from "./trainerApi/addNewDietProduct"
+export { removeDietProduct } from "./trainerApi/removeDietProduct"
+export { getSingleStudentData } from "./trainerApi/getSingleStudentData"
+export { getStudentDiet } from "./trainerApi/getStudentDiet"
 
 export { getTrainingPlan } from "./studentApi/getTrainingPlan"

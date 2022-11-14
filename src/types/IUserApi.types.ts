@@ -34,3 +34,15 @@ export interface IUserLoginResponse {
           }
         | Record<string, never>
 }
+
+export interface IUserDataResponse {
+    code: RESPONSE_CODE
+    success: boolean
+    username?: string
+    trainerName?: string
+}
+
+export interface IUserInfo {
+    username?: string
+    trainerName?: string
+}

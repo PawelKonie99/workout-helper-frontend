@@ -8,10 +8,10 @@ import {
 } from "react-hook-form"
 import { CustomSelect, NormalButton } from "@/components"
 import { BUTTON_VARIANT } from "@/enums"
-import { IWorkoutFields, IWorkoutOption, IWorkoutSeriesSchema } from "@/types"
+import { ISelectOption, IWorkoutFields, IWorkoutSeriesSchema } from "@/types"
 import { useGetAllWorkoutOptions } from "@/hooks"
 import { getBestExercise } from "@/api"
-import { isWorkoutOptionTypeGuard } from "@/helpers"
+import { isSelectOptionTypeGuard } from "@/helpers"
 
 interface Props {
     item: FieldArrayWithId<IWorkoutSeriesSchema, "workoutData", "id">
@@ -34,8 +34,8 @@ export const WorkoutFormFields = ({
     const { EXERCISE, WEIGHT, REPS, SERIES } = useGetAllWorkoutOptions() ?? {}
     const [bestExercise, setBestExercise] = useState<IWorkoutFields>()
 
-    const handleExerciseNameChange = async (option: IWorkoutOption | unknown) => {
-        if (isWorkoutOptionTypeGuard(option)) {
+    const handleExerciseNameChange = async (option: ISelectOption | unknown) => {
+        if (isSelectOptionTypeGuard(option)) {
             const bestExerciseResponse = await getBestExercise(option.value)
 
             const { exerciseName, repsQuantity, seriesQuantity, weightQuantity } =

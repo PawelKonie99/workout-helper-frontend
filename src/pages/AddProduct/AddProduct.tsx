@@ -1,76 +1,55 @@
-import { MEAL_TYPES } from "@/enums"
-import { AddProductForm } from "./components"
 import { useGetTodayProduct } from "@/hooks"
+import { addNewProduct, deleteProduct } from "@/api"
+import { AllMealsForm, MacrosSummary } from "@/components"
+import { MEAL_TYPES } from "@/enums"
+import { DietFromTrainer } from "./components"
 
 const AddProduct = () => {
     const { todayProductsData, setNewlyAddedProductName, setRemovedProductId } =
         useGetTodayProduct()
 
-    const { breakfast, brunch, dinner, dessert, supper } = todayProductsData?.todayProducts ?? {}
-
-    const { totalKcal, totalProteins, totalFat, totalCarbons } =
-        todayProductsData?.todaySummary ?? {}
-
     const handleSetNewlyAddedProductName = (newProductName: string) => {
         setNewlyAddedProductName(newProductName)
     }
-    const handleSetRemovedProductId = (productId: string) => {
-        setRemovedProductId(productId)
+
+    const handleDeleteProduct = async (
+        productId: string,
+        timeOfTheMeal: MEAL_TYPES,
+    ): Promise<{ success: boolean }> => {
+        if (todayProductsData?.allDayMealsId) {
+            const { success } = await deleteProduct(
+                todayProductsData?.allDayMealsId,
+                productId,
+                timeOfTheMeal,
+            )
+            setRemovedProductId(productId)
+
+            return { success }
+        }
+
+        return { success: false }
     }
 
     return (
-        <div className="bg-offWhite flex justify-center">
-            <div>
-                <AddProductForm
-                    timeOfTheMeal={MEAL_TYPES.BREAKFAST}
-                    title="Śniadanie"
-                    alreadyAddedProducts={breakfast}
+        <div className="flex flex-col">
+            <DietFromTrainer />
+            <div className="bg-offWhite flex justify-center">
+                <AllMealsForm
+                    addedProducts={todayProductsData?.todayProducts}
+                    handleSendProductData={addNewProduct}
                     handleSetNewlyAddedProductName={handleSetNewlyAddedProductName}
-                    allDayMealsId={todayProductsData?.allDayMealsId}
-                    handleSetRemovedProductId={handleSetRemovedProductId}
+                    handleDeleteProduct={handleDeleteProduct}
                 />
-                <AddProductForm
-                    timeOfTheMeal={MEAL_TYPES.BRUNCH}
-                    title="Drugie Śniadanie"
-                    alreadyAddedProducts={brunch}
-                    handleSetNewlyAddedProductName={handleSetNewlyAddedProductName}
-                    allDayMealsId={todayProductsData?.allDayMealsId}
-                    handleSetRemovedProductId={handleSetRemovedProductId}
-                />
-                <AddProductForm
-                    timeOfTheMeal={MEAL_TYPES.DINNER}
-                    title="Obiad"
-                    alreadyAddedProducts={dinner}
-                    handleSetNewlyAddedProductName={handleSetNewlyAddedProductName}
-                    allDayMealsId={todayProductsData?.allDayMealsId}
-                    handleSetRemovedProductId={handleSetRemovedProductId}
-                />
-                <AddProductForm
-                    timeOfTheMeal={MEAL_TYPES.DESSERT}
-                    title="Podwieczorek"
-                    alreadyAddedProducts={dessert}
-                    handleSetNewlyAddedProductName={handleSetNewlyAddedProductName}
-                    allDayMealsId={todayProductsData?.allDayMealsId}
-                    handleSetRemovedProductId={handleSetRemovedProductId}
-                />
-                <AddProductForm
-                    timeOfTheMeal={MEAL_TYPES.SUPPER}
-                    title="Kolacja"
-                    alreadyAddedProducts={supper}
-                    handleSetNewlyAddedProductName={handleSetNewlyAddedProductName}
-                    allDayMealsId={todayProductsData?.allDayMealsId}
-                    handleSetRemovedProductId={handleSetRemovedProductId}
-                />
+                {todayProductsData?.todaySummary &&
+                todayProductsData?.todaySummary?.totalKcal > 0 ? (
+                    <div className="ml-16">
+                        <MacrosSummary
+                            title="Podsumowanie dzisiejszego dnia:"
+                            dailySummary={todayProductsData?.todaySummary}
+                        />
+                    </div>
+                ) : null}
             </div>
-            {totalKcal && totalKcal > 0 ? (
-                <div className="ml-16">
-                    <h3 className="text-xl mb-4">Podsumowanie dzisiejszego dnia:</h3>
-                    <p>Kcal: {totalKcal?.toFixed(2)}</p>
-                    <p>Białko: {totalProteins?.toFixed(2)}</p>
-                    <p>Tłuszcz: {totalFat?.toFixed(2)}</p>
-                    <p>Węglowodany: {totalCarbons?.toFixed(2)}</p>
-                </div>
-            ) : null}
         </div>
     )
 }

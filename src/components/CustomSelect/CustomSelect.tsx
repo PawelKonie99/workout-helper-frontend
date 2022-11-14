@@ -1,7 +1,7 @@
 import { InputLabel } from "@mui/material"
 import { FieldError, RefCallBack } from "react-hook-form"
 import Select, { StylesConfig } from "react-select"
-import { IWorkoutOption } from "@/types"
+import { ISelectOption } from "@/types"
 import { FormErrorMessage } from "../FormErrorMessage/FormErrorMessage"
 
 interface ISelectValue {
@@ -11,12 +11,12 @@ interface ISelectValue {
 interface Props {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onChange: (...event: any[]) => void
-    inputRef: RefCallBack
     options: ISelectValue[]
     placeholder: string
     name: string
     label: string
-    onChangeCustom?: (option: IWorkoutOption | unknown) => void
+    onChangeCustom?: (option: ISelectOption | unknown) => void
+    inputRef?: RefCallBack
     value?: ISelectValue
     isError?: FieldError
     errorMessage?: string

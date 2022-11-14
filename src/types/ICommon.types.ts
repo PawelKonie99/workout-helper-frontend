@@ -5,3 +5,8 @@ export interface IStandardResponse {
     message: string
     success: boolean
 }
+
+export interface ISelectOption {
+    value: string
+    label: string
+}

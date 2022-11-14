@@ -2,8 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react"
 import { toast } from "react-toastify"
 import { getProductData, translateProduct } from "@/api/externalApi"
 import { NormalButton, TextInput } from "@/components"
-import { BUTTON_TYPES, MEAL_TYPES, RESPONSE_CODE } from "@/enums"
-import { addNewProduct, deleteProduct } from "@/api"
+import { BUTTON_TYPES, MEAL_TYPES } from "@/enums"
 import { IDatabaseProduct, IProductPayload } from "@/types"
 import "react-toastify/dist/ReactToastify.css"
 
@@ -11,20 +10,24 @@ interface Props {
     timeOfTheMeal: MEAL_TYPES
     title: string
     handleSetNewlyAddedProductName: (newProduct: string) => void
-    handleSetRemovedProductId: (productId: string) => void
+    handleSendProductData: (product: IProductPayload) => Promise<{ success: boolean }>
+    handleDeleteProduct: (
+        productId: string,
+        timeOfTheMeal: MEAL_TYPES,
+    ) => Promise<{ success: boolean }>
     alreadyAddedProducts?: IDatabaseProduct[]
-    allDayMealsId?: string
 }
 
 export const AddProductForm = ({
     timeOfTheMeal,
     title,
-    alreadyAddedProducts,
     handleSetNewlyAddedProductName,
-    handleSetRemovedProductId,
-    allDayMealsId,
+    handleSendProductData,
+    handleDeleteProduct,
+    alreadyAddedProducts,
 }: Props) => {
     const [productNameInput, setProductNameInput] = useState("")
+    const [isLoading, setIsLoading] = useState(false)
 
     const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
         setProductNameInput(event.target.value)
@@ -33,6 +36,7 @@ export const AddProductForm = ({
     const handleOnSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         try {
+            setIsLoading(true)
             const translatedProductName = await translateProduct(productNameInput)
             const [productData] = await getProductData(translatedProductName)
 
@@ -47,33 +51,32 @@ export const AddProductForm = ({
                 proteins: nf_protein,
                 typeOfMeal: timeOfTheMeal,
             }
-            setProductNameInput("")
 
-            const { code } = await addNewProduct(newProductPayload)
+            const { success } = await handleSendProductData(newProductPayload)
 
-            if (code === RESPONSE_CODE.success) {
+            if (success) {
                 toast.success(`${food_name} dodany pomyślnie!`)
             } else {
                 toast.error("Błąd podczas dodawania produktu!")
             }
 
-            handleSetNewlyAddedProductName(food_name)
+            setProductNameInput("")
+            handleSetNewlyAddedProductName(`${food_name}${Math.random()}`) //TODO refactor
+            setIsLoading(false)
         } catch (error: unknown) {
             setProductNameInput("")
             toast.error("Błąd podczas dodawania produktu!")
+            setIsLoading(false)
         }
     }
 
-    const handleDeleteProduct = async (productId: string, productName: string) => {
-        if (allDayMealsId) {
-            const { code } = await deleteProduct(allDayMealsId, productId)
-            handleSetRemovedProductId(productId)
+    const handleDelete = async (productId: string, productName: string) => {
+        const { success } = await handleDeleteProduct(productId, timeOfTheMeal)
 
-            if (code === RESPONSE_CODE.success) {
-                toast.success(`${productName} usunięty pomyślnie!`)
-            } else {
-                toast.error("Błąd podczas usuwania produktu!")
-            }
+        if (success) {
+            toast.success(`${productName} usunięty pomyślnie!`)
+        } else {
+            toast.error("Błąd podczas usuwania produktu!")
         }
     }
 
@@ -89,7 +92,7 @@ export const AddProductForm = ({
                     onChange={handleOnChange}
                     classname="pb-4"
                 />
-                <NormalButton label="Dodaj" type={BUTTON_TYPES.SUBMIT} />
+                <NormalButton label="Dodaj" type={BUTTON_TYPES.SUBMIT} isLoading={isLoading} />
             </form>
             {alreadyAddedProducts && alreadyAddedProducts?.length > 0 ? (
                 <span className="mt-2">Dodane produkty</span>
@@ -104,7 +107,7 @@ export const AddProductForm = ({
                             >
                                 <div
                                     className="absolute -right-3 -top-4 cursor-pointer"
-                                    onClick={() => handleDeleteProduct(_id, productName)}
+                                    onClick={() => handleDelete(_id, productName)}
                                 >
                                     x
                                 </div>

@@ -15,6 +15,9 @@ export const TrainingPlan = () => {
         if (!success) {
             toast.error("Błąd podczas pobierania planu!")
         }
+        if (trainingPlan?.length === 0) {
+            toast.error("Nie masz aktualnie planu treningowego!")
+        }
 
         setUserTrainingPlan(trainingPlan)
     }
@@ -27,7 +30,7 @@ export const TrainingPlan = () => {
                 onClick={handleGetTrainingPlan}
                 className="mb-4"
             />
-            {userTrainingPlan && userTrainingPlan?.length > 1 && (
+            {userTrainingPlan && userTrainingPlan?.length > 0 && (
                 <SingleWorkoutHistory workoutData={userTrainingPlan} />
             )}
         </div>
