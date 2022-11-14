@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getDiet } from "@/api"
+import { getStudentDiet } from "@/api"
 import { IDietMeals, ISelectOption } from "@/types"
 
 export const useGetStudentDiet = (choosenStudent?: ISelectOption) => {
@@ -10,7 +10,7 @@ export const useGetStudentDiet = (choosenStudent?: ISelectOption) => {
     useEffect(() => {
         const getUserDiet = async () => {
             if (choosenStudent) {
-                const { diet } = await getDiet(choosenStudent)
+                const { diet } = await getStudentDiet(choosenStudent)
 
                 diet && setUserDiet(diet)
             }

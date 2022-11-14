@@ -13,10 +13,11 @@ export {
     NEW_TRAINING_PLAN,
     GET_TRAINING_PLAN,
     GET_USER_INFO,
-    GET_DIET,
+    GET_STUDENT_DIET,
     ADD_NEW_DIET_PRODUCT,
     REMOVE_DIET_PRODUCT,
     GET_SINGLE_USER,
+    GET_DIET,
 } from "./apiRoutes"
 export {
     INITIAL_REP_COUNT,

@@ -32,7 +32,12 @@ export type {
     IUserInfo,
 } from "./IUserApi.types"
 export type { ITranslationResponse } from "./externalApiTypes/ITranslation.types"
-export type { ITrainingPlanResponse, IGetStudenDietResponse, IDietMeals } from "./IStudentApi.types"
+export type {
+    ITrainingPlanResponse,
+    IGetStudenDietResponse,
+    IUserDietData,
+    IDietMeals,
+} from "./IStudentApi.types"
 export type {
     IAddStudentSchema,
     IAllStudentsResponse,

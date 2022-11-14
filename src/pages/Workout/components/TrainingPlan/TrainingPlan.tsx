@@ -30,7 +30,7 @@ export const TrainingPlan = () => {
                 onClick={handleGetTrainingPlan}
                 className="mb-4"
             />
-            {userTrainingPlan && userTrainingPlan?.length > 1 && (
+            {userTrainingPlan && userTrainingPlan?.length > 0 && (
                 <SingleWorkoutHistory workoutData={userTrainingPlan} />
             )}
         </div>

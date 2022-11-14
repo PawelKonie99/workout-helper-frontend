@@ -1,14 +1,12 @@
 import { useGetTodayProduct } from "@/hooks"
 import { addNewProduct, deleteProduct } from "@/api"
-import { AllMealsForm } from "@/components"
+import { AllMealsForm, MacrosSummary } from "@/components"
 import { MEAL_TYPES } from "@/enums"
+import { DietFromTrainer } from "./components"
 
 const AddProduct = () => {
     const { todayProductsData, setNewlyAddedProductName, setRemovedProductId } =
         useGetTodayProduct()
-
-    const { totalKcal, totalProteins, totalFat, totalCarbons } =
-        todayProductsData?.todaySummary ?? {}
 
     const handleSetNewlyAddedProductName = (newProductName: string) => {
         setNewlyAddedProductName(newProductName)
@@ -33,22 +31,25 @@ const AddProduct = () => {
     }
 
     return (
-        <div className="bg-offWhite flex justify-center">
-            <AllMealsForm
-                addedProducts={todayProductsData?.todayProducts}
-                handleSendProductData={addNewProduct}
-                handleSetNewlyAddedProductName={handleSetNewlyAddedProductName}
-                handleDeleteProduct={handleDeleteProduct}
-            />
-            {totalKcal && totalKcal > 0 ? (
-                <div className="ml-16">
-                    <h3 className="text-xl mb-4">Podsumowanie dzisiejszego dnia:</h3>
-                    <p>Kcal: {totalKcal?.toFixed(2)}</p>
-                    <p>Białko: {totalProteins?.toFixed(2)}</p>
-                    <p>Tłuszcz: {totalFat?.toFixed(2)}</p>
-                    <p>Węglowodany: {totalCarbons?.toFixed(2)}</p>
-                </div>
-            ) : null}
+        <div className="flex flex-col">
+            <DietFromTrainer />
+            <div className="bg-offWhite flex justify-center">
+                <AllMealsForm
+                    addedProducts={todayProductsData?.todayProducts}
+                    handleSendProductData={addNewProduct}
+                    handleSetNewlyAddedProductName={handleSetNewlyAddedProductName}
+                    handleDeleteProduct={handleDeleteProduct}
+                />
+                {todayProductsData?.todaySummary &&
+                todayProductsData?.todaySummary?.totalKcal > 0 ? (
+                    <div className="ml-16">
+                        <MacrosSummary
+                            title="Podsumowanie dzisiejszego dnia:"
+                            dailySummary={todayProductsData?.todaySummary}
+                        />
+                    </div>
+                ) : null}
+            </div>
         </div>
     )
 }

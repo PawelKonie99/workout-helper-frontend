@@ -20,8 +20,6 @@ export const MyStudents = ({ myStudents }: Props) => {
         }
     }
 
-    console.log("choosenStudentData", choosenStudentData)
-
     return (
         <div className="flex flex-col">
             {myStudents && myStudents.length <= 0 ? (
