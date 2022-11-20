@@ -48,7 +48,7 @@ export const WorkoutFormFields = ({
     }
 
     return (
-        <div className="flex items-end my-2">
+        <div className="flex items-start my-2">
             {EXERCISE && (
                 <Controller
                     name={`workoutData.${index}.exerciseName`}
@@ -163,13 +163,16 @@ export const WorkoutFormFields = ({
                     )}
                 />
             )}
+
             {index > 0 && (
-                <NormalButton
-                    onClick={() => remove(index)}
-                    buttonVariant={BUTTON_VARIANT.DELETE}
-                    className="ml-2"
-                    label="Usuń ćwiczenie"
-                />
+                <div className="h-full flex items-end">
+                    <NormalButton
+                        onClick={() => remove(index)}
+                        buttonVariant={BUTTON_VARIANT.DELETE}
+                        className="ml-2"
+                        label="Usuń ćwiczenie"
+                    />
+                </div>
             )}
 
             {bestExercise && showBestRecord && (

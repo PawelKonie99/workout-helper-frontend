@@ -12,14 +12,22 @@ export const MealSummary = ({ title, timeOfMeal }: IProps) => {
     return (
         <div className="flex flex-col">
             <span className="text-primaryBlue text-lg">{title}</span>
-            <SingleElementInfo macroElementName="Białko" valueOfMacroElement={proteins} unit="g" />
             <SingleElementInfo
-                macroElementName="Węglowodany"
-                valueOfMacroElement={carbons}
+                macroElementName="Białko"
+                valueOfMacroElement={proteins.toFixed(2)}
                 unit="g"
             />
-            <SingleElementInfo macroElementName="Tłuszcze" valueOfMacroElement={fat} unit="g" />
-            <SingleElementInfo macroElementName="Kalorie" valueOfMacroElement={kcal} />
+            <SingleElementInfo
+                macroElementName="Węglowodany"
+                valueOfMacroElement={carbons.toFixed(2)}
+                unit="g"
+            />
+            <SingleElementInfo
+                macroElementName="Tłuszcze"
+                valueOfMacroElement={fat.toFixed(2)}
+                unit="g"
+            />
+            <SingleElementInfo macroElementName="Kalorie" valueOfMacroElement={kcal.toFixed(2)} />
         </div>
     )
 }

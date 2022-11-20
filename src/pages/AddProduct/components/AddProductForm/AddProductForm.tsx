@@ -117,7 +117,7 @@ export const AddProductForm = ({
             {alreadyAddedProducts && alreadyAddedProducts?.length > 0 ? (
                 <span className="mt-2">Dodane produkty</span>
             ) : null}
-            <div className="mt-4 flex flex-col items-center">
+            <div className="mt-3 flex flex-col items-center">
                 <div className="flex justify-start mt-2">
                     {alreadyAddedProducts?.map(
                         ({ productName, kcal, proteins, carbons, fat, _id }, index) => (
