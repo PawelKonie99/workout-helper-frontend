@@ -15,7 +15,7 @@ export const workoutFormValues: IWorkoutSeriesSchema = {
                 value: "",
                 label: "",
             },
-            weightQuantity: "",
+            weightQuantity: "0",
         },
     ],
 }

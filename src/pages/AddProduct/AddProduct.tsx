@@ -1,10 +1,13 @@
+import { useSelector } from "react-redux"
 import { useGetTodayProduct } from "@/hooks"
 import { addNewProduct, deleteProduct } from "@/api"
 import { AllMealsForm, MacrosSummary } from "@/components"
 import { MEAL_TYPES } from "@/enums"
 import { DietFromTrainer } from "./components"
+import { RootState } from "@/store/store"
 
 const AddProduct = () => {
+    const { isTrainer } = useSelector((state: RootState) => state.userReducer)
     const { todayProductsData, setNewlyAddedProductName, setRemovedProductId } =
         useGetTodayProduct()
 
@@ -32,7 +35,7 @@ const AddProduct = () => {
 
     return (
         <div className="flex flex-col">
-            <DietFromTrainer />
+            {!isTrainer && <DietFromTrainer />}
             <div className="bg-offWhite flex justify-center">
                 <AllMealsForm
                     addedProducts={todayProductsData?.todayProducts}

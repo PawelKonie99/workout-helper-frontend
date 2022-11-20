@@ -9,7 +9,7 @@ export const UserInfo = ({ userInfo }: Props) => {
 
     return (
         <div className="flex flex-col mb-6 items-center">
-            <span>Cześć, {username}</span>
+            <h1 className="text-2xl">Cześć, {username}</h1>
             {trainerName && <span>Twój trener: {trainerName}</span>}
         </div>
     )

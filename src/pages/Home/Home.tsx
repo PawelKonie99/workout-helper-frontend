@@ -1,5 +1,7 @@
+import { MainDescription } from "./components"
+
 const Home = () => {
-    return <div>Witaj na stronie glownej</div>
+    return <MainDescription />
 }
 
 export default Home

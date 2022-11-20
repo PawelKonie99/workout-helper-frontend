@@ -1,5 +1,6 @@
 import { formatDate } from "@/helpers"
 import { IWorkoutFields } from "@/types"
+import { SingleElementInfo } from "../SingleElementInfo/SingleElementInfo"
 
 interface Props {
     workoutData: IWorkoutFields[]
@@ -9,13 +10,26 @@ interface Props {
 export const SingleWorkoutHistory = ({ workoutData, date }: Props) => {
     return (
         <div className="mb-4">
-            {date && <span>{formatDate(date)}</span>}
+            {date && <span className="text-primaryBlue text-lg">{formatDate(date)}</span>}
             {workoutData.map(({ exerciseName, repsQuantity, seriesQuantity, weightQuantity }) => (
                 <div key={exerciseName} className="flex">
-                    <span className="mr-4 text-primaryDark">Nazwa ćwiczenia: {exerciseName}</span>
-                    <span className="mr-4  text-primaryBlue">Ilość powtórzeń: {repsQuantity}</span>
-                    <span className="mr-4 text-primaryDark">Nazwa serii: {seriesQuantity}</span>
-                    <span className="mr-4  text-primaryBlue">Waga obiązenia: {weightQuantity}</span>
+                    <SingleElementInfo
+                        macroElementName="Nazwa ćwiczenia"
+                        valueOfMacroElement={exerciseName}
+                    />
+                    <SingleElementInfo
+                        macroElementName="Ilość powtórzeń"
+                        valueOfMacroElement={repsQuantity}
+                    />
+                    <SingleElementInfo
+                        macroElementName="Nazwa serii"
+                        valueOfMacroElement={seriesQuantity}
+                    />
+                    <SingleElementInfo
+                        macroElementName="Waga obiązenia"
+                        valueOfMacroElement={weightQuantity}
+                        unit="kg"
+                    />
                 </div>
             ))}
         </div>

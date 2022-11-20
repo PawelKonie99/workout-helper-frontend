@@ -10,3 +10,4 @@ export { SingleWorkoutHistory } from "./SingleWorkoutHistory/SingleWorkoutHistor
 export { AllMealsForm } from "./AllMealsForm/AllMealsForm"
 export { WorkoutFormFields } from "./WorkoutFormFields/WorkoutFormFields"
 export { MacrosSummary } from "./MacrosSummary/MacrosSummary"
+export { SingleElementInfo } from "./SingleElementInfo/SingleElementInfo"

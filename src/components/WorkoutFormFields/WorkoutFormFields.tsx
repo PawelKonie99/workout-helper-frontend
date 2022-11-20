@@ -148,7 +148,7 @@ export const WorkoutFormFields = ({
                         <div className="ml-2">
                             <TextInput
                                 inputType={INPUT_TYPES.NUMBER}
-                                label="Waga"
+                                label="Waga (kg)"
                                 placeholder="Dodaj wagę obciązenia"
                                 name={name}
                                 onChange={onChange}

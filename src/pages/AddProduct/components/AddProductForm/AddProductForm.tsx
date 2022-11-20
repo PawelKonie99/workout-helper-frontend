@@ -89,7 +89,7 @@ export const AddProductForm = ({
     }
 
     return (
-        <div className="flex flex-col items-center justify-center mb-10">
+        <div className="flex flex-col items-center justify-start mb-10">
             <form onSubmit={handleOnSubmit} className="flex flex-col items-center">
                 <h3 className="text-2xl pb-4">{title}</h3>
                 <div className="flex">

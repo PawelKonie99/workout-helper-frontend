@@ -9,7 +9,7 @@ export const Navbar = () => {
         <div className="fixed w-full flex m-auto justify-between px-16 py-6 bg-primaryYellow z-50">
             {/* //TODO replace to img */}
             <Link to="/">
-                <p>logo</p>
+                <p className="text-lg">Strona główna</p>
             </Link>
 
             <ul className="flex">
