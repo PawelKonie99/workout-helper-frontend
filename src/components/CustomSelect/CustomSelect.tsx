@@ -1,3 +1,4 @@
+import classNames from "classnames"
 import { InputLabel } from "@mui/material"
 import { FieldError, RefCallBack } from "react-hook-form"
 import Select, { StylesConfig } from "react-select"
@@ -20,6 +21,8 @@ interface Props {
     value?: ISelectValue
     isError?: FieldError
     errorMessage?: string
+    className?: string
+    isMargin?: boolean
 }
 
 export const CustomSelect = ({
@@ -33,14 +36,20 @@ export const CustomSelect = ({
     value,
     isError,
     errorMessage,
+    className,
+    isMargin = true,
 }: Props) => {
+    const selectAppearance = classNames({
+        "mx-2": isMargin,
+    })
+
     const handleChange = (event: unknown) => {
         onChange(event)
         onChangeCustom && onChangeCustom(event)
     }
 
     return (
-        <div className="flex flex-col mx-2">
+        <div className={`flex flex-col ${selectAppearance} ${className}`}>
             <InputLabel id={label}>{label}</InputLabel>
             <Select
                 inputId={label}

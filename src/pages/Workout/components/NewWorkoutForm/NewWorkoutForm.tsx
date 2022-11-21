@@ -46,32 +46,35 @@ export const NewWorkoutForm = () => {
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center">
-            <div className="flex flex-col justify-start">
-                {fields.map((item, index) => {
-                    return (
-                        <WorkoutFormFields
-                            control={control}
-                            errors={errors}
-                            index={index}
-                            item={item}
-                            remove={remove}
-                            key={item.id}
-                        />
-                    )
-                })}
-            </div>
-            <div className="flex flex-col pt-8">
-                <NormalButton
-                    buttonVariant={BUTTON_VARIANT.SECONDARY}
-                    label="Dodaj ćwiczenie"
-                    onClick={() => {
-                        append(workoutFormValues.workoutData)
-                    }}
-                    className="mb-4"
-                />
-                <NormalButton label="Zakoncz" type={BUTTON_TYPES.SUBMIT} />
-            </div>
-        </form>
+        <div>
+            <h1 className="text-2xl mb-8 text-center">Dodaj ćwiczenia wykonane na treningu!</h1>
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center">
+                <div className="flex flex-col justify-start">
+                    {fields.map((item, index) => {
+                        return (
+                            <WorkoutFormFields
+                                control={control}
+                                errors={errors}
+                                index={index}
+                                item={item}
+                                remove={remove}
+                                key={item.id}
+                            />
+                        )
+                    })}
+                </div>
+                <div className="flex flex-col pt-8">
+                    <NormalButton
+                        buttonVariant={BUTTON_VARIANT.SECONDARY}
+                        label="Dodaj ćwiczenie"
+                        onClick={() => {
+                            append(workoutFormValues.workoutData)
+                        }}
+                        className="mb-4"
+                    />
+                    <NormalButton label="Zakoncz" type={BUTTON_TYPES.SUBMIT} />
+                </div>
+            </form>
+        </div>
     )
 }

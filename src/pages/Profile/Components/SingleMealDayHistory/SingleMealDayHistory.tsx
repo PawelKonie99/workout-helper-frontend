@@ -10,9 +10,9 @@ export const SingleMealDayHistory = ({ singleMealDay }: Props) => {
     const { breakfast, brunch, dailySummary, dessert, dinner, mealDate, supper } = singleMealDay
 
     return (
-        <div className="mb-4">
-            <span>{mealDate}</span>
-            <div className="flex mt-2">
+        <div className="mb-6">
+            <span className="text-primaryBlue text-lg">{mealDate}</span>
+            <div className="flex mt-1">
                 <MealSummary timeOfMeal={breakfast} title="Śniadanie:" />
                 <MealSummary timeOfMeal={brunch} title="Drugie śniadanie:" />
                 <MealSummary timeOfMeal={dinner} title="Obiad:" />

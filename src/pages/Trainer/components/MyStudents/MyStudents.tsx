@@ -42,14 +42,32 @@ export const MyStudents = ({ myStudents }: Props) => {
             )}
             {choosenStudentData?.studentName && (
                 <div>
-                    <span>Dane dla podopiecznego: {choosenStudentData?.studentName}</span>
+                    <span className="text-lg text-primaryBlue">
+                        Dane dla podopiecznego: {choosenStudentData?.studentName}
+                    </span>
                     <div className="my-2">
-                        {choosenStudentData?.allUserWorkouts && (
-                            <WorkoutHistory workoutHistory={choosenStudentData?.allUserWorkouts} />
-                        )}
+                        <div className="mt-6">
+                            <span className="text-lg text-primaryDark font-bold">
+                                Historia treningów
+                            </span>
+                            <div className="mt-4">
+                                {choosenStudentData?.allUserWorkouts && (
+                                    <WorkoutHistory
+                                        workoutHistory={choosenStudentData?.allUserWorkouts}
+                                    />
+                                )}
+                            </div>
+                        </div>
                     </div>
                     {choosenStudentData?.mealHistory && (
-                        <ProductHistory productHistory={choosenStudentData?.mealHistory} />
+                        <div className="mt-10">
+                            <span className="text-lg text-primaryDark font-bold">
+                                Historia posiłków
+                            </span>
+                            <div className="mt-4">
+                                <ProductHistory productHistory={choosenStudentData?.mealHistory} />
+                            </div>
+                        </div>
                     )}
                 </div>
             )}

@@ -21,7 +21,7 @@ export const AllMealsForm = ({
     const { breakfast, brunch, dinner, dessert, supper } = addedProducts
 
     return (
-        <div>
+        <div className="grid grid-cols-2 gap-x-20 gap-y-8">
             <AddProductForm
                 timeOfTheMeal={MEAL_TYPES.BREAKFAST}
                 title="Śniadanie"

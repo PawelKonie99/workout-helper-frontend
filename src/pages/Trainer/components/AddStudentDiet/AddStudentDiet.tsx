@@ -67,7 +67,7 @@ export const AddStudentDiet = ({ myStudents }: Props) => {
         students.map(({ studentName, id }) => ({ value: id, label: studentName }))
 
     return (
-        <>
+        <div className="flex flex-col">
             {!myStudents || myStudents.length <= 0 ? (
                 <span>Nie masz zadnych podopiecznych!</span>
             ) : (
@@ -78,6 +78,8 @@ export const AddStudentDiet = ({ myStudents }: Props) => {
                     name={"studentName"}
                     onChange={handleChooseStudent}
                     value={choosenStudent}
+                    className="mb-8 w-64"
+                    isMargin={false}
                 />
             )}
             {userDiet && (
@@ -88,6 +90,6 @@ export const AddStudentDiet = ({ myStudents }: Props) => {
                     handleDeleteProduct={handleDeleteProduct}
                 />
             )}
-        </>
+        </div>
     )
 }

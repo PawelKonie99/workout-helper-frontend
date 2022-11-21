@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react"
 import { toast } from "react-toastify"
 import { getProductData, translateProduct } from "@/api/externalApi"
 import { NormalButton, TextInput } from "@/components"
-import { BUTTON_TYPES, MEAL_TYPES } from "@/enums"
+import { BUTTON_TYPES, INPUT_TYPES, MEAL_TYPES } from "@/enums"
 import { IDatabaseProduct, IProductPayload } from "@/types"
 import "react-toastify/dist/ReactToastify.css"
 
@@ -26,25 +26,33 @@ export const AddProductForm = ({
     handleDeleteProduct,
     alreadyAddedProducts,
 }: Props) => {
-    const [productNameInput, setProductNameInput] = useState("")
+    const [productNameAndWeight, setProductNameAndWeight] = useState({ name: "", weight: "" })
     const [isLoading, setIsLoading] = useState(false)
 
-    const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
-        setProductNameInput(event.target.value)
+    const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setProductNameAndWeight((prevState) => ({ ...prevState, name: event.target.value }))
     }
+    const handleWeightChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setProductNameAndWeight((prevState) => ({
+            ...prevState,
+            weight: event.target.value ? `${event.target.value}g` : event.target.value,
+        }))
+    }
+
+    const { name, weight } = productNameAndWeight
 
     const handleOnSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         try {
             setIsLoading(true)
-            const translatedProductName = await translateProduct(productNameInput)
-            const [productData] = await getProductData(translatedProductName)
+            const translatedProductName = await translateProduct(name)
+            const [productData] = await getProductData(translatedProductName, weight)
 
             const { food_name, nf_calories, nf_protein, nf_total_carbohydrate, nf_total_fat } =
                 productData
 
             const newProductPayload: IProductPayload = {
-                productName: productNameInput,
+                productName: `${name} ${weight}`,
                 carbons: nf_total_carbohydrate,
                 fat: nf_total_fat,
                 kcal: nf_calories,
@@ -60,11 +68,11 @@ export const AddProductForm = ({
                 toast.error("Błąd podczas dodawania produktu!")
             }
 
-            setProductNameInput("")
+            setProductNameAndWeight({ name: "", weight: "" })
             handleSetNewlyAddedProductName(`${food_name}${Math.random()}`) //TODO refactor
             setIsLoading(false)
         } catch (error: unknown) {
-            setProductNameInput("")
+            setProductNameAndWeight({ name: "", weight: "" })
             toast.error("Błąd podczas dodawania produktu!")
             setIsLoading(false)
         }
@@ -81,23 +89,35 @@ export const AddProductForm = ({
     }
 
     return (
-        <div className="flex flex-col items-center justify-center mb-10">
+        <div className="flex flex-col items-center justify-start mb-10">
             <form onSubmit={handleOnSubmit} className="flex flex-col items-center">
                 <h3 className="text-2xl pb-4">{title}</h3>
-                <TextInput
-                    name="product-name"
-                    label="Nazwa produktu"
-                    placeholder="Nazwa produktu"
-                    value={productNameInput}
-                    onChange={handleOnChange}
-                    classname="pb-4"
-                />
+                <div className="flex">
+                    <TextInput
+                        name="product-name"
+                        label="Nazwa produktu"
+                        placeholder="Nazwa produktu"
+                        value={name}
+                        onChange={handleNameChange}
+                        classname="pb-4"
+                    />
+                    <TextInput
+                        name="product-weight"
+                        label="Waga produktu (g)"
+                        placeholder="Waga produktu (g)"
+                        value={weight.replace("g", "")}
+                        onChange={handleWeightChange}
+                        classname="pb-4 ml-4"
+                        inputType={INPUT_TYPES.NUMBER}
+                    />
+                </div>
+
                 <NormalButton label="Dodaj" type={BUTTON_TYPES.SUBMIT} isLoading={isLoading} />
             </form>
             {alreadyAddedProducts && alreadyAddedProducts?.length > 0 ? (
                 <span className="mt-2">Dodane produkty</span>
             ) : null}
-            <div className="mt-4 flex flex-col items-center">
+            <div className="mt-3 flex flex-col items-center">
                 <div className="flex justify-start mt-2">
                     {alreadyAddedProducts?.map(
                         ({ productName, kcal, proteins, carbons, fat, _id }, index) => (

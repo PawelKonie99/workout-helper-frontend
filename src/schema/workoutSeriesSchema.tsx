@@ -17,10 +17,7 @@ export const workoutSeriesSchema = () => {
                     label: yup.string().required("Ilość serii jest wymagana"),
                     value: yup.string().required("Ilość serii jest wymagana"),
                 }),
-                weightQuantity: yup.object().shape({
-                    label: yup.string().required("Waga obciązenia jest wymagana"),
-                    value: yup.string().required("Waga obciązenia jest wymagana"),
-                }),
+                weightQuantity: yup.string().required("Waga obciązenia jest wymagana"),
             }),
         ),
     })

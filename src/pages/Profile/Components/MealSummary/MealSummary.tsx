@@ -1,3 +1,4 @@
+import { SingleElementInfo } from "@/components"
 import { IMealMacros } from "@/types"
 
 interface IProps {
@@ -10,11 +11,23 @@ export const MealSummary = ({ title, timeOfMeal }: IProps) => {
 
     return (
         <div className="flex flex-col">
-            <span className="mr-4 text-primaryDark">{title} </span>
-            <span className="mr-4  text-primaryBlue">Białko: {proteins}</span>
-            <span className="mr-4 text-primaryDark">Węglowodany: {carbons}</span>
-            <span className="mr-4  text-primaryBlue">Tłuszcze: {fat}</span>
-            <span className="mr-4 text-primaryDark">Kalorie: {kcal}</span>
+            <span className="text-primaryBlue text-lg">{title}</span>
+            <SingleElementInfo
+                macroElementName="Białko"
+                valueOfMacroElement={proteins.toFixed(2)}
+                unit="g"
+            />
+            <SingleElementInfo
+                macroElementName="Węglowodany"
+                valueOfMacroElement={carbons.toFixed(2)}
+                unit="g"
+            />
+            <SingleElementInfo
+                macroElementName="Tłuszcze"
+                valueOfMacroElement={fat.toFixed(2)}
+                unit="g"
+            />
+            <SingleElementInfo macroElementName="Kalorie" valueOfMacroElement={kcal.toFixed(2)} />
         </div>
     )
 }
