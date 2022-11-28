@@ -6,7 +6,7 @@ import { FormErrorMessage } from ".."
 
 interface Props {
     name: string
-    label: string
+    label?: string
     value: string
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onChange: (event: ChangeEvent<HTMLInputElement>) => void
@@ -46,7 +46,7 @@ export const TextInput = ({
                 error={!!isError}
                 name={name}
                 id={name}
-                label={label}
+                label={isLabelAbove ? "" : label}
                 onChange={onChange}
                 ref={inputRef}
                 value={value}

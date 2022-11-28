@@ -48,7 +48,7 @@ export const WorkoutFormFields = ({
     }
 
     return (
-        <div className="flex items-start my-2">
+        <div className="flex items-start mb-10 h-4.35">
             {EXERCISE && (
                 <Controller
                     name={`workoutData.${index}.exerciseName`}

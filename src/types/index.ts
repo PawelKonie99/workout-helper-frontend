@@ -30,6 +30,8 @@ export type {
     ILoginFormSchema,
     IUserDataResponse,
     IUserInfo,
+    ILoginResponse,
+    IUserRoles,
 } from "./IUserApi.types"
 export type { ITranslationResponse } from "./externalApiTypes/ITranslation.types"
 export type {

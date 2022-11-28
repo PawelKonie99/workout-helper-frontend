@@ -109,7 +109,10 @@ export const AddStudentTrainingPlanForm = ({ myStudents }: Props) => {
                             }}
                             className="mb-4"
                         />
-                        <NormalButton label="Zakoncz" type={BUTTON_TYPES.SUBMIT} />
+                        <NormalButton
+                            label="Zakoncz dodawanie treningu"
+                            type={BUTTON_TYPES.SUBMIT}
+                        />
                     </div>
                 </form>
             )}

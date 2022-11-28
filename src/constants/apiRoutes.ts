@@ -21,3 +21,4 @@ export const GET_STUDENT_DIET = "/trainer/diet"
 
 export const GET_DIET = "/student/diet"
 export const GET_TRAINING_PLAN = "/student/plan"
+export const GET_TRAINER_REQUEST = "/student/trainerRequest"

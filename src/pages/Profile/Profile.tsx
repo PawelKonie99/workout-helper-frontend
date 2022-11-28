@@ -32,6 +32,11 @@ const Profile = () => {
         mealHistory && setMealsHistory(mealHistory)
         setViewToDisplay(VIEWS_TO_DISPLAY_PROFILE.MEAL_HISTORY)
     }
+    const loadTrainerRequest = async () => {
+        // const { mealHistory } = await getMealsHistory()
+        // mealHistory && setMealsHistory(mealHistory)
+        // setViewToDisplay(VIEWS_TO_DISPLAY_PROFILE.MEAL_HISTORY)
+    }
 
     const logut = () => {
         saveUserLogout(dispatch)
@@ -54,6 +59,7 @@ const Profile = () => {
                                 onClick={loadUserMealsHistory}
                                 title="Historia posiłków"
                             />
+                            <MenuListItem onClick={loadUserMealsHistory} title="Powiadomienia" />
                             <MenuListItem onClick={logut} title="Wyloguj" />
                         </ul>
                     </div>

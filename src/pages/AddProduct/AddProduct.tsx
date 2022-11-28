@@ -7,7 +7,7 @@ import { DietFromTrainer } from "./components"
 import { RootState } from "@/store/store"
 
 const AddProduct = () => {
-    const { isTrainer } = useSelector((state: RootState) => state.userReducer)
+    const { trainerRole } = useSelector((state: RootState) => state.userReducer.roles)
     const { todayProductsData, setNewlyAddedProductName, setRemovedProductId } =
         useGetTodayProduct()
 
@@ -35,7 +35,7 @@ const AddProduct = () => {
 
     return (
         <div className="flex flex-col">
-            {!isTrainer && <DietFromTrainer />}
+            {!trainerRole && <DietFromTrainer />}
             <div className="bg-offWhite flex justify-center">
                 <AllMealsForm
                     addedProducts={todayProductsData?.todayProducts}

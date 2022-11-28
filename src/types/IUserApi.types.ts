@@ -23,14 +23,14 @@ export interface IUserLoginPayload {
     password: string
 }
 
-export interface IUserLoginResponse {
+export interface ILoginResponse {
     code: RESPONSE_CODE
     message: string
     loggedUser?:
         | {
               username: string
               token: string
-              isTrainer: boolean
+              roles: IUserRoles
           }
         | Record<string, never>
 }
@@ -45,4 +45,10 @@ export interface IUserDataResponse {
 export interface IUserInfo {
     username?: string
     trainerName?: string
+}
+
+export interface IUserRoles {
+    adminRole: boolean
+    trainerRole: boolean
+    userRole: boolean
 }

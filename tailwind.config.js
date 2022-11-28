@@ -16,6 +16,9 @@ module.exports = {
                 darkGrey: "#626262",
                 offWhite: "#F5F5F5",
             },
+            spacing: {
+                4.35: "4.35rem",
+            },
         },
     },
     plugins: [],

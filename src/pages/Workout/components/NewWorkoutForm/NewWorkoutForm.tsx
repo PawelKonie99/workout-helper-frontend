@@ -72,7 +72,7 @@ export const NewWorkoutForm = () => {
                         }}
                         className="mb-4"
                     />
-                    <NormalButton label="Zakoncz" type={BUTTON_TYPES.SUBMIT} />
+                    <NormalButton label="Zakończ trening" type={BUTTON_TYPES.SUBMIT} />
                 </div>
             </form>
         </div>
