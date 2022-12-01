@@ -35,7 +35,7 @@ export const WorkoutFormFields = ({
     const [bestExercise, setBestExercise] = useState<IWorkoutFields>()
 
     const handleExerciseNameChange = async (option: ISelectOption | unknown) => {
-        if (isSelectOptionTypeGuard(option)) {
+        if (isSelectOptionTypeGuard(option) && showBestRecord) {
             const bestExerciseResponse = await getBestExercise(option.value)
 
             const { exerciseName, repsQuantity, seriesQuantity, weightQuantity } =

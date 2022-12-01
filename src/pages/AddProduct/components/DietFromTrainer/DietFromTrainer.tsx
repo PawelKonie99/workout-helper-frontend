@@ -35,17 +35,16 @@ export const DietFromTrainer = () => {
                 onClick={handleGetDietFromTrainer}
                 className="mb-4"
             />
-            {userDiet &&
-                userDiet?.dailySummary?.totalKcal < 0 && ( //TODO lepszy warunek, jak bedzie puste to chyba wyswietli
-                    <div className="flex mb-6">
-                        <DietTimeOfMeal timeOfMeal="Sniadanie" mealProducts={breakfast} />
-                        <DietTimeOfMeal timeOfMeal="Drugie sniadanie" mealProducts={brunch} />
-                        <DietTimeOfMeal timeOfMeal="Obiad" mealProducts={dinner} />
-                        <DietTimeOfMeal timeOfMeal="Deser" mealProducts={dessert} />
-                        <DietTimeOfMeal timeOfMeal="Kolacja" mealProducts={supper} />
-                        <MacrosSummary title="W sumie:" dailySummary={dailySummary} />
-                    </div>
-                )}
+            {userDiet && userDiet?.dailySummary?.totalKcal > 0 && (
+                <div className="flex mb-6">
+                    <DietTimeOfMeal timeOfMeal="Sniadanie" mealProducts={breakfast} />
+                    <DietTimeOfMeal timeOfMeal="Drugie sniadanie" mealProducts={brunch} />
+                    <DietTimeOfMeal timeOfMeal="Obiad" mealProducts={dinner} />
+                    <DietTimeOfMeal timeOfMeal="Deser" mealProducts={dessert} />
+                    <DietTimeOfMeal timeOfMeal="Kolacja" mealProducts={supper} />
+                    <MacrosSummary title="W sumie:" dailySummary={dailySummary} />
+                </div>
+            )}
         </div>
     )
 }
