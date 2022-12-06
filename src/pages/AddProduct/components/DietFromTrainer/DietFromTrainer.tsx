@@ -1,7 +1,6 @@
 import { toast } from "react-toastify"
 import { useState } from "react"
 import { MacrosSummary, NormalButton } from "@/components"
-import "react-toastify/dist/ReactToastify.css"
 import { getDiet } from "@/api/studentApi/getDiet"
 import { IUserDietData } from "@/types"
 import { DietTimeOfMeal } from "../DietTimeOfMeal/DietTimeOfMeal"

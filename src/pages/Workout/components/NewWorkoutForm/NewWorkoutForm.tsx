@@ -5,7 +5,6 @@ import { IWorkoutSeriesSchema } from "@/types"
 import { workoutFormValues, workoutSeriesSchema } from "@/schema"
 import { NormalButton, WorkoutFormFields } from "@/components"
 import { addNewWorkout } from "@/api"
-import "react-toastify/dist/ReactToastify.css"
 import { parseSubmitedWorkoutData } from "@/helpers"
 
 export const NewWorkoutForm = () => {

@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router"
 import { useState } from "react"
 import { getAllUserWorkouts, getMealsHistory, getTrainerRequest } from "@/api"
@@ -13,6 +13,7 @@ import {
 } from "./Components"
 import { saveUserLogout } from "@/store/userReducer/actions/saveUserLogout"
 import { useGetUserInfo } from "@/hooks"
+import { RootState } from "@/store/store"
 
 //TODO przeniesc
 enum VIEWS_TO_DISPLAY_PROFILE {
@@ -25,6 +26,8 @@ const Profile = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const userInfo = useGetUserInfo()
+
+    const { trainerName } = useSelector((state: RootState) => state.userReducer)
     const [viewToDisplay, setViewToDisplay] = useState<VIEWS_TO_DISPLAY_PROFILE>()
     const [workoutHistory, setWorkoutHistory] = useState<IUserWorkoutDataFromDatabase[]>()
     const [mealsHistory, setMealsHistory] = useState<IMealHistory[]>()
@@ -40,7 +43,7 @@ const Profile = () => {
         mealHistory && setMealsHistory(mealHistory)
         setViewToDisplay(VIEWS_TO_DISPLAY_PROFILE.MEAL_HISTORY)
     }
-    const loadNotifications = async () => {
+    const loadRequestedTrainers = async () => {
         const { requestedTrainers } = await getTrainerRequest()
         requestedTrainers && setUserRequestedTrainers(requestedTrainers)
         setViewToDisplay(VIEWS_TO_DISPLAY_PROFILE.NOTIFICATIONS)
@@ -67,7 +70,7 @@ const Profile = () => {
                                 onClick={loadUserMealsHistory}
                                 title="Historia posiłków"
                             />
-                            <MenuListItem onClick={loadNotifications} title="Powiadomienia" />
+                            <MenuListItem onClick={loadRequestedTrainers} title="Powiadomienia" />
                             <MenuListItem onClick={logut} title="Wyloguj" />
                         </ul>
                     </div>
@@ -78,7 +81,11 @@ const Profile = () => {
                         <ProductHistory productHistory={mealsHistory} />
                     )}
                     {viewToDisplay === VIEWS_TO_DISPLAY_PROFILE.NOTIFICATIONS && (
-                        <RequestedTrainers userRequestedTrainers={userRequestedTrainers} />
+                        <RequestedTrainers
+                            userRequestedTrainers={userRequestedTrainers}
+                            loadRequestedTrainers={loadRequestedTrainers}
+                            isTrainer={!!trainerName}
+                        />
                     )}
                 </div>
             </ContentContainer>

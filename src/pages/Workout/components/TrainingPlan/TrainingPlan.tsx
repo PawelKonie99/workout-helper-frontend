@@ -3,7 +3,6 @@ import { useState } from "react"
 import { getTrainingPlan } from "@/api"
 import { IWorkoutFields } from "@/types"
 import { NormalButton, SingleWorkoutHistory } from "@/components"
-import "react-toastify/dist/ReactToastify.css"
 
 export const TrainingPlan = () => {
     const [userTrainingPlan, setUserTrainingPlan] = useState<IWorkoutFields[]>()

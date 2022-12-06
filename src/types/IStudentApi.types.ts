@@ -40,3 +40,10 @@ export interface IUserDecisionPayload {
     userDecision: MANAGE_REQUESTED_TRAINERS
     trainerId: string
 }
+
+export interface IUserDecisionResponse {
+    code: RESPONSE_CODE
+    message: string
+    success: boolean
+    trainerName: string
+}

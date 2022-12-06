@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { IProductPayload, ISelectOption, IStudentData } from "@/types"
 import { AllMealsForm, CustomSelect } from "@/components"
-import "react-toastify/dist/ReactToastify.css"
 import { isSelectOptionTypeGuard } from "@/helpers"
 import { addNewDietProduct, removeDietProduct } from "@/api"
 import { useGetStudentDiet } from "@/hooks"

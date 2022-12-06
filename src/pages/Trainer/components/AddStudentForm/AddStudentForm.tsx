@@ -5,7 +5,6 @@ import { addStudent } from "@/api"
 import { NormalButton, TextInput } from "@/components"
 import { addStudentSchema } from "@/schema"
 import { IAddStudentSchema } from "@/types"
-import "react-toastify/dist/ReactToastify.css"
 
 interface Props {
     handleSetNewStudentName: (studentName: string) => void

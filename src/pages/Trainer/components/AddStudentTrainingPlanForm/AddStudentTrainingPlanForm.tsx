@@ -4,7 +4,6 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { IAddStudentPlanSchema, IStudentData } from "@/types"
 import { addStudentPlanSchema, studentPlanFormValues, workoutFormValues } from "@/schema"
 import { CustomSelect, NormalButton, WorkoutFormFields } from "@/components"
-import "react-toastify/dist/ReactToastify.css"
 import { addNewTrainingPlan } from "@/api"
 import { parseSubmitedUserData, parseSubmitedWorkoutData } from "@/helpers"
 

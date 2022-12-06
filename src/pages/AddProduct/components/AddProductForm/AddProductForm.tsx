@@ -4,7 +4,6 @@ import { getProductData, translateProduct } from "@/api/externalApi"
 import { NormalButton, TextInput } from "@/components"
 import { INPUT_TYPES, MEAL_TYPES } from "@/enums"
 import { IDatabaseProduct, IProductPayload } from "@/types"
-import "react-toastify/dist/ReactToastify.css"
 
 interface Props {
     timeOfTheMeal: MEAL_TYPES

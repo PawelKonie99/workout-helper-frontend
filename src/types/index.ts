@@ -42,6 +42,7 @@ export type {
     IGetTrainerRequestResponse,
     IRequestedTrainerData,
     IUserDecisionPayload,
+    IUserDecisionResponse,
 } from "./IStudentApi.types"
 export type {
     IAddStudentSchema,
