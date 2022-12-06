@@ -5,7 +5,7 @@ import { useNavigate } from "react-router"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { NormalButton, TextInput, TextLink } from "@/components"
 import { IRegisterFormSchema } from "@/types"
-import { BUTTON_TYPES, BUTTON_VARIANT, INPUT_TYPES } from "@/enums"
+import { INPUT_TYPES } from "@/enums"
 import { registerSchema } from "@/schema"
 import { PopUpContext } from "@/contexts/PopupContext"
 import { registerUser } from "@/api"
@@ -53,7 +53,7 @@ export const RegisterForm = () => {
                             closePopup()
                             navigate("/login")
                         }}
-                        buttonVariant={BUTTON_VARIANT.SECONDARY}
+                        buttonVariant="secondary"
                     />
                 </div>,
             )
@@ -66,7 +66,7 @@ export const RegisterForm = () => {
                         onClick={() => {
                             closePopup()
                         }}
-                        buttonVariant={BUTTON_VARIANT.SECONDARY}
+                        buttonVariant="secondary"
                     />
                 </div>,
             )
@@ -79,7 +79,7 @@ export const RegisterForm = () => {
                         onClick={() => {
                             closePopup()
                         }}
-                        buttonVariant={BUTTON_VARIANT.SECONDARY}
+                        buttonVariant="secondary"
                     />
                 </div>,
             )
@@ -168,7 +168,7 @@ export const RegisterForm = () => {
                                 />
                             )}
                         />
-                        <NormalButton label="Zarejestruj sie" type={BUTTON_TYPES.SUBMIT} />
+                        <NormalButton label="Zarejestruj sie" type="submit" />
                     </form>
                 </div>
                 <TextLink href="login" label="Masz juz konto? Zaloguj się!" />

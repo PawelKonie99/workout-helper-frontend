@@ -1,10 +1,16 @@
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router"
 import { useState } from "react"
-import { getAllUserWorkouts, getMealsHistory } from "@/api"
+import { getAllUserWorkouts, getMealsHistory, getTrainerRequest } from "@/api"
 import { ContentContainer } from "@/components"
-import { IMealHistory, IUserWorkoutDataFromDatabase } from "@/types"
-import { MenuListItem, ProductHistory, UserInfo, WorkoutHistory } from "./Components"
+import { IMealHistory, IRequestedTrainerData, IUserWorkoutDataFromDatabase } from "@/types"
+import {
+    MenuListItem,
+    ProductHistory,
+    RequestedTrainers,
+    UserInfo,
+    WorkoutHistory,
+} from "./Components"
 import { saveUserLogout } from "@/store/userReducer/actions/saveUserLogout"
 import { useGetUserInfo } from "@/hooks"
 
@@ -12,6 +18,7 @@ import { useGetUserInfo } from "@/hooks"
 enum VIEWS_TO_DISPLAY_PROFILE {
     WORKOUT_HISTORY = "WORKOUT_HISTORY",
     MEAL_HISTORY = "MEAL_HISTORY",
+    NOTIFICATIONS = "NOTIFICATIONS",
 }
 
 const Profile = () => {
@@ -21,6 +28,7 @@ const Profile = () => {
     const [viewToDisplay, setViewToDisplay] = useState<VIEWS_TO_DISPLAY_PROFILE>()
     const [workoutHistory, setWorkoutHistory] = useState<IUserWorkoutDataFromDatabase[]>()
     const [mealsHistory, setMealsHistory] = useState<IMealHistory[]>()
+    const [userRequestedTrainers, setUserRequestedTrainers] = useState<IRequestedTrainerData[]>()
 
     const loadAllUserWorkouts = async () => {
         const { allUserWorkouts } = await getAllUserWorkouts()
@@ -32,10 +40,10 @@ const Profile = () => {
         mealHistory && setMealsHistory(mealHistory)
         setViewToDisplay(VIEWS_TO_DISPLAY_PROFILE.MEAL_HISTORY)
     }
-    const loadTrainerRequest = async () => {
-        // const { mealHistory } = await getMealsHistory()
-        // mealHistory && setMealsHistory(mealHistory)
-        // setViewToDisplay(VIEWS_TO_DISPLAY_PROFILE.MEAL_HISTORY)
+    const loadNotifications = async () => {
+        const { requestedTrainers } = await getTrainerRequest()
+        requestedTrainers && setUserRequestedTrainers(requestedTrainers)
+        setViewToDisplay(VIEWS_TO_DISPLAY_PROFILE.NOTIFICATIONS)
     }
 
     const logut = () => {
@@ -59,7 +67,7 @@ const Profile = () => {
                                 onClick={loadUserMealsHistory}
                                 title="Historia posiłków"
                             />
-                            <MenuListItem onClick={loadUserMealsHistory} title="Powiadomienia" />
+                            <MenuListItem onClick={loadNotifications} title="Powiadomienia" />
                             <MenuListItem onClick={logut} title="Wyloguj" />
                         </ul>
                     </div>
@@ -68,6 +76,9 @@ const Profile = () => {
                     )}
                     {viewToDisplay === VIEWS_TO_DISPLAY_PROFILE.MEAL_HISTORY && (
                         <ProductHistory productHistory={mealsHistory} />
+                    )}
+                    {viewToDisplay === VIEWS_TO_DISPLAY_PROFILE.NOTIFICATIONS && (
+                        <RequestedTrainers userRequestedTrainers={userRequestedTrainers} />
                     )}
                 </div>
             </ContentContainer>

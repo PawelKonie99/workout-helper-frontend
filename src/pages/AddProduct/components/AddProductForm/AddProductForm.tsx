@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react"
 import { toast } from "react-toastify"
 import { getProductData, translateProduct } from "@/api/externalApi"
 import { NormalButton, TextInput } from "@/components"
-import { BUTTON_TYPES, INPUT_TYPES, MEAL_TYPES } from "@/enums"
+import { INPUT_TYPES, MEAL_TYPES } from "@/enums"
 import { IDatabaseProduct, IProductPayload } from "@/types"
 import "react-toastify/dist/ReactToastify.css"
 
@@ -112,7 +112,7 @@ export const AddProductForm = ({
                     />
                 </div>
 
-                <NormalButton label="Dodaj" type={BUTTON_TYPES.SUBMIT} isLoading={isLoading} />
+                <NormalButton label="Dodaj" type="submit" isLoading={isLoading} />
             </form>
             {alreadyAddedProducts && alreadyAddedProducts?.length > 0 ? (
                 <span className="mt-2">Dodane produkty</span>

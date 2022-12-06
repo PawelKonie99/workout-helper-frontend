@@ -39,6 +39,9 @@ export type {
     IGetStudenDietResponse,
     IUserDietData,
     IDietMeals,
+    IGetTrainerRequestResponse,
+    IRequestedTrainerData,
+    IUserDecisionPayload,
 } from "./IStudentApi.types"
 export type {
     IAddStudentSchema,

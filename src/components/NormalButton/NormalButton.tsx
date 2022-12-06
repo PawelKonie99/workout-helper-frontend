@@ -1,12 +1,11 @@
 import LoadingButton from "@mui/lab/LoadingButton"
 import classNames from "classnames"
-import { BUTTON_TYPES, BUTTON_VARIANT } from "@/enums"
 
 interface Props {
     label: string
     className?: string
-    type?: BUTTON_TYPES
-    buttonVariant?: BUTTON_VARIANT
+    type?: "button" | "submit" | "reset"
+    buttonVariant?: "primary" | "secondary" | "delete"
     onClick?: () => void
     isFullWidth?: boolean
     isLoading?: boolean
@@ -15,16 +14,16 @@ interface Props {
 export const NormalButton = ({
     label,
     className,
-    type = BUTTON_TYPES.BUTTON,
+    type = "button",
     onClick,
-    buttonVariant = BUTTON_VARIANT.PRIMARY,
+    buttonVariant = "primary",
     isFullWidth,
     isLoading,
 }: Props) => {
     const buttonAppearance = classNames({
-        "bg-primary hover:bg-primaryDark": buttonVariant === BUTTON_VARIANT.PRIMARY,
-        "bg-primaryBlue hover:bg-primaryBlue": buttonVariant === BUTTON_VARIANT.SECONDARY,
-        "bg-errorRed hover:bg-errorRedDark": buttonVariant === BUTTON_VARIANT.DELETE,
+        "bg-primary hover:bg-primaryDark": buttonVariant === "primary",
+        "bg-primaryBlue hover:bg-primaryBlue": buttonVariant === "secondary",
+        "bg-errorRed hover:bg-errorRedDark": buttonVariant === "delete",
     })
 
     return (

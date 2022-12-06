@@ -1,4 +1,4 @@
-import { RESPONSE_CODE } from "@/enums"
+import { MANAGE_REQUESTED_TRAINERS, RESPONSE_CODE } from "@/enums"
 import { IWorkoutFields, IDatabaseProduct, IProductsSummary } from "."
 
 export interface ITrainingPlanResponse {
@@ -23,4 +23,20 @@ export interface IDietMeals {
     dinner: IDatabaseProduct[]
     dessert: IDatabaseProduct[]
     supper: IDatabaseProduct[]
+}
+
+export interface IGetTrainerRequestResponse {
+    code: RESPONSE_CODE
+    success: boolean
+    requestedTrainers?: IRequestedTrainerData[] | []
+}
+
+export interface IRequestedTrainerData {
+    username: string
+    id: string
+}
+
+export interface IUserDecisionPayload {
+    userDecision: MANAGE_REQUESTED_TRAINERS
+    trainerId: string
 }

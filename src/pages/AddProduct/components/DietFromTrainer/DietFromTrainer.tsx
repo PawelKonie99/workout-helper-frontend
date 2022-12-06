@@ -1,7 +1,6 @@
 import { toast } from "react-toastify"
 import { useState } from "react"
 import { MacrosSummary, NormalButton } from "@/components"
-import { BUTTON_VARIANT } from "@/enums"
 import "react-toastify/dist/ReactToastify.css"
 import { getDiet } from "@/api/studentApi/getDiet"
 import { IUserDietData } from "@/types"
@@ -30,7 +29,7 @@ export const DietFromTrainer = () => {
     return (
         <div className="flex flex-col justify-center items-center">
             <NormalButton
-                buttonVariant={BUTTON_VARIANT.SECONDARY}
+                buttonVariant="secondary"
                 label="Pobierz diete od trenera"
                 onClick={handleGetDietFromTrainer}
                 className="mb-4"

@@ -3,7 +3,6 @@ import { useForm, useFieldArray, Controller } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { IAddStudentPlanSchema, IStudentData } from "@/types"
 import { addStudentPlanSchema, studentPlanFormValues, workoutFormValues } from "@/schema"
-import { BUTTON_TYPES, BUTTON_VARIANT } from "@/enums"
 import { CustomSelect, NormalButton, WorkoutFormFields } from "@/components"
 import "react-toastify/dist/ReactToastify.css"
 import { addNewTrainingPlan } from "@/api"
@@ -102,17 +101,14 @@ export const AddStudentTrainingPlanForm = ({ myStudents }: Props) => {
                     />
                     <div className="flex flex-col pt-8 ml-2">
                         <NormalButton
-                            buttonVariant={BUTTON_VARIANT.SECONDARY}
+                            buttonVariant="secondary"
                             label="Dodaj ćwiczenie"
                             onClick={() => {
                                 append(workoutFormValues.workoutData)
                             }}
                             className="mb-4"
                         />
-                        <NormalButton
-                            label="Zakoncz dodawanie treningu"
-                            type={BUTTON_TYPES.SUBMIT}
-                        />
+                        <NormalButton label="Zakoncz dodawanie treningu" type="submit" />
                     </div>
                 </form>
             )}

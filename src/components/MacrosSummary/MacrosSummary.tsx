@@ -11,25 +11,10 @@ export const MacrosSummary = ({ title, dailySummary }: Props) => {
     return (
         <div className="flex flex-col">
             <span className="mr-4 text-primaryBlue text-lg">{title}</span>
-            <SingleElementInfo
-                macroElementName="Kalorie"
-                valueOfMacroElement={totalKcal?.toFixed(2)}
-            />
-            <SingleElementInfo
-                macroElementName="Białko"
-                valueOfMacroElement={totalProteins?.toFixed(2)}
-                unit="g"
-            />
-            <SingleElementInfo
-                macroElementName="Węglowodany"
-                valueOfMacroElement={totalCarbons?.toFixed(2)}
-                unit="g"
-            />
-            <SingleElementInfo
-                macroElementName="Tłuszcze"
-                valueOfMacroElement={totalFat?.toFixed(2)}
-                unit="g"
-            />
+            <SingleElementInfo name="Kalorie" value={totalKcal?.toFixed(2)} />
+            <SingleElementInfo name="Białko" value={totalProteins?.toFixed(2)} unit="g" />
+            <SingleElementInfo name="Węglowodany" value={totalCarbons?.toFixed(2)} unit="g" />
+            <SingleElementInfo name="Tłuszcze" value={totalFat?.toFixed(2)} unit="g" />
         </div>
     )
 }

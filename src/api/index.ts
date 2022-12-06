@@ -20,3 +20,5 @@ export { getSingleStudentData } from "./trainerApi/getSingleStudentData"
 export { getStudentDiet } from "./trainerApi/getStudentDiet"
 
 export { getTrainingPlan } from "./studentApi/getTrainingPlan"
+export { getTrainerRequest } from "./studentApi/getTrainerRequest"
+export { sendStudentTrainerDecision } from "./studentApi/sendStudentTrainerDecision"

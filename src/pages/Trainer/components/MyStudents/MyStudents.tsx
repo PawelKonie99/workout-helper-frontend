@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { getSingleStudentData } from "@/api"
 import { NormalButton } from "@/components"
-import { BUTTON_VARIANT } from "@/enums"
 import { IChoosenStudentData, IStudentData } from "@/types"
 import { ProductHistory, WorkoutHistory } from "@/pages/Profile/Components"
 
@@ -32,7 +31,7 @@ export const MyStudents = ({ myStudents }: Props) => {
                             <span className="mt-4">{studentName}</span>
                             <NormalButton
                                 onClick={() => handleLoadStudentData(id, studentName)}
-                                buttonVariant={BUTTON_VARIANT.SECONDARY}
+                                buttonVariant="secondary"
                                 className="ml-2"
                                 label="Załaduj dane"
                             />

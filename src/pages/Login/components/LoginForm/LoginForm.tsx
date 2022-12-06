@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { NormalButton, TextInput, TextLink } from "@/components"
 import { saveUserLogin } from "@/store/userReducer/actions/saveUserLogin"
 import { ILoginFormSchema } from "@/types"
-import { BUTTON_TYPES, BUTTON_VARIANT, INPUT_TYPES } from "@/enums"
+import { INPUT_TYPES } from "@/enums"
 import { loginSchema } from "@/schema"
 import { loginUser } from "@/api"
 import { PopUpContext } from "@/contexts"
@@ -52,7 +52,7 @@ export const LoginForm = () => {
                         onClick={() => {
                             closePopup()
                         }}
-                        buttonVariant={BUTTON_VARIANT.SECONDARY}
+                        buttonVariant="secondary"
                     />
                 </div>,
             )
@@ -107,7 +107,7 @@ export const LoginForm = () => {
                                 />
                             )}
                         />
-                        <NormalButton label="Zaloguj sie" type={BUTTON_TYPES.SUBMIT} />
+                        <NormalButton label="Zaloguj sie" type="submit" />
                     </form>
                 </div>
                 <TextLink href="register" label="Nie masz konta? Zarejestruj się!" />

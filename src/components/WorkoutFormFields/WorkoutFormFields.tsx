@@ -7,7 +7,7 @@ import {
     UseFieldArrayRemove,
 } from "react-hook-form"
 import { CustomSelect, NormalButton, TextInput } from "@/components"
-import { BUTTON_VARIANT, INPUT_TYPES } from "@/enums"
+import { INPUT_TYPES } from "@/enums"
 import { ISelectOption, IWorkoutFields, IWorkoutSeriesSchema } from "@/types"
 import { useGetAllWorkoutOptions } from "@/hooks"
 import { getBestExercise } from "@/api"
@@ -168,7 +168,7 @@ export const WorkoutFormFields = ({
                 <div className="h-full flex items-end">
                     <NormalButton
                         onClick={() => remove(index)}
-                        buttonVariant={BUTTON_VARIANT.DELETE}
+                        buttonVariant="delete"
                         className="ml-2"
                         label="Usuń ćwiczenie"
                     />
