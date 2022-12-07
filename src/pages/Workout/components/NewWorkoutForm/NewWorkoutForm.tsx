@@ -3,10 +3,8 @@ import { useForm, useFieldArray } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { IWorkoutSeriesSchema } from "@/types"
 import { workoutFormValues, workoutSeriesSchema } from "@/schema"
-import { BUTTON_TYPES, BUTTON_VARIANT } from "@/enums"
 import { NormalButton, WorkoutFormFields } from "@/components"
 import { addNewWorkout } from "@/api"
-import "react-toastify/dist/ReactToastify.css"
 import { parseSubmitedWorkoutData } from "@/helpers"
 
 export const NewWorkoutForm = () => {
@@ -65,14 +63,14 @@ export const NewWorkoutForm = () => {
                 </div>
                 <div className="flex flex-col pt-8">
                     <NormalButton
-                        buttonVariant={BUTTON_VARIANT.SECONDARY}
+                        buttonVariant="secondary"
                         label="Dodaj ćwiczenie"
                         onClick={() => {
                             append(workoutFormValues.workoutData)
                         }}
                         className="mb-4"
                     />
-                    <NormalButton label="Zakoncz" type={BUTTON_TYPES.SUBMIT} />
+                    <NormalButton label="Zakończ trening" type="submit" />
                 </div>
             </form>
         </div>

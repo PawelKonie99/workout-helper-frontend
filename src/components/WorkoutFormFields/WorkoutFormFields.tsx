@@ -7,7 +7,7 @@ import {
     UseFieldArrayRemove,
 } from "react-hook-form"
 import { CustomSelect, NormalButton, TextInput } from "@/components"
-import { BUTTON_VARIANT, INPUT_TYPES } from "@/enums"
+import { INPUT_TYPES } from "@/enums"
 import { ISelectOption, IWorkoutFields, IWorkoutSeriesSchema } from "@/types"
 import { useGetAllWorkoutOptions } from "@/hooks"
 import { getBestExercise } from "@/api"
@@ -35,7 +35,7 @@ export const WorkoutFormFields = ({
     const [bestExercise, setBestExercise] = useState<IWorkoutFields>()
 
     const handleExerciseNameChange = async (option: ISelectOption | unknown) => {
-        if (isSelectOptionTypeGuard(option)) {
+        if (isSelectOptionTypeGuard(option) && showBestRecord) {
             const bestExerciseResponse = await getBestExercise(option.value)
 
             const { exerciseName, repsQuantity, seriesQuantity, weightQuantity } =
@@ -48,7 +48,7 @@ export const WorkoutFormFields = ({
     }
 
     return (
-        <div className="flex items-start my-2">
+        <div className="flex items-start mb-10 h-4.35">
             {EXERCISE && (
                 <Controller
                     name={`workoutData.${index}.exerciseName`}
@@ -168,7 +168,7 @@ export const WorkoutFormFields = ({
                 <div className="h-full flex items-end">
                     <NormalButton
                         onClick={() => remove(index)}
-                        buttonVariant={BUTTON_VARIANT.DELETE}
+                        buttonVariant="delete"
                         className="ml-2"
                         label="Usuń ćwiczenie"
                     />

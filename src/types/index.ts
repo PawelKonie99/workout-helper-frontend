@@ -30,6 +30,8 @@ export type {
     ILoginFormSchema,
     IUserDataResponse,
     IUserInfo,
+    ILoginResponse,
+    IUserRoles,
 } from "./IUserApi.types"
 export type { ITranslationResponse } from "./externalApiTypes/ITranslation.types"
 export type {
@@ -37,6 +39,10 @@ export type {
     IGetStudenDietResponse,
     IUserDietData,
     IDietMeals,
+    IGetTrainerRequestResponse,
+    IRequestedTrainerData,
+    IUserDecisionPayload,
+    IUserDecisionResponse,
 } from "./IStudentApi.types"
 export type {
     IAddStudentSchema,

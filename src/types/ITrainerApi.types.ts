@@ -17,7 +17,6 @@ export interface IAllStudentsResponse {
 }
 
 export interface IStudentData {
-    user: string
     studentName: string
     id: string
 }

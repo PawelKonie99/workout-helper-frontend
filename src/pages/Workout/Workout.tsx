@@ -4,11 +4,11 @@ import { NewWorkoutForm } from "./components"
 import { TrainingPlan } from "./components/TrainingPlan/TrainingPlan"
 
 const Workout = () => {
-    const { isTrainer } = useSelector((state: RootState) => state.userReducer)
+    const { trainerRole } = useSelector((state: RootState) => state.userReducer.roles)
 
     return (
         <div className="flex flex-col items-center justify-center">
-            {!isTrainer && <TrainingPlan />}
+            {!trainerRole && <TrainingPlan />}
             <NewWorkoutForm />
         </div>
     )

@@ -18,6 +18,8 @@ export {
     REMOVE_DIET_PRODUCT,
     GET_SINGLE_USER,
     GET_DIET,
+    GET_TRAINER_REQUEST,
+    SEND_STUDENT_TRAINER_DECISION,
 } from "./apiRoutes"
 export {
     INITIAL_REP_COUNT,

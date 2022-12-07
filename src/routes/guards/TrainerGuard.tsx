@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const TrainerGuard = ({ children }: Props) => {
-    const isTrainer = useSelector((state: RootState) => state.userReducer.isTrainer)
+    const isTrainer = useSelector((state: RootState) => state.userReducer.roles.trainerRole)
 
     return isTrainer ? <>{children}</> : <Navigate to="/" />
 }

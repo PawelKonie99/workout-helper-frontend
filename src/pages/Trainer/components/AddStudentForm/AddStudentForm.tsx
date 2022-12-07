@@ -3,10 +3,8 @@ import { toast } from "react-toastify"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { addStudent } from "@/api"
 import { NormalButton, TextInput } from "@/components"
-import { BUTTON_TYPES } from "@/enums"
 import { addStudentSchema } from "@/schema"
 import { IAddStudentSchema } from "@/types"
-import "react-toastify/dist/ReactToastify.css"
 
 interface Props {
     handleSetNewStudentName: (studentName: string) => void
@@ -73,7 +71,7 @@ export const AddStudentForm = ({ handleSetNewStudentName }: Props) => {
                                 />
                             )}
                         />
-                        <NormalButton className="mt-6" label="Dodaj" type={BUTTON_TYPES.SUBMIT} />
+                        <NormalButton className="mt-6" label="Dodaj" type="submit" />
                     </form>
                 </div>
             </div>

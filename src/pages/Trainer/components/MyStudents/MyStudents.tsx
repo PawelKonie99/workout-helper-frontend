@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { getSingleStudentData } from "@/api"
 import { NormalButton } from "@/components"
-import { BUTTON_VARIANT } from "@/enums"
 import { IChoosenStudentData, IStudentData } from "@/types"
 import { ProductHistory, WorkoutHistory } from "@/pages/Profile/Components"
 
@@ -27,12 +26,12 @@ export const MyStudents = ({ myStudents }: Props) => {
             ) : (
                 <>
                     <h1 className="mb-4 text-xl">Moi podopieczni:</h1>
-                    {myStudents?.map(({ studentName, user }) => (
+                    {myStudents?.map(({ studentName, id }) => (
                         <div key={studentName} className="mb-6">
                             <span className="mt-4">{studentName}</span>
                             <NormalButton
-                                onClick={() => handleLoadStudentData(user, studentName)}
-                                buttonVariant={BUTTON_VARIANT.SECONDARY}
+                                onClick={() => handleLoadStudentData(id, studentName)}
+                                buttonVariant="secondary"
                                 className="ml-2"
                                 label="Załaduj dane"
                             />
