@@ -1,8 +1,8 @@
+import { toast } from "react-toastify"
 import { useContext } from "react"
 import { NormalButton } from "@/components"
 import { PopUpContext } from "@/contexts"
 import { deleteTrainer } from "@/api"
-import { toast } from "react-toastify"
 
 interface Props {
     trainerName: string
