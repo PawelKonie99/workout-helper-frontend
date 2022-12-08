@@ -37,7 +37,7 @@ export const AddStudentForm = ({ handleSetNewStudentName }: Props) => {
         const { success } = await addStudent(newStudentPayload)
 
         if (success) {
-            toast.success("Podopieczny dodany pomyślnie!")
+            toast.success("Prośba o dodanie podopiecznego wysłana pomyślnie!")
         } else {
             toast.error("Błąd podczas dodawania podopiecznego!")
         }

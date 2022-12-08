@@ -1,7 +1,4 @@
-export { SingleMealDayHistory } from "./SingleMealDayHistory/SingleMealDayHistory"
-export { WorkoutHistory } from "./WorkoutHistory/WorkoutHistory"
-export { MenuListItem } from "./MenuListItem/MenuListItem"
-export { ProductHistory } from "./ProductHistory/ProductHistory"
 export { MealSummary } from "./MealSummary/MealSummary"
 export { UserInfo } from "./UserInfo/UserInfo"
 export { RequestedTrainers } from "./RequestedTrainers/RequestedTrainers"
+export { UserSettings } from "./UserSettings/UserSettings"

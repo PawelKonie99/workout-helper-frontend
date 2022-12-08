@@ -72,7 +72,7 @@ export const RequestedTrainers = ({
 
         if (message === "Trener został zaakceptowany") {
             toast.success("Trener został zaakceptowany")
-            saveUserTrainer(dispatch, trainerName)
+            saveUserTrainer(dispatch, trainerName, trainerId)
         } else {
             toast.info("Trener został odrzucony")
         }

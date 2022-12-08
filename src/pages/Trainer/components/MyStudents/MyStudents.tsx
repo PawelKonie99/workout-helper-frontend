@@ -1,8 +1,7 @@
 import { useState } from "react"
 import { getSingleStudentData } from "@/api"
-import { NormalButton } from "@/components"
+import { NormalButton, ProductHistory, WorkoutHistory } from "@/components"
 import { IChoosenStudentData, IStudentData } from "@/types"
-import { ProductHistory, WorkoutHistory } from "@/pages/Profile/Components"
 
 type Props = {
     myStudents?: IStudentData[]
