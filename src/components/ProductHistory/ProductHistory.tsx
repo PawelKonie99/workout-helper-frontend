@@ -1,5 +1,5 @@
 import { IMealHistory } from "@/types"
-import { SingleMealDayHistory } from "../SingleMealDayHistory/SingleMealDayHistory"
+import { SingleMealDayHistory } from ".."
 
 interface Props {
     productHistory?: IMealHistory[]

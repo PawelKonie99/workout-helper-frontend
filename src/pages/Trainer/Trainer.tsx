@@ -1,6 +1,5 @@
 import { useState } from "react"
-import { ContentContainer } from "@/components"
-import { MenuListItem } from "../Profile/Components"
+import { ContentContainer, MenuListItem } from "@/components"
 import {
     AddStudentDiet,
     AddStudentForm,

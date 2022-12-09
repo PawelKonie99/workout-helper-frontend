@@ -37,7 +37,7 @@ export const LoginForm = () => {
         const { loggedUser, message } = await loginUser(data)
 
         if (loggedUser) {
-            saveUserLogin(dispatch, loggedUser.token, loggedUser.roles)
+            saveUserLogin(dispatch, loggedUser.token, loggedUser.roles, loggedUser.username)
         }
 
         //TODO message przeniesc do const

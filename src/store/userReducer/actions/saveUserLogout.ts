@@ -7,6 +7,7 @@ export const saveUserLogout = (dispatch: AppDispatch) => {
             loggedIn: false,
             token: "",
             roles: { adminRole: false, trainerRole: false, userRole: false },
+            username: "",
         }),
     )
 }

@@ -40,6 +40,7 @@ export interface IUserDataResponse {
     success: boolean
     username?: string
     trainerName?: string
+    trainerId?: string
 }
 
 export interface IUserInfo {

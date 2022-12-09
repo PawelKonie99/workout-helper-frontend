@@ -1,6 +1,6 @@
 import { MacrosSummary } from "@/components"
 import { IMealHistory } from "@/types"
-import { MealSummary } from "../MealSummary/MealSummary"
+import { MealSummary } from "../../pages/Profile/components/MealSummary/MealSummary"
 
 interface Props {
     singleMealDay: IMealHistory

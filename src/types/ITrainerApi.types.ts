@@ -52,7 +52,7 @@ export interface IAddNewTrainingPlanPayload {
     workoutData: IWorkoutFields[]
     userData: {
         id: string
-        userName: string
+        username: string
     }
 }
 

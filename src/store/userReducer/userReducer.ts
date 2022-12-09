@@ -7,6 +7,8 @@ export type IUserReducerInitialState = {
     token: string
     roles: IUserRoles
     trainerName: string
+    trainerId: string
+    username: string
 }
 export const userReducerInitialState: IUserReducerInitialState = {
     loggedIn: false,
@@ -17,6 +19,8 @@ export const userReducerInitialState: IUserReducerInitialState = {
         userRole: false,
     },
     trainerName: "",
+    trainerId: "",
+    username: "",
 }
 
 const userSlice = createSlice({
@@ -25,14 +29,24 @@ const userSlice = createSlice({
     reducers: {
         loginUser: (
             state,
-            action: PayloadAction<{ loggedIn: boolean; token: string; roles: IUserRoles }>,
+            action: PayloadAction<{
+                loggedIn: boolean
+                token: string
+                roles: IUserRoles
+                username: string
+            }>,
         ) => {
             state.loggedIn = action.payload.loggedIn
             state.token = action.payload.token
             state.roles = action.payload.roles
+            state.username = action.payload.username
         },
-        setUserTrainer: (state, action: PayloadAction<{ trainerName: string }>) => {
+        setUserTrainer: (
+            state,
+            action: PayloadAction<{ trainerName: string; trainerId: string }>,
+        ) => {
             state.trainerName = action.payload.trainerName
+            state.trainerId = action.payload.trainerId
         },
     },
 })
