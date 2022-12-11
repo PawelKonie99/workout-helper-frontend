@@ -25,3 +25,4 @@ export { sendStudentTrainerDecision } from "./studentApi/sendStudentTrainerDecis
 export { deleteTrainer } from "./studentApi/deleteTrainer"
 
 export { getUsers } from "./adminApi/getUsers"
+export { deleteUser } from "./adminApi/deleteUser"

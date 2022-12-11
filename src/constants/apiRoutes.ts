@@ -26,3 +26,4 @@ export const SEND_STUDENT_TRAINER_DECISION = "/student/trainerRequest"
 export const DELETE_TRAINER = "/student/trainer"
 
 export const GET_USERS = "/admin/user"
+export const DELETE_USER = "/admin/user"

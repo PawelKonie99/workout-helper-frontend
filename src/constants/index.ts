@@ -22,6 +22,7 @@ export {
     SEND_STUDENT_TRAINER_DECISION,
     DELETE_TRAINER,
     GET_USERS,
+    DELETE_USER,
 } from "./apiRoutes"
 export {
     INITIAL_REP_COUNT,

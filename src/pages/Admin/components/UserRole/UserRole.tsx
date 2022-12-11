@@ -16,14 +16,14 @@ export const UserRole = ({ isRole, roleName }: Props) => {
 
     return (
         <div className="flex flex-col mr-4 justify-start items-center">
-            <span className={` ${selectAppearance}`}>{roleName}</span>
-            {roleName !== "user" && (
-                <NormalButton
-                    buttonVariant="secondary"
-                    label={`${isRole ? "Usuń role" : "Dodaj role"}`}
-                    onClick={() => console.log("elo")}
-                />
-            )}
+            <span className={`font-semibold ${selectAppearance}`}>{roleName}</span>
+
+            <NormalButton
+                buttonVariant="secondary"
+                label={`${isRole ? "Usuń role" : "Aktywuj role"}`}
+                onClick={() => console.log("elo")}
+                isDisabled={roleName === "user"}
+            />
         </div>
     )
 }

@@ -9,6 +9,7 @@ interface Props {
     onClick?: () => void
     isFullWidth?: boolean
     isLoading?: boolean
+    isDisabled?: boolean
 }
 
 export const NormalButton = ({
@@ -19,6 +20,7 @@ export const NormalButton = ({
     buttonVariant = "primary",
     isFullWidth,
     isLoading,
+    isDisabled,
 }: Props) => {
     const buttonAppearance = classNames({
         "bg-primary hover:bg-primaryDark": buttonVariant === "primary",
@@ -34,6 +36,7 @@ export const NormalButton = ({
             className={`${buttonAppearance} shadow-none ${className}`}
             onClick={onClick}
             loading={isLoading}
+            disabled={isDisabled}
         >
             {label}
         </LoadingButton>
