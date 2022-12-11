@@ -27,3 +27,5 @@ export const DELETE_TRAINER = "/student/trainer"
 
 export const GET_USERS = "/admin/user"
 export const DELETE_USER = "/admin/user"
+export const CHANGE_USER_ROLE = "/admin/user/role"
+export const GET_SINGLE_USER_DATA = "/admin/user"

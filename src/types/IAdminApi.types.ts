@@ -1,5 +1,5 @@
 import { RESPONSE_CODE } from "@/enums"
-import { IRoles } from "./ICommon.types"
+import { IRole, IRoles } from "./ICommon.types"
 
 export interface IPaginationValuesPayload {
     offset: number
@@ -16,4 +16,20 @@ export interface IUserData {
     roles: IRoles
     username: string
     id: string
+}
+
+export interface IChangeRolePayload {
+    userId: string
+    roleToChange: IRole
+    isRoleActive: boolean
+}
+
+export interface IGetSingleUserResponse {
+    code: RESPONSE_CODE
+    success: boolean
+    parsedUserData?: {
+        roles: IRoles
+        username: string
+        id: string
+    }
 }

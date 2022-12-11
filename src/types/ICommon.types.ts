@@ -2,7 +2,7 @@ import { RESPONSE_CODE } from "@/enums"
 
 export interface IStandardResponse {
     code: RESPONSE_CODE
-    message: string
+    message?: string
     success: boolean
 }
 
@@ -16,3 +16,5 @@ export interface IRoles {
     trainerRole: boolean
     userRole: boolean
 }
+
+export type IRole = "user" | "admin" | "trainer"

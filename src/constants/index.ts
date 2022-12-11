@@ -22,7 +22,9 @@ export {
     SEND_STUDENT_TRAINER_DECISION,
     DELETE_TRAINER,
     GET_USERS,
+    CHANGE_USER_ROLE,
     DELETE_USER,
+    GET_SINGLE_USER_DATA,
 } from "./apiRoutes"
 export {
     INITIAL_REP_COUNT,

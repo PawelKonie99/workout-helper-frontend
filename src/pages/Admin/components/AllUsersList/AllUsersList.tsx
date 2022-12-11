@@ -1,8 +1,8 @@
 import { toast } from "react-toastify"
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { NormalButton } from "@/components"
-import { deleteUser, getUsers } from "@/api"
-import { IUserData } from "@/types"
+import { deleteUser, getSingleUserData, getUsers } from "@/api"
+import { IRole, IUserData } from "@/types"
 import { UserRole } from "../UserRole/UserRole"
 import { PopUpContext } from "@/contexts"
 
@@ -10,6 +10,29 @@ export const AllUsersList = () => {
     const { openPopup, closePopup } = useContext(PopUpContext)
     const [offset, setOffset] = useState(0)
     const [usersToDisplay, setUsersToDisplay] = useState<IUserData[]>([])
+    const [updatedUser, setUpdatedUser] = useState<{ id: string; role: IRole }>({
+        id: "",
+        role: "user",
+    })
+
+    useEffect(() => {
+        const testowy = async () => {
+            const { parsedUserData } = await getSingleUserData(updatedUser.id)
+            if (parsedUserData?.id) {
+                setUsersToDisplay((prevState) =>
+                    prevState.map((userData) =>
+                        userData.id !== updatedUser.id ? userData : parsedUserData,
+                    ),
+                )
+            }
+        }
+
+        testowy()
+    }, [updatedUser.id, updatedUser.role])
+
+    const handleChangeUpdatedUserId = (userId: string, role: IRole) => {
+        setUpdatedUser({ id: userId, role })
+    }
 
     const handleLoadMoreStudents = async () => {
         setOffset((prevState) => prevState + 5)
@@ -76,9 +99,24 @@ export const AllUsersList = () => {
                             <div className="flex flex-col border-r-2 ">
                                 <span className="mr-2">Role </span>
                                 <div className="flex">
-                                    <UserRole isRole={adminRole} roleName="admin" />
-                                    <UserRole isRole={trainerRole} roleName="trainer" />
-                                    <UserRole isRole={userRole} roleName="user" />
+                                    <UserRole
+                                        isRole={adminRole}
+                                        roleName="admin"
+                                        userId={id}
+                                        handleChangeUpdatedUserId={handleChangeUpdatedUserId}
+                                    />
+                                    <UserRole
+                                        isRole={trainerRole}
+                                        roleName="trainer"
+                                        userId={id}
+                                        handleChangeUpdatedUserId={handleChangeUpdatedUserId}
+                                    />
+                                    <UserRole
+                                        isRole={userRole}
+                                        roleName="user"
+                                        userId={id}
+                                        handleChangeUpdatedUserId={handleChangeUpdatedUserId}
+                                    />
                                 </div>
                             </div>
                             <NormalButton

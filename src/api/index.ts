@@ -26,3 +26,4 @@ export { deleteTrainer } from "./studentApi/deleteTrainer"
 
 export { getUsers } from "./adminApi/getUsers"
 export { deleteUser } from "./adminApi/deleteUser"
+export { getSingleUserData } from "./adminApi/getSingleUserData"

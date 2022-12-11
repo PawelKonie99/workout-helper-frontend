@@ -1,5 +1,5 @@
 export type { INutritionProductResponse, IFood } from "./externalApiTypes/IFoodApi.types"
-export type { IStandardResponse, ISelectOption, IRoles } from "./ICommon.types"
+export type { IStandardResponse, ISelectOption, IRoles, IRole } from "./ICommon.types"
 export type {
     IProductPayload,
     ITodayProductsResponse,
@@ -56,4 +56,9 @@ export type {
     IGetSingleStudentDataResponse,
     IChoosenStudentData,
 } from "./ITrainerApi.types"
-export type { IPaginationValuesPayload, IGetAllUsersResponse, IUserData } from "./IAdminApi.types"
+export type {
+    IPaginationValuesPayload,
+    IGetAllUsersResponse,
+    IUserData,
+    IChangeRolePayload,
+} from "./IAdminApi.types"
