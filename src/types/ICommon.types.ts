@@ -10,3 +10,9 @@ export interface ISelectOption {
     value: string
     label: string
 }
+
+export interface IRoles {
+    adminRole: boolean
+    trainerRole: boolean
+    userRole: boolean
+}

@@ -1,11 +1,11 @@
 interface Props {
     title: string
-    onClick: () => void
+    onClick?: () => void
 }
 
 export const MenuListItem = ({ onClick, title }: Props) => {
     return (
-        <li className="border-b-2 mb-4 cursor-pointer" onClick={() => onClick()}>
+        <li className="border-b-2 mb-4 cursor-pointer" onClick={() => onClick && onClick()}>
             {title}
         </li>
     )

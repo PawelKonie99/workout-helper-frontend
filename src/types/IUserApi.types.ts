@@ -1,4 +1,5 @@
 import { RESPONSE_CODE } from "@/enums"
+import { IRoles } from "./ICommon.types"
 
 export interface ILoginFormSchema {
     username: string
@@ -30,7 +31,7 @@ export interface ILoginResponse {
         | {
               username: string
               token: string
-              roles: IUserRoles
+              roles: IRoles
           }
         | Record<string, never>
 }
@@ -46,10 +47,4 @@ export interface IUserDataResponse {
 export interface IUserInfo {
     username?: string
     trainerName?: string
-}
-
-export interface IUserRoles {
-    adminRole: boolean
-    trainerRole: boolean
-    userRole: boolean
 }

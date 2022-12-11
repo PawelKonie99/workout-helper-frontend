@@ -23,3 +23,5 @@ export { getTrainingPlan } from "./studentApi/getTrainingPlan"
 export { getTrainerRequest } from "./studentApi/getTrainerRequest"
 export { sendStudentTrainerDecision } from "./studentApi/sendStudentTrainerDecision"
 export { deleteTrainer } from "./studentApi/deleteTrainer"
+
+export { getUsers } from "./adminApi/getUsers"

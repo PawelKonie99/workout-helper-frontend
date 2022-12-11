@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { USER } from "@/constants"
-import { IUserRoles } from "@/types"
+import { IRoles } from "@/types"
 
 export type IUserReducerInitialState = {
     loggedIn: boolean
     token: string
-    roles: IUserRoles
+    roles: IRoles
     trainerName: string
     trainerId: string
     username: string
@@ -32,7 +32,7 @@ const userSlice = createSlice({
             action: PayloadAction<{
                 loggedIn: boolean
                 token: string
-                roles: IUserRoles
+                roles: IRoles
                 username: string
             }>,
         ) => {
