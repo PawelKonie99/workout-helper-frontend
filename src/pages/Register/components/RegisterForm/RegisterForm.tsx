@@ -5,7 +5,6 @@ import { useNavigate } from "react-router"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { NormalButton, TextInput, TextLink } from "@/components"
 import { IRegisterFormSchema } from "@/types"
-import { INPUT_TYPES } from "@/enums"
 import { registerSchema } from "@/schema"
 import { PopUpContext } from "@/contexts/PopupContext"
 import { registerUser } from "@/api"
@@ -120,7 +119,7 @@ export const RegisterForm = () => {
                             render={({ field: { name, onChange, ref, value } }) => (
                                 <TextInput
                                     autoComplete={"password"}
-                                    inputType={INPUT_TYPES.PASSWORD}
+                                    inputType="password"
                                     isError={errors.password}
                                     name={name}
                                     value={value}
@@ -138,7 +137,7 @@ export const RegisterForm = () => {
                             control={control}
                             render={({ field: { name, onChange, ref, value } }) => (
                                 <TextInput
-                                    inputType={INPUT_TYPES.PASSWORD}
+                                    inputType="password"
                                     isError={errors.confirmPassword}
                                     name={name}
                                     value={value}

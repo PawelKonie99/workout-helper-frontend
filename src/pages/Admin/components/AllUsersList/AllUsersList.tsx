@@ -5,11 +5,13 @@ import { deleteUser, getSingleUserData, getUsers } from "@/api"
 import { IRole, IUserData } from "@/types"
 import { UserRole } from "../UserRole/UserRole"
 import { PopUpContext } from "@/contexts"
+import { ChangeUserPasswordForm } from "../ChangeUserPasswordForm/ChangeUserPasswordForm"
 
 export const AllUsersList = () => {
     const { openPopup, closePopup } = useContext(PopUpContext)
     const [offset, setOffset] = useState(0)
     const [usersToDisplay, setUsersToDisplay] = useState<IUserData[]>([])
+
     const [updatedUser, setUpdatedUser] = useState<{ id: string; role: IRole }>({
         id: "",
         role: "user",
@@ -97,7 +99,7 @@ export const AllUsersList = () => {
                                 <span className=" text-primaryBlue">{username}</span>
                             </div>
                             <div className="flex flex-col border-r-2 ">
-                                <span className="mr-2">Role </span>
+                                <span className="mr-2">Role uzytkownika</span>
                                 <div className="flex">
                                     <UserRole
                                         isRole={adminRole}
@@ -119,12 +121,15 @@ export const AllUsersList = () => {
                                     />
                                 </div>
                             </div>
-                            <NormalButton
-                                buttonVariant="delete"
-                                label="Usuń uzytkownika"
-                                onClick={() => handleDeleteUser(id, username)}
-                                className="mt-8 ml-4"
-                            />
+                            <ChangeUserPasswordForm userId={id} />
+                            <div>
+                                <NormalButton
+                                    buttonVariant="delete"
+                                    label="Usuń uzytkownika"
+                                    onClick={() => handleDeleteUser(id, username)}
+                                    className="mt-8"
+                                />
+                            </div>
                         </div>
                     </div>
                 ),

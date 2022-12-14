@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react"
 import { toast } from "react-toastify"
 import { getProductData, translateProduct } from "@/api/externalApi"
 import { NormalButton, TextInput } from "@/components"
-import { INPUT_TYPES, MEAL_TYPES } from "@/enums"
+import { MEAL_TYPES } from "@/enums"
 import { IDatabaseProduct, IProductPayload } from "@/types"
 
 interface Props {
@@ -107,7 +107,7 @@ export const AddProductForm = ({
                         value={weight.replace("g", "")}
                         onChange={handleWeightChange}
                         classname="pb-4 ml-4"
-                        inputType={INPUT_TYPES.NUMBER}
+                        inputType="number"
                     />
                 </div>
 

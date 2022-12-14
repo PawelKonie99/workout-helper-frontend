@@ -25,6 +25,7 @@ export {
     CHANGE_USER_ROLE,
     DELETE_USER,
     GET_SINGLE_USER_DATA,
+    CHANGE_USER_PASSWORD,
 } from "./apiRoutes"
 export {
     INITIAL_REP_COUNT,

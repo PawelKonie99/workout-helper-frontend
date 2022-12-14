@@ -33,3 +33,7 @@ export interface IGetSingleUserResponse {
         id: string
     }
 }
+
+export interface IChangeUserPasswordSchema {
+    password: string
+}

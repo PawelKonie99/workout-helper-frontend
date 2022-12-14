@@ -6,12 +6,10 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { NormalButton, TextInput, TextLink } from "@/components"
 import { saveUserLogin } from "@/store/userReducer/actions/saveUserLogin"
 import { ILoginFormSchema } from "@/types"
-import { INPUT_TYPES } from "@/enums"
 import { loginSchema } from "@/schema"
 import { loginUser } from "@/api"
 import { PopUpContext } from "@/contexts"
 
-//TODO przeniesc
 const defaultFormValues: ILoginFormSchema = {
     username: "",
     password: "",
@@ -94,7 +92,7 @@ export const LoginForm = () => {
                             render={({ field: { name, onChange, ref, value } }) => (
                                 <TextInput
                                     autoComplete={"password"}
-                                    inputType={INPUT_TYPES.PASSWORD}
+                                    inputType="password"
                                     isError={errors.password}
                                     name={name}
                                     value={value}

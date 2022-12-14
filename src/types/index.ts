@@ -61,4 +61,5 @@ export type {
     IGetAllUsersResponse,
     IUserData,
     IChangeRolePayload,
+    IChangeUserPasswordSchema,
 } from "./IAdminApi.types"
