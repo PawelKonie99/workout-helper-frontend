@@ -1,11 +1,11 @@
 import { AppDispatch } from "@/store/store"
-import { IUserRoles } from "@/types"
+import { IRoles } from "@/types"
 import { loginUser } from "../userReducer"
 
 export const saveUserLogin = (
     dispatch: AppDispatch,
     token: string,
-    roles: IUserRoles,
+    roles: IRoles,
     username: string,
 ) => {
     dispatch(loginUser({ loggedIn: true, token, roles, username }))

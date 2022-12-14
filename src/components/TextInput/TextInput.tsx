@@ -1,7 +1,6 @@
 import { ChangeEvent } from "react"
 import { FieldError, RefCallBack } from "react-hook-form"
 import { TextField } from "@mui/material"
-import { INPUT_TYPES } from "@/enums"
 import { FormErrorMessage } from ".."
 
 interface Props {
@@ -13,7 +12,7 @@ interface Props {
     inputRef?: RefCallBack
     isError?: FieldError
     errorMessage?: string
-    inputType?: INPUT_TYPES
+    inputType?: "button" | "username" | "number" | "text" | "password"
     autoComplete?: string
     placeholder?: string
     classname?: string
@@ -29,7 +28,7 @@ export const TextInput = ({
     inputRef,
     value,
     errorMessage,
-    inputType = INPUT_TYPES.TEXT,
+    inputType = "text",
     autoComplete,
     placeholder,
     classname,

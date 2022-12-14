@@ -8,20 +8,18 @@ import {
 } from "./components"
 import { useLoadMyStudents } from "@/hooks"
 
-//TODO przeniesc
-enum VIEWS_TO_DISPLAY_TRAINER {
-    MY_STUDENTS = "MY_STUDENTS",
-    ADD_STUDENT = "ADD_STUDENT",
-    ADD_STUDENT_WORKOUT_PLAN = "ADD_STUDENT_WORKOUT_PLAN",
-    ADD_STUDENT_DIET = "ADD_STUDENT_DIET",
-}
+type viewsToDisplayTrainer =
+    | "MY_STUDENTS"
+    | "ADD_STUDENT"
+    | "ADD_STUDENT_WORKOUT_PLAN"
+    | "ADD_STUDENT_DIET"
 
 const Trainer = () => {
-    const [viewToDisplay, setViewToDisplay] = useState<VIEWS_TO_DISPLAY_TRAINER>()
+    const [viewToDisplay, setViewToDisplay] = useState<viewsToDisplayTrainer>()
     const [newStudentName, setNewStudentName] = useState("")
     const myStudents = useLoadMyStudents(newStudentName)
 
-    const loadView = (view: VIEWS_TO_DISPLAY_TRAINER) => {
+    const loadView = (view: viewsToDisplayTrainer) => {
         setViewToDisplay(view)
     }
 
@@ -35,37 +33,31 @@ const Trainer = () => {
                 <div className="mr-40">
                     <ul>
                         <MenuListItem
-                            onClick={() => loadView(VIEWS_TO_DISPLAY_TRAINER.MY_STUDENTS)}
+                            onClick={() => loadView("MY_STUDENTS")}
                             title="Moi podopieczni"
                         />
                         <MenuListItem
-                            onClick={() => loadView(VIEWS_TO_DISPLAY_TRAINER.ADD_STUDENT)}
+                            onClick={() => loadView("ADD_STUDENT")}
                             title="Dodaj podopiecznego"
                         />
                         <MenuListItem
-                            onClick={() =>
-                                loadView(VIEWS_TO_DISPLAY_TRAINER.ADD_STUDENT_WORKOUT_PLAN)
-                            }
+                            onClick={() => loadView("ADD_STUDENT_WORKOUT_PLAN")}
                             title="Dodaj plan treningowy dla podopiecznego"
                         />
                         <MenuListItem
-                            onClick={() => loadView(VIEWS_TO_DISPLAY_TRAINER.ADD_STUDENT_DIET)}
+                            onClick={() => loadView("ADD_STUDENT_DIET")}
                             title="Dodaj diete dla podopiecznego"
                         />
                     </ul>
                 </div>
-                {viewToDisplay === VIEWS_TO_DISPLAY_TRAINER.MY_STUDENTS && (
-                    <MyStudents myStudents={myStudents} />
-                )}
-                {viewToDisplay === VIEWS_TO_DISPLAY_TRAINER.ADD_STUDENT && (
+                {viewToDisplay === "MY_STUDENTS" && <MyStudents myStudents={myStudents} />}
+                {viewToDisplay === "ADD_STUDENT" && (
                     <AddStudentForm handleSetNewStudentName={handleSetNewStudentName} />
                 )}
-                {viewToDisplay === VIEWS_TO_DISPLAY_TRAINER.ADD_STUDENT_WORKOUT_PLAN && (
+                {viewToDisplay === "ADD_STUDENT_WORKOUT_PLAN" && (
                     <AddStudentTrainingPlanForm myStudents={myStudents} />
                 )}
-                {viewToDisplay === VIEWS_TO_DISPLAY_TRAINER.ADD_STUDENT_DIET && (
-                    <AddStudentDiet myStudents={myStudents} />
-                )}
+                {viewToDisplay === "ADD_STUDENT_DIET" && <AddStudentDiet myStudents={myStudents} />}
             </div>
         </ContentContainer>
     )

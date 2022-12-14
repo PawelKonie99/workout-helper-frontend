@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { getAllUserWorkouts, getMealsHistory, getTrainerRequest } from "@/api"
 import { ContentContainer, MenuListItem, ProductHistory, WorkoutHistory } from "@/components"
 import { IMealHistory, IRequestedTrainerData, IUserWorkoutDataFromDatabase } from "@/types"
@@ -9,13 +9,7 @@ import { saveUserLogout } from "@/store/userReducer/actions/saveUserLogout"
 import { useTrainerInfo } from "@/hooks"
 import { RootState } from "@/store/store"
 
-//TODO przeniesc
-enum VIEWS_TO_DISPLAY_PROFILE {
-    WORKOUT_HISTORY = "WORKOUT_HISTORY",
-    MEAL_HISTORY = "MEAL_HISTORY",
-    NOTIFICATIONS = "NOTIFICATIONS",
-    SETTINGS = "SETTINGS",
-}
+type viewsToDisplayProfile = "WORKOUT_HISTORY" | "MEAL_HISTORY" | "NOTIFICATIONS" | "SETTINGS"
 
 const Profile = () => {
     useTrainerInfo()
@@ -24,29 +18,34 @@ const Profile = () => {
     const { trainerName, trainerId, username } = useSelector(
         (state: RootState) => state.userReducer,
     )
-    const [viewToDisplay, setViewToDisplay] = useState<VIEWS_TO_DISPLAY_PROFILE>()
+    const [viewToDisplay, setViewToDisplay] = useState<viewsToDisplayProfile>()
     const [workoutHistory, setWorkoutHistory] = useState<IUserWorkoutDataFromDatabase[]>()
     const [mealsHistory, setMealsHistory] = useState<IMealHistory[]>()
     const [userRequestedTrainers, setUserRequestedTrainers] = useState<IRequestedTrainerData[]>()
 
+    useEffect(() => {
+        loadRequestedTrainers()
+    }, [])
+
+    const loadRequestedTrainers = async () => {
+        const { requestedTrainers } = await getTrainerRequest()
+        requestedTrainers && setUserRequestedTrainers(requestedTrainers)
+        setViewToDisplay("NOTIFICATIONS")
+    }
+
     const loadAllUserWorkouts = async () => {
         const { allUserWorkouts } = await getAllUserWorkouts()
         allUserWorkouts && setWorkoutHistory(allUserWorkouts)
-        setViewToDisplay(VIEWS_TO_DISPLAY_PROFILE.WORKOUT_HISTORY)
+        setViewToDisplay("WORKOUT_HISTORY")
     }
     const loadUserMealsHistory = async () => {
         const { mealHistory } = await getMealsHistory()
         mealHistory && setMealsHistory(mealHistory)
-        setViewToDisplay(VIEWS_TO_DISPLAY_PROFILE.MEAL_HISTORY)
-    }
-    const loadRequestedTrainers = async () => {
-        const { requestedTrainers } = await getTrainerRequest()
-        requestedTrainers && setUserRequestedTrainers(requestedTrainers)
-        setViewToDisplay(VIEWS_TO_DISPLAY_PROFILE.NOTIFICATIONS)
+        setViewToDisplay("MEAL_HISTORY")
     }
 
     const loadSettings = () => {
-        setViewToDisplay(VIEWS_TO_DISPLAY_PROFILE.SETTINGS)
+        setViewToDisplay("SETTINGS")
     }
 
     const logut = () => {
@@ -70,21 +69,28 @@ const Profile = () => {
                                 onClick={loadUserMealsHistory}
                                 title="Historia posiłków"
                             />
-                            <MenuListItem onClick={loadRequestedTrainers} title="Powiadomienia" />
+                            <MenuListItem
+                                onClick={loadRequestedTrainers}
+                                title={`Powiadomienia ${
+                                    userRequestedTrainers?.length
+                                        ? `(${userRequestedTrainers?.length})`
+                                        : ""
+                                }`}
+                            />
                             <MenuListItem onClick={loadSettings} title="Ustawienia" />
                             <MenuListItem onClick={logut} title="Wyloguj" />
                         </ul>
                     </div>
-                    {viewToDisplay === VIEWS_TO_DISPLAY_PROFILE.WORKOUT_HISTORY && (
+                    {viewToDisplay === "WORKOUT_HISTORY" && (
                         <WorkoutHistory workoutHistory={workoutHistory} />
                     )}
-                    {viewToDisplay === VIEWS_TO_DISPLAY_PROFILE.MEAL_HISTORY && (
+                    {viewToDisplay === "MEAL_HISTORY" && (
                         <ProductHistory productHistory={mealsHistory} />
                     )}
-                    {viewToDisplay === VIEWS_TO_DISPLAY_PROFILE.SETTINGS && (
+                    {viewToDisplay === "SETTINGS" && (
                         <UserSettings trainerName={trainerName} trainerId={trainerId} />
                     )}
-                    {viewToDisplay === VIEWS_TO_DISPLAY_PROFILE.NOTIFICATIONS && (
+                    {viewToDisplay === "NOTIFICATIONS" && (
                         <RequestedTrainers
                             userRequestedTrainers={userRequestedTrainers}
                             loadRequestedTrainers={loadRequestedTrainers}
