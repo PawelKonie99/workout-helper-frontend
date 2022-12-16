@@ -10,7 +10,7 @@ import { saveUserTrainer } from "@/store/userReducer/actions/saveUserTrainer"
 
 interface Props {
     userRequestedTrainers?: IRequestedTrainerData[]
-    loadRequestedTrainers: () => Promise<void>
+    loadRequestedTrainers: (setView: boolean) => Promise<void>
     isTrainer?: boolean
 }
 
@@ -68,7 +68,7 @@ export const RequestedTrainers = ({
         }
 
         const { message, trainerName } = await sendStudentTrainerDecision(studentDecisionPayload)
-        loadRequestedTrainers()
+        loadRequestedTrainers(true)
 
         if (message === "Trener został zaakceptowany") {
             toast.success("Trener został zaakceptowany")

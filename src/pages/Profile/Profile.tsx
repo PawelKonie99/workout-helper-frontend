@@ -24,13 +24,13 @@ const Profile = () => {
     const [userRequestedTrainers, setUserRequestedTrainers] = useState<IRequestedTrainerData[]>()
 
     useEffect(() => {
-        loadRequestedTrainers()
+        loadRequestedTrainers(false)
     }, [])
 
-    const loadRequestedTrainers = async () => {
+    const loadRequestedTrainers = async (setView: boolean) => {
         const { requestedTrainers } = await getTrainerRequest()
         requestedTrainers && setUserRequestedTrainers(requestedTrainers)
-        setViewToDisplay("NOTIFICATIONS")
+        setView && setViewToDisplay("NOTIFICATIONS")
     }
 
     const loadAllUserWorkouts = async () => {
@@ -70,7 +70,7 @@ const Profile = () => {
                                 title="Historia posiłków"
                             />
                             <MenuListItem
-                                onClick={loadRequestedTrainers}
+                                onClick={() => loadRequestedTrainers(true)}
                                 title={`Powiadomienia ${
                                     userRequestedTrainers?.length
                                         ? `(${userRequestedTrainers?.length})`
