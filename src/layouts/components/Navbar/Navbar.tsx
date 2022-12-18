@@ -1,9 +1,8 @@
-import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { RootState } from "@/store/store"
+import { useAppSelector } from "@/store/hooks/storeHooks"
 
 export const Navbar = () => {
-    const { trainerRole, adminRole } = useSelector((state: RootState) => state.userReducer.roles)
+    const { trainerRole, adminRole } = useAppSelector((state) => state.userReducer.roles)
 
     return (
         <div className="fixed w-full flex m-auto justify-between px-16 py-6 bg-primaryYellow z-50">

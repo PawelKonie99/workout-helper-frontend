@@ -15,7 +15,6 @@ export const authRoutes = {
     children: [
         {
             path: "register",
-
             children: [
                 {
                     index: true,

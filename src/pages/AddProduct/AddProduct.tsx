@@ -1,13 +1,12 @@
-import { useSelector } from "react-redux"
 import { useGetTodayProduct } from "@/hooks"
 import { addNewProduct, deleteProduct } from "@/api"
 import { AllMealsForm, MacrosSummary } from "@/components"
 import { MEAL_TYPES } from "@/enums"
 import { DietFromTrainer } from "./components"
-import { RootState } from "@/store/store"
+import { useAppSelector } from "@/store/hooks/storeHooks"
 
 const AddProduct = () => {
-    const { trainerRole } = useSelector((state: RootState) => state.userReducer.roles)
+    const { trainerRole } = useAppSelector((state) => state.userReducer.roles)
     const { todayProductsData, setNewlyAddedProductName, setRemovedProductId } =
         useGetTodayProduct()
 

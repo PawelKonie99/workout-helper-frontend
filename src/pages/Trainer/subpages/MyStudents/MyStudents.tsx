@@ -1,13 +1,12 @@
 import { useState } from "react"
 import { getSingleStudentData } from "@/api"
 import { NormalButton, ProductHistory, WorkoutHistory } from "@/components"
-import { IChoosenStudentData, IStudentData } from "@/types"
+import { IChoosenStudentData } from "@/types"
+import { useLoadMyStudents } from "@/hooks"
 
-type Props = {
-    myStudents?: IStudentData[]
-}
+const MyStudents = () => {
+    const myStudents = useLoadMyStudents()
 
-export const MyStudents = ({ myStudents }: Props) => {
     const [choosenStudentData, setChoosenStudentData] = useState<IChoosenStudentData>()
 
     const handleLoadStudentData = async (userId: string, studentName: string) => {
@@ -72,3 +71,5 @@ export const MyStudents = ({ myStudents }: Props) => {
         </div>
     )
 }
+
+export default MyStudents

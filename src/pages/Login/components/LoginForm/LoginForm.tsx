@@ -1,7 +1,6 @@
 import { useContext } from "react"
 import { useForm, Controller, SubmitHandler } from "react-hook-form"
 import { useNavigate } from "react-router"
-import { useDispatch } from "react-redux"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { NormalButton, TextInput, TextLink } from "@/components"
 import { saveUserLogin } from "@/store/userReducer/actions/saveUserLogin"
@@ -9,6 +8,7 @@ import { ILoginFormSchema } from "@/types"
 import { loginSchema } from "@/schema"
 import { loginUser } from "@/api"
 import { PopUpContext } from "@/contexts"
+import { useAppDispatch } from "@/store/hooks/storeHooks"
 
 const defaultFormValues: ILoginFormSchema = {
     username: "",
@@ -17,7 +17,7 @@ const defaultFormValues: ILoginFormSchema = {
 
 export const LoginForm = () => {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const { openPopup, closePopup } = useContext(PopUpContext)
 
     const {

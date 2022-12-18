@@ -16,12 +16,12 @@ const Admin = () => {
             <ContentContainer>
                 <div className="flex w-full">
                     <div className="mr-40">
-                        <ul>
+                        {/* <ul>
                             <MenuListItem
                                 onClick={() => loadView("ALL_USERS")}
                                 title="Wszyscy uzytkownicy"
                             />
-                        </ul>
+                        </ul> */}
                     </div>
                     {viewToDisplay === "ALL_USERS" && <AllUsersList />}
                 </div>

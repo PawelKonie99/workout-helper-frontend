@@ -1,12 +1,15 @@
+import { Link, To } from "react-router-dom"
+
 interface Props {
     title: string
+    to: To
     onClick?: () => void
 }
 
-export const MenuListItem = ({ onClick, title }: Props) => {
+export const MenuListItem = ({ onClick, title, to }: Props) => {
     return (
         <li className="border-b-2 mb-4 cursor-pointer" onClick={() => onClick && onClick()}>
-            {title}
+            <Link to={to}>{title}</Link>
         </li>
     )
 }

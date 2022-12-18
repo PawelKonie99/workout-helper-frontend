@@ -6,16 +6,12 @@ import { NormalButton, TextInput } from "@/components"
 import { addStudentSchema } from "@/schema"
 import { IAddStudentSchema } from "@/types"
 
-interface Props {
-    handleSetNewStudentName: (studentName: string) => void
-}
-
 //TODO przeniesc
 const defaultFormValues: IAddStudentSchema = {
     studentName: "",
 }
 
-export const AddStudentForm = ({ handleSetNewStudentName }: Props) => {
+export const AddStudentForm = () => {
     const {
         handleSubmit,
         control,
@@ -41,7 +37,6 @@ export const AddStudentForm = ({ handleSetNewStudentName }: Props) => {
         } else {
             toast.error("Błąd podczas dodawania podopiecznego!")
         }
-        handleSetNewStudentName(studentName)
         reset()
     }
 

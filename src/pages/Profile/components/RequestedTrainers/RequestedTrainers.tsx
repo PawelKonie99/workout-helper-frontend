@@ -1,4 +1,3 @@
-import { useDispatch } from "react-redux"
 import { useContext } from "react"
 import { toast } from "react-toastify"
 import { sendStudentTrainerDecision } from "@/api"
@@ -7,10 +6,11 @@ import { MANAGE_REQUESTED_TRAINERS } from "@/enums"
 import { IRequestedTrainerData } from "@/types"
 import { PopUpContext } from "@/contexts"
 import { saveUserTrainer } from "@/store/userReducer/actions/saveUserTrainer"
+import { useAppDispatch } from "@/store/hooks/storeHooks"
 
 interface Props {
     userRequestedTrainers?: IRequestedTrainerData[]
-    loadRequestedTrainers: (setView: boolean) => Promise<void>
+    loadRequestedTrainers: () => Promise<void>
     isTrainer?: boolean
 }
 
@@ -20,7 +20,7 @@ export const RequestedTrainers = ({
     isTrainer,
 }: Props) => {
     const { openPopup, closePopup } = useContext(PopUpContext)
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const manageRequestedTrainer = async (
         userDecision: MANAGE_REQUESTED_TRAINERS,
@@ -68,7 +68,7 @@ export const RequestedTrainers = ({
         }
 
         const { message, trainerName } = await sendStudentTrainerDecision(studentDecisionPayload)
-        loadRequestedTrainers(true)
+        loadRequestedTrainers()
 
         if (message === "Trener został zaakceptowany") {
             toast.success("Trener został zaakceptowany")
