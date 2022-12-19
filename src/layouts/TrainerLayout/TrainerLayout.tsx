@@ -1,12 +1,5 @@
-import { useEffect, useState } from "react"
-import { Outlet, useNavigate } from "react-router-dom"
-import { getTrainerRequest } from "@/api"
+import { Outlet } from "react-router-dom"
 import { ContentContainer, MenuListItem } from "@/components"
-import { UserInfo } from "@/pages/Profile/components"
-import { useAppDispatch, useAppSelector } from "@/store/hooks/storeHooks"
-import { saveUserLogout } from "@/store/userReducer/actions/saveUserLogout"
-import { IRequestedTrainerData } from "@/types"
-import { useTrainerInfo } from "@/hooks"
 import { Navbar } from "../components"
 
 export const TrainerLayout = () => {

@@ -1,9 +1,18 @@
 import axios from "axios"
 import { IStandardResponse, IUserRegisterPayload } from "@/types"
 import { USER_REGISTER } from "@/constants"
+import { isAxiosError } from "@/helpers"
 
 export const registerUser = async (userPayload: IUserRegisterPayload) => {
-    const { data } = await axios.post<IStandardResponse>(USER_REGISTER, userPayload)
+    try {
+        const { data } = await axios.post<IStandardResponse>(USER_REGISTER, userPayload)
 
-    return data
+        return data
+    } catch (error: unknown) {
+        if (isAxiosError<IStandardResponse>(error) && error.response?.data) {
+            return error.response?.data
+        }
+
+        throw error
+    }
 }
