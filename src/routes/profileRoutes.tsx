@@ -13,8 +13,8 @@ const AllMealsHistory = SuspenseComponent(
 const Notifications = SuspenseComponent(
     lazy(() => import("../pages/Profile/subpages/Notifications/Notifications")),
 )
-const Settings = SuspenseComponent(
-    lazy(() => import("../pages/Profile/subpages/Settings/Settings")),
+const SettingsPage = SuspenseComponent(
+    lazy(() => import("../pages/Profile/subpages/SettingsPage/SettingsPage")),
 )
 
 export const profileRoutes = {
@@ -45,7 +45,7 @@ export const profileRoutes = {
                 },
                 {
                     path: "settings",
-                    element: Settings,
+                    element: SettingsPage,
                 },
             ],
         },
