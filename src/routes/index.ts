@@ -1,7 +1,7 @@
 export { Router } from "./Router"
 
-export { SuspenseComponent } from "./SuspenseComponent"
-export { SuspenseFallback } from "./SuspenseFallback"
+export { SuspenseComponent } from "./components/SuspenseComponent"
+export { SuspenseFallback } from "./components/SuspenseFallback"
 
 export { authRoutes } from "./authRoutes"
 export { homeRoutes } from "./homeRoutes"
