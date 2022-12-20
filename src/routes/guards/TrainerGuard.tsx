@@ -1,13 +1,13 @@
-import { useSelector } from "react-redux"
 import { Navigate } from "react-router-dom"
 import { RootState } from "@/store/store"
+import { useAppSelector } from "@/store/hooks/storeHooks"
 
 interface Props {
     children: React.ReactNode
 }
 
 export const TrainerGuard = ({ children }: Props) => {
-    const isTrainer = useSelector((state: RootState) => state.userReducer.roles.trainerRole)
+    const isTrainer = useAppSelector((state: RootState) => state.userReducer.roles.trainerRole)
 
     return isTrainer ? <>{children}</> : <Navigate to="/" />
 }

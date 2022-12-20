@@ -1,4 +1,5 @@
 import { CHANGE_USER_PASSWORD } from "@/constants/apiRoutes"
+import { isAxiosError } from "@/helpers"
 import { IStandardResponse } from "@/types"
 import { instance } from "../interceptors/sendToken"
 
@@ -9,10 +10,17 @@ interface IChangeUserPasswordPayload {
 }
 
 export const changeUserPassword = async (changeUserPasswordPayload: IChangeUserPasswordPayload) => {
-    const { data } = await instance.post<IStandardResponse>(
-        CHANGE_USER_PASSWORD,
-        changeUserPasswordPayload,
-    )
+    try {
+        const { data } = await instance.post<IStandardResponse>(
+            CHANGE_USER_PASSWORD,
+            changeUserPasswordPayload,
+        )
 
-    return data
+        return data
+    } catch (error: unknown) {
+        if (isAxiosError<IStandardResponse>(error) && error.response?.data) {
+            return error.response?.data
+        }
+        throw error
+    }
 }

@@ -10,7 +10,7 @@ type Props = {
     myStudents?: IStudentData[]
 }
 
-export const AddStudentDiet = ({ myStudents }: Props) => {
+export const AddStudentDietForm = ({ myStudents }: Props) => {
     const [choosenStudent, setChoosenStudent] = useState<ISelectOption>()
     const { userDiet, setNewlyAddedProductName, setRemovedProductId } =
         useGetStudentDiet(choosenStudent)

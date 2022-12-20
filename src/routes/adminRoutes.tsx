@@ -1,20 +1,31 @@
 import { lazy } from "react"
-import { MainLayout } from "@/layouts"
+import { AdminLayout } from "@/layouts"
 import { AdminGuard } from "./guards"
 import { SuspenseComponent } from "."
 
-const admin = SuspenseComponent(lazy(() => import("../pages/Admin/Admin")))
+const Admin = SuspenseComponent(lazy(() => import("../pages/Admin/Admin")))
+const AllUsers = SuspenseComponent(lazy(() => import("../pages/Admin/subpages/AllUsers/AllUsers")))
 
 export const adminRoutes = {
     element: (
         <AdminGuard>
-            <MainLayout />
+            <AdminLayout />
         </AdminGuard>
     ),
+
     children: [
         {
-            path: "admin",
-            element: admin,
+            path: "/admin",
+            children: [
+                {
+                    index: true,
+                    element: Admin,
+                },
+                {
+                    path: "allUsers",
+                    element: AllUsers,
+                },
+            ],
         },
     ],
 }

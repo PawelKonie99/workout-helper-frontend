@@ -1,4 +1,3 @@
-import { useDispatch } from "react-redux"
 import { useContext } from "react"
 import { toast } from "react-toastify"
 import { sendStudentTrainerDecision } from "@/api"
@@ -7,6 +6,7 @@ import { MANAGE_REQUESTED_TRAINERS } from "@/enums"
 import { IRequestedTrainerData } from "@/types"
 import { PopUpContext } from "@/contexts"
 import { saveUserTrainer } from "@/store/userReducer/actions/saveUserTrainer"
+import { useAppDispatch } from "@/store/hooks/storeHooks"
 
 interface Props {
     userRequestedTrainers?: IRequestedTrainerData[]
@@ -20,7 +20,7 @@ export const RequestedTrainers = ({
     isTrainer,
 }: Props) => {
     const { openPopup, closePopup } = useContext(PopUpContext)
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const manageRequestedTrainer = async (
         userDecision: MANAGE_REQUESTED_TRAINERS,

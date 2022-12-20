@@ -1,5 +1,6 @@
 import axios from "axios"
 import { ITranslationResponse } from "@/types"
+import { isAxiosError } from "@/helpers"
 
 export const translateProduct = async (productName: string): Promise<string> => {
     try {
@@ -13,6 +14,10 @@ export const translateProduct = async (productName: string): Promise<string> => 
 
         return translatedText
     } catch (error: unknown) {
-        return "error"
+        if (isAxiosError<ITranslationResponse>(error) && error.response?.data) {
+            return error.response?.data.responseData.translatedText
+        }
+
+        throw error
     }
 }

@@ -1,10 +1,10 @@
-import { useDispatch } from "react-redux"
 import { useEffect } from "react"
 import { getUserInfo } from "@/api"
 import { saveUserTrainer } from "@/store/userReducer/actions/saveUserTrainer"
+import { useAppDispatch } from "@/store/hooks/storeHooks"
 
 export const useTrainerInfo = () => {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
         const getTrainerInfo = async () => {

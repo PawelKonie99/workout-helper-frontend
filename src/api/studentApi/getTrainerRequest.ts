@@ -1,9 +1,18 @@
 import { GET_TRAINER_REQUEST } from "@/constants"
+import { isAxiosError } from "@/helpers"
 import { IGetTrainerRequestResponse } from "@/types"
 import { instance } from "../interceptors/sendToken"
 
 export const getTrainerRequest = async () => {
-    const { data } = await instance.get<IGetTrainerRequestResponse>(GET_TRAINER_REQUEST)
+    try {
+        const { data } = await instance.get<IGetTrainerRequestResponse>(GET_TRAINER_REQUEST)
 
-    return data
+        return data
+    } catch (error: unknown) {
+        if (isAxiosError<IGetTrainerRequestResponse>(error) && error.response?.data) {
+            return error.response?.data
+        }
+
+        throw error
+    }
 }

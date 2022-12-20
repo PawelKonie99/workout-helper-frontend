@@ -1,6 +1,5 @@
-import { useSelector } from "react-redux"
 import { Navigate } from "react-router-dom"
-import { RootState } from "@/store/store"
+import { useAppSelector } from "@/store/hooks/storeHooks"
 
 interface Props {
     children: React.ReactNode
@@ -8,7 +7,7 @@ interface Props {
 
 export const GuestGuard = ({ children }: Props) => {
     //TODO Here token need to be checked, or smth else that recognize logged user
-    const isLoggedIn = useSelector((state: RootState) => state.userReducer.loggedIn)
+    const isLoggedIn = useAppSelector((state) => state.userReducer.loggedIn)
 
     return isLoggedIn ? <Navigate to="/" /> : <>{children}</>
 }

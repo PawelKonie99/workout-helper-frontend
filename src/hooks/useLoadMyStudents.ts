@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { getAllStudents } from "@/api"
 import { IStudentData } from "@/types"
 
-export const useLoadMyStudents = (refreshStudents: string) => {
+export const useLoadMyStudents = (refreshStudents?: string) => {
     const [myStudents, setMyStudents] = useState<IStudentData[]>()
 
     useEffect(() => {

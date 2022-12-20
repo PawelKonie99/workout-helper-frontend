@@ -1,10 +1,9 @@
-import { useSelector } from "react-redux"
-import { RootState } from "@/store/store"
+import { useAppSelector } from "@/store/hooks/storeHooks"
 import { NewWorkoutForm } from "./components"
 import { TrainingPlan } from "./components/TrainingPlan/TrainingPlan"
 
 const Workout = () => {
-    const { trainerRole } = useSelector((state: RootState) => state.userReducer.roles)
+    const { trainerRole } = useAppSelector((state) => state.userReducer.roles)
 
     return (
         <div className="flex flex-col items-center justify-center">
