@@ -5,5 +5,5 @@ interface Props {
 }
 
 export const ContentContainer = ({ children }: Props) => {
-    return <div className="px-20">{children}</div>
+    return <div className="px-20 bg-offWhite">{children}</div>
 }

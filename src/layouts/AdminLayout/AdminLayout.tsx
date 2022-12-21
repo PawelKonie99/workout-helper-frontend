@@ -9,9 +9,10 @@ export const AdminLayout = () => {
             <div className="pt-28">
                 <ContentContainer>
                     <div className="flex w-full">
-                        <div className="mr-40">
+                        <div className="mr-20">
                             <ul>
-                                <MenuListItem title="Moi podopieczni" to="admin/allUsers" />
+                                <MenuListItem title="Wszyscy uzytkownicy" to="admin/allUsers" />
+                                <MenuListItem title="Wyszukaj uzytkownika" to="admin/findUser" />
                             </ul>
                         </div>
                         <Outlet />

@@ -27,13 +27,15 @@ export interface IChangeRolePayload {
 export interface IGetSingleUserResponse {
     code: RESPONSE_CODE
     success: boolean
-    parsedUserData?: {
-        roles: IRoles
-        username: string
-        id: string
-    }
+    parsedUserData?: IParsedUserData
 }
 
 export interface IChangeUserPasswordSchema {
     password: string
+}
+
+export interface IParsedUserData {
+    roles: IRoles
+    username: string
+    id: string
 }
