@@ -5,6 +5,7 @@ import { SuspenseComponent } from "."
 
 const Admin = SuspenseComponent(lazy(() => import("../pages/Admin/Admin")))
 const AllUsers = SuspenseComponent(lazy(() => import("../pages/Admin/subpages/AllUsers/AllUsers")))
+const FindUser = SuspenseComponent(lazy(() => import("../pages/Admin/subpages/FindUser/FindUser")))
 
 export const adminRoutes = {
     element: (
@@ -24,6 +25,10 @@ export const adminRoutes = {
                 {
                     path: "allUsers",
                     element: AllUsers,
+                },
+                {
+                    path: "findUser",
+                    element: FindUser,
                 },
             ],
         },

@@ -27,12 +27,12 @@ export const ProfileLayout = () => {
         navigate("/login")
     }
 
-    useEffect(() => {
-        const loadRequestedTrainer = async () => {
-            const { requestedTrainers } = await getTrainerRequest()
-            requestedTrainers && setUserRequestedTrainers(requestedTrainers)
-        }
+    const loadRequestedTrainer = async () => {
+        const { requestedTrainers } = await getTrainerRequest()
+        requestedTrainers && setUserRequestedTrainers(requestedTrainers)
+    }
 
+    useEffect(() => {
         loadRequestedTrainer()
     }, [])
 
@@ -64,6 +64,7 @@ export const ProfileLayout = () => {
                                     }`}
                                     to="profile/notifications"
                                     imageSrc={notificationsIcon}
+                                    onClick={loadRequestedTrainer}
                                 />
                                 <MenuListItem
                                     title="Ustawienia"
