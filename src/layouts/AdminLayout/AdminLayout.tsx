@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom"
 import { ContentContainer, MenuListItem } from "@/components"
 import { Navbar } from "../components"
+import mealIcon from "../../images/svg/meal-icon.svg"
 
 export const AdminLayout = () => {
     return (
@@ -11,7 +12,11 @@ export const AdminLayout = () => {
                     <div className="flex w-full">
                         <div className="mr-40">
                             <ul>
-                                <MenuListItem title="Moi podopieczni" to="admin/allUsers" />
+                                <MenuListItem
+                                    title="Moi podopieczni"
+                                    to="admin/allUsers"
+                                    imageSrc={mealIcon}
+                                />
                             </ul>
                         </div>
                         <Outlet />

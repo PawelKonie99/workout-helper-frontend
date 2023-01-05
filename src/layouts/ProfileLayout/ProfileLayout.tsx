@@ -8,6 +8,11 @@ import { saveUserLogout } from "@/store/userReducer/actions/saveUserLogout"
 import { IRequestedTrainerData } from "@/types"
 import { Navbar } from "../components"
 import { useTrainerInfo } from "@/hooks"
+import workoutIcon from "../../images/svg/workout-icon.svg"
+import mealIcon from "../../images/svg/meal-icon.svg"
+import notificationsIcon from "../../images/svg/notifications-icon.svg"
+import settingsIcon from "../../images/svg/settings-icon.svg"
+import logoutIcon from "../../images/svg/logout-icon.svg"
 
 export const ProfileLayout = () => {
     useTrainerInfo()
@@ -43,10 +48,12 @@ export const ProfileLayout = () => {
                                 <MenuListItem
                                     title="Historia treningów"
                                     to="profile/allTrainingsHistory"
+                                    imageSrc={workoutIcon}
                                 />
                                 <MenuListItem
                                     title="Historia posiłków"
                                     to="profile/allMealsHistory"
+                                    imageSrc={mealIcon}
                                 />
 
                                 <MenuListItem
@@ -56,9 +63,19 @@ export const ProfileLayout = () => {
                                             : ""
                                     }`}
                                     to="profile/notifications"
+                                    imageSrc={notificationsIcon}
                                 />
-                                <MenuListItem title="Ustawienia" to="profile/settings" />
-                                <MenuListItem onClick={logut} title="Wyloguj" to="/login" />
+                                <MenuListItem
+                                    title="Ustawienia"
+                                    to="profile/settings"
+                                    imageSrc={settingsIcon}
+                                />
+                                <MenuListItem
+                                    onClick={logut}
+                                    title="Wyloguj"
+                                    to="/login"
+                                    imageSrc={logoutIcon}
+                                />
                             </ul>
                         </div>
                         <Outlet />

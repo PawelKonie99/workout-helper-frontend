@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import { useAppSelector } from "@/store/hooks/storeHooks"
+import { NavbarLink } from "../NavbarLink/NavbarLink"
 
 export const Navbar = () => {
     const { trainerRole, adminRole } = useAppSelector((state) => state.userReducer.roles)
@@ -12,35 +13,13 @@ export const Navbar = () => {
             </Link>
 
             <ul className="flex">
-                <li className="ml-8">
-                    <Link to="/workout">
-                        <span className="text-lg ">Nowy trening</span>
-                    </Link>
-                </li>
-                <li className="ml-8">
-                    <Link to="/meal">
-                        <span className="text-lg">Dodaj posiłek</span>
-                    </Link>
-                </li>
-                <li className="ml-8">
-                    <Link to="/profile">
-                        <span className="text-lg">Profil</span>
-                    </Link>
-                </li>
-                {trainerRole && (
-                    <li className="ml-8">
-                        <Link to="/trainer">
-                            <span className="text-lg">Centrum Trenera</span>
-                        </Link>
-                    </li>
-                )}
-                {adminRole && (
-                    <li className="ml-8">
-                        <Link to="/admin">
-                            <span className="text-lg ">Centrum Administratora</span>
-                        </Link>
-                    </li>
-                )}
+                <NavbarLink link="/workout" title="Nowy trening" />
+
+                <NavbarLink link="/meal" title="Dodaj posiłek" />
+
+                <NavbarLink link="/profile" title="Profil" />
+                {trainerRole && <NavbarLink link="/trainer" title="Centrum Trenera" />}
+                {adminRole && <NavbarLink link="/admin" title="Centrum Administratora" />}
             </ul>
         </div>
     )
