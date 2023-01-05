@@ -49,7 +49,7 @@ export const CustomSelect = ({
     }
 
     return (
-        <div className={`flex flex-col ${selectAppearance} ${className}`}>
+        <div className={`flex flex-col ${selectAppearance} ${className} mt-2 lg:mt-0`}>
             <InputLabel id={label}>{label}</InputLabel>
             <Select
                 inputId={label}

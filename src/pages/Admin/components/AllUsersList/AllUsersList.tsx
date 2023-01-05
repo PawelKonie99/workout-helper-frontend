@@ -72,7 +72,11 @@ export const AllUsersList = () => {
             )}
             <NormalButton
                 buttonVariant="primary"
-                label="Pobierz dodatkowych uzytkownikow"
+                label={
+                    usersToDisplay.length
+                        ? "Pobierz dodatkowych uzytkownikow"
+                        : "Pobierz dane uzytkownikow"
+                }
                 onClick={handleLoadMoreStudents}
                 className="mt-4"
             />

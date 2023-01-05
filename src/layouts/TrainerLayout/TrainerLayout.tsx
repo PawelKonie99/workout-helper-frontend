@@ -1,6 +1,9 @@
 import { Outlet } from "react-router-dom"
 import { ContentContainer, MenuListItem } from "@/components"
 import { Navbar } from "../components"
+import userGroupIcon from "../../images/svg/user-group-icon.svg"
+import addUserIcon from "../../images/svg/add-user-icon.svg"
+import workoutIcon from "../../images/svg/workout-icon.svg"
 import mealIcon from "../../images/svg/meal-icon.svg"
 
 export const TrainerLayout = () => {
@@ -9,23 +12,23 @@ export const TrainerLayout = () => {
             <Navbar />
             <div className="pt-28">
                 <ContentContainer>
-                    <div className="flex w-full">
+                    <div className="flex flex-col lg:flex-row w-full">
                         <div className="mr-40">
                             <ul>
                                 <MenuListItem
                                     title="Moi podopieczni"
                                     to="trainer/myStudents"
-                                    imageSrc={mealIcon}
+                                    imageSrc={userGroupIcon}
                                 />
                                 <MenuListItem
                                     title="Dodaj podopiecznego"
                                     to="trainer/addStudent"
-                                    imageSrc={mealIcon}
+                                    imageSrc={addUserIcon}
                                 />
                                 <MenuListItem
                                     title="Dodaj plan treningowy dla podopiecznego"
                                     to="trainer/addStudentTrainingPlan"
-                                    imageSrc={mealIcon}
+                                    imageSrc={workoutIcon}
                                 />
                                 <MenuListItem
                                     title="Dodaj diete dla podopiecznego"

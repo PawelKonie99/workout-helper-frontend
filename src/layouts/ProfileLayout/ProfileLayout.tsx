@@ -42,8 +42,8 @@ export const ProfileLayout = () => {
             <div className="pt-28">
                 <UserInfo userInfo={{ username, trainerName }} />
                 <ContentContainer>
-                    <div className="flex w-full">
-                        <div className="mr-40">
+                    <div className="flex flex-col lg:flex-row w-full">
+                        <div className="mr-10 md:mr-40">
                             <ul>
                                 <MenuListItem
                                     title="Historia treningów"

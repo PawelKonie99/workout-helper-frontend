@@ -10,7 +10,7 @@ export const MealSummary = ({ title, timeOfMeal }: IProps) => {
     const { carbons, fat, kcal, proteins } = timeOfMeal
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col mt-4 lg:mt-0">
             <span className="text-primaryBlue text-lg">{title}</span>
             <SingleElementInfo name="Białko" value={proteins.toFixed(2)} unit="g" />
             <SingleElementInfo name="Węglowodany" value={carbons.toFixed(2)} unit="g" />

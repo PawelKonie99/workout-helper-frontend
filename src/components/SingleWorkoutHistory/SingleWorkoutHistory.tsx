@@ -12,7 +12,7 @@ export const SingleWorkoutHistory = ({ workoutData, date }: Props) => {
         <div className="mb-4">
             {date && <span className="text-primaryBlue text-lg">{formatDate(date)}</span>}
             {workoutData.map(({ exerciseName, repsQuantity, seriesQuantity, weightQuantity }) => (
-                <div key={exerciseName} className="flex mb-1">
+                <div key={exerciseName} className="flex flex-col md:flex-row mb-1">
                     <SingleElementInfo name="Nazwa ćwiczenia" value={exerciseName} />
                     <SingleElementInfo name="Ilość powtórzeń" value={repsQuantity} />
                     <SingleElementInfo name="Nazwa serii" value={seriesQuantity} />

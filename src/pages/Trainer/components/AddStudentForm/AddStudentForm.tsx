@@ -41,7 +41,7 @@ export const AddStudentForm = () => {
     }
 
     return (
-        <div className="flex justify-center items-center ml-20">
+        <div className="flex justify-center items-center md:ml-20">
             <div className="bg-white px-12 py-12 flex flex-col items-center w-96 rounded-lg">
                 <h1 className="text-3xl pb-8">Dodaj podopiecznego</h1>
                 <div className="w-full mx-auto flex justify-center">
