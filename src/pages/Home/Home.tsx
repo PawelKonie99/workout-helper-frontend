@@ -1,7 +1,14 @@
-import { MainDescription } from "./components"
+import { useEffect } from "react"
+import { useNavigate } from "react-router"
 
 const Home = () => {
-    return <MainDescription />
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        navigate("/workout")
+    })
+
+    return <></>
 }
 
 export default Home

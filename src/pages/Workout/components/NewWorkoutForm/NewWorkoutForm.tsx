@@ -46,20 +46,21 @@ export const NewWorkoutForm = () => {
     return (
         <div>
             <h1 className="text-2xl mb-8 text-center">Dodaj ćwiczenia wykonane na treningu!</h1>
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col items-center">
+            <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="flex flex-col items-center bg-offWhite"
+            >
                 <div className="flex flex-col justify-start">
-                    {fields.map((item, index) => {
-                        return (
-                            <WorkoutFormFields
-                                control={control}
-                                errors={errors}
-                                index={index}
-                                item={item}
-                                remove={remove}
-                                key={item.id}
-                            />
-                        )
-                    })}
+                    {fields.map((item, index) => (
+                        <WorkoutFormFields
+                            control={control}
+                            errors={errors}
+                            index={index}
+                            item={item}
+                            remove={remove}
+                            key={item.id}
+                        />
+                    ))}
                 </div>
                 <div className="flex flex-col pt-8">
                     <NormalButton

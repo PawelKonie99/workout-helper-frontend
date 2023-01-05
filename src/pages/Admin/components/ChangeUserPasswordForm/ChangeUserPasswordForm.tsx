@@ -55,7 +55,10 @@ export const ChangeUserPasswordForm = ({ userId }: Props) => {
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col mx-4 border-r-2 pr-4">
+        <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col lg:mx-4 lg:border-r-2 pr-4"
+        >
             <span className="mb-2">Zmień hasło uzytkownika</span>
             <Controller
                 name="password"

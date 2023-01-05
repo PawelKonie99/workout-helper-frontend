@@ -59,12 +59,12 @@ export const SingleUserData = ({
 
     return (
         <div className="mb-6 ">
-            <div className="grid grid-cols-5 gap-4">
-                <div className="flex flex-col mr-4 border-r-2 pr-4">
+            <div className="grid  lg:grid-cols-5 gap-4 border-b-2 pb-6 lg:border-none lg:pb-0">
+                <div className="flex flex-row lg:flex-col mr-4 lg:border-r-2 pr-4">
                     <span>Nazwa uzytkownika</span>
-                    <span className=" text-primaryBlue">{username}</span>
+                    <span className=" text-primaryBlue ml-4 lg:ml-0">{username}</span>
                 </div>
-                <div className="flex flex-col border-r-2 col-span-2">
+                <div className="flex flex-col lg:border-r-2 col-span-2">
                     <span className="mr-2">Role uzytkownika</span>
                     <div className="flex  ">
                         <UserRole
