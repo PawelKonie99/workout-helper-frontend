@@ -7,7 +7,7 @@ interface Props {
     isRole: boolean
     roleName: IRole
     userId: string
-    handleChangeUpdatedUserId: (userId: string, role: IRole) => void
+    handleChangeUpdatedUserId: (userId: string, role: IRole) => Promise<void>
 }
 
 export const UserRole = ({ isRole, roleName, userId, handleChangeUpdatedUserId }: Props) => {
@@ -24,7 +24,7 @@ export const UserRole = ({ isRole, roleName, userId, handleChangeUpdatedUserId }
         }
 
         await changeUserRole(changeRolePayload)
-        handleChangeUpdatedUserId(userId, roleName)
+        await handleChangeUpdatedUserId(userId, roleName)
     }
 
     return (

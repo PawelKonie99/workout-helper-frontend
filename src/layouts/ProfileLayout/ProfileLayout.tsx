@@ -22,12 +22,12 @@ export const ProfileLayout = () => {
         navigate("/login")
     }
 
-    useEffect(() => {
-        const loadRequestedTrainer = async () => {
-            const { requestedTrainers } = await getTrainerRequest()
-            requestedTrainers && setUserRequestedTrainers(requestedTrainers)
-        }
+    const loadRequestedTrainer = async () => {
+        const { requestedTrainers } = await getTrainerRequest()
+        requestedTrainers && setUserRequestedTrainers(requestedTrainers)
+    }
 
+    useEffect(() => {
         loadRequestedTrainer()
     }, [])
 
@@ -56,6 +56,7 @@ export const ProfileLayout = () => {
                                             : ""
                                     }`}
                                     to="profile/notifications"
+                                    onClick={loadRequestedTrainer}
                                 />
                                 <MenuListItem title="Ustawienia" to="profile/settings" />
                                 <MenuListItem onClick={logut} title="Wyloguj" to="/login" />

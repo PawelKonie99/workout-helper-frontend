@@ -8,7 +8,10 @@ interface Props {
 
 export const MenuListItem = ({ onClick, title, to }: Props) => {
     return (
-        <li className="border-b-2 mb-4 cursor-pointer" onClick={() => onClick && onClick()}>
+        <li
+            className="border-b-2 mb-4 cursor-pointer flex w-full"
+            onClick={() => onClick && onClick()}
+        >
             <Link to={to}>{title}</Link>
         </li>
     )
