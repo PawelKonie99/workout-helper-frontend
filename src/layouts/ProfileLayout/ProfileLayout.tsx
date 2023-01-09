@@ -16,7 +16,11 @@ import logoutIcon from "../../images/svg/logout-icon.svg"
 
 export const ProfileLayout = () => {
     useTrainerInfo()
-    const { trainerName, username } = useAppSelector((state) => state.userReducer)
+    const {
+        trainerName,
+        username,
+        roles: { trainerRole },
+    } = useAppSelector((state) => state.userReducer)
     const [userRequestedTrainers, setUserRequestedTrainers] = useState<IRequestedTrainerData[]>()
 
     const navigate = useNavigate()
@@ -55,17 +59,18 @@ export const ProfileLayout = () => {
                                     to="profile/allMealsHistory"
                                     imageSrc={mealIcon}
                                 />
-
-                                <MenuListItem
-                                    title={`Powiadomienia ${
-                                        userRequestedTrainers?.length
-                                            ? `(${userRequestedTrainers?.length})`
-                                            : ""
-                                    }`}
-                                    to="profile/notifications"
-                                    imageSrc={notificationsIcon}
-                                    onClick={loadRequestedTrainer}
-                                />
+                                {!trainerRole && (
+                                    <MenuListItem
+                                        title={`Powiadomienia ${
+                                            userRequestedTrainers?.length
+                                                ? `(${userRequestedTrainers?.length})`
+                                                : ""
+                                        }`}
+                                        to="profile/notifications"
+                                        imageSrc={notificationsIcon}
+                                        onClick={loadRequestedTrainer}
+                                    />
+                                )}
                                 <MenuListItem
                                     title="Ustawienia"
                                     to="profile/settings"
