@@ -19,7 +19,7 @@ export const ProfileLayout = () => {
     const {
         trainerName,
         username,
-        roles: { trainerRole },
+        roles: { trainerRole, adminRole },
     } = useAppSelector((state) => state.userReducer)
     const [userRequestedTrainers, setUserRequestedTrainers] = useState<IRequestedTrainerData[]>()
 
@@ -49,33 +49,37 @@ export const ProfileLayout = () => {
                     <div className="flex flex-col lg:flex-row w-full">
                         <div className="mr-10 md:mr-40">
                             <ul>
-                                <MenuListItem
-                                    title="Historia treningów"
-                                    to="profile/allTrainingsHistory"
-                                    imageSrc={workoutIcon}
-                                />
-                                <MenuListItem
-                                    title="Historia posiłków"
-                                    to="profile/allMealsHistory"
-                                    imageSrc={mealIcon}
-                                />
-                                {!trainerRole && (
-                                    <MenuListItem
-                                        title={`Powiadomienia ${
-                                            userRequestedTrainers?.length
-                                                ? `(${userRequestedTrainers?.length})`
-                                                : ""
-                                        }`}
-                                        to="profile/notifications"
-                                        imageSrc={notificationsIcon}
-                                        onClick={loadRequestedTrainer}
-                                    />
+                                {!adminRole && (
+                                    <>
+                                        <MenuListItem
+                                            title="Historia treningów"
+                                            to="profile/allTrainingsHistory"
+                                            imageSrc={workoutIcon}
+                                        />
+                                        <MenuListItem
+                                            title="Historia posiłków"
+                                            to="profile/allMealsHistory"
+                                            imageSrc={mealIcon}
+                                        />
+                                        {!trainerRole && (
+                                            <MenuListItem
+                                                title={`Powiadomienia ${
+                                                    userRequestedTrainers?.length
+                                                        ? `(${userRequestedTrainers?.length})`
+                                                        : ""
+                                                }`}
+                                                to="profile/notifications"
+                                                imageSrc={notificationsIcon}
+                                                onClick={loadRequestedTrainer}
+                                            />
+                                        )}
+                                        <MenuListItem
+                                            title="Ustawienia"
+                                            to="profile/settings"
+                                            imageSrc={settingsIcon}
+                                        />
+                                    </>
                                 )}
-                                <MenuListItem
-                                    title="Ustawienia"
-                                    to="profile/settings"
-                                    imageSrc={settingsIcon}
-                                />
                                 <MenuListItem
                                     onClick={logut}
                                     title="Wyloguj"
