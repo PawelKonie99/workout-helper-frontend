@@ -5,7 +5,6 @@ export type {
     ITodayProductsResponse,
     ITodayProducts,
     IDatabaseProduct,
-    IProductsSummary,
     IDeleteProductResponse,
     IMealHistoryResponse,
     IMealHistory,

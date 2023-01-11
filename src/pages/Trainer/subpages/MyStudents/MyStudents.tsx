@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { toast } from "react-toastify"
+import { useEffect, useState } from "react"
 import { getSingleStudentData } from "@/api"
 import { NormalButton, ProductHistory, WorkoutHistory } from "@/components"
 import { IChoosenStudentData } from "@/types"
@@ -8,17 +9,64 @@ const MyStudents = () => {
     const myStudents = useLoadMyStudents()
 
     const [choosenStudentData, setChoosenStudentData] = useState<IChoosenStudentData>()
+    const [workoutOffset, setWorkoutOffset] = useState<number>(1)
+    const [productsOffset, setProductsOffset] = useState<number>(1)
 
     const handleLoadStudentData = async (userId: string, studentName: string) => {
-        const { allUserWorkouts, mealHistory } = (await getSingleStudentData(userId)) ?? {}
+        const { allUserWorkouts, mealHistory } =
+            (await getSingleStudentData(userId, workoutOffset, productsOffset)) ?? {}
 
         if (allUserWorkouts && mealHistory) {
-            setChoosenStudentData({ allUserWorkouts, mealHistory, studentName })
+            setChoosenStudentData({ allUserWorkouts, mealHistory, studentName, userId })
         }
     }
 
+    useEffect(() => {
+        const loadMoreData = async () => {
+            if (choosenStudentData?.userId) {
+                const { allUserWorkouts, mealHistory } =
+                    (await getSingleStudentData(
+                        choosenStudentData?.userId,
+                        workoutOffset,
+                        productsOffset,
+                    )) ?? {}
+
+                if (
+                    mealHistory?.length === choosenStudentData.mealHistory?.length &&
+                    allUserWorkouts?.length === choosenStudentData.allUserWorkouts?.length
+                ) {
+                    toast.error("Nie ma więcej dostępnych danych")
+                }
+                if (
+                    allUserWorkouts?.length === choosenStudentData.allUserWorkouts?.length &&
+                    mealHistory?.length === choosenStudentData.mealHistory?.length
+                ) {
+                    toast.error("Nie ma więcej dostępnych danych")
+                }
+
+                if (allUserWorkouts) {
+                    setChoosenStudentData({
+                        allUserWorkouts,
+                        mealHistory,
+                        studentName: choosenStudentData.studentName,
+                        userId: choosenStudentData.userId,
+                    })
+                }
+            }
+        }
+        loadMoreData()
+    }, [workoutOffset, productsOffset])
+
+    const handleChangeWorkoutOffset = async () => {
+        setWorkoutOffset((prevState) => prevState + 1)
+    }
+
+    const handleChangeProductsOffset = async () => {
+        setProductsOffset((prevState) => prevState + 1)
+    }
+
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col mb-12">
             {myStudents && myStudents.length <= 0 ? (
                 <span>Nie masz zadnych podopiecznych!</span>
             ) : (
@@ -51,6 +99,7 @@ const MyStudents = () => {
                                 {choosenStudentData?.allUserWorkouts && (
                                     <WorkoutHistory
                                         workoutHistory={choosenStudentData?.allUserWorkouts}
+                                        handleChangeOffset={handleChangeWorkoutOffset}
                                     />
                                 )}
                             </div>
@@ -62,7 +111,10 @@ const MyStudents = () => {
                                 Historia posiłków
                             </span>
                             <div className="mt-4">
-                                <ProductHistory productHistory={choosenStudentData?.mealHistory} />
+                                <ProductHistory
+                                    productHistory={choosenStudentData?.mealHistory}
+                                    handleChangeOffset={handleChangeProductsOffset}
+                                />
                             </div>
                         </div>
                     )}

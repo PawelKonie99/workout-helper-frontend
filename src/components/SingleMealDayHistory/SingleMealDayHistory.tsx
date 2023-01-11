@@ -1,4 +1,12 @@
-import { MacrosSummary } from "@/components"
+import {
+    TableContainer,
+    Paper,
+    Table,
+    TableHead,
+    TableRow,
+    TableCell,
+    TableBody,
+} from "@mui/material"
 import { IMealHistory } from "@/types"
 import { MealSummary } from "../../pages/Profile/components/MealSummary/MealSummary"
 
@@ -11,15 +19,28 @@ export const SingleMealDayHistory = ({ singleMealDay }: Props) => {
 
     return (
         <div className="mb-6">
-            <span className="text-primaryBlue text-lg">{mealDate}</span>
-            <div className="flex flex-col lg:flex-row mt-1">
-                <MealSummary timeOfMeal={breakfast} title="Śniadanie:" />
-                <MealSummary timeOfMeal={brunch} title="Drugie śniadanie:" />
-                <MealSummary timeOfMeal={dinner} title="Obiad:" />
-                <MealSummary timeOfMeal={dessert} title="Deser:" />
-                <MealSummary timeOfMeal={supper} title="Kolacja:" />
-                <MacrosSummary title="W sumie:" dailySummary={dailySummary} />
-            </div>
+            {mealDate && <span className="text-lg">Data: {mealDate}</span>}
+            <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Posiłek</TableCell>
+                            <TableCell align="right">Białka</TableCell>
+                            <TableCell align="right">Węglowodany</TableCell>
+                            <TableCell align="right">Tłuszcze</TableCell>
+                            <TableCell align="right">Kalorie</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        <MealSummary timeOfMeal={breakfast} title="Śniadanie:" />
+                        <MealSummary timeOfMeal={brunch} title="Drugie śniadanie:" />
+                        <MealSummary timeOfMeal={dinner} title="Obiad:" />
+                        <MealSummary timeOfMeal={dessert} title="Deser:" />
+                        <MealSummary timeOfMeal={supper} title="Kolacja:" />
+                        <MealSummary title="W sumie:" timeOfMeal={dailySummary} />
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </div>
     )
 }

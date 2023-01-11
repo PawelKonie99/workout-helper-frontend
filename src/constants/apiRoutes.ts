@@ -1,5 +1,6 @@
 export const USER_REGISTER = "user/register"
 export const USER_LOGIN = "user/login"
+export const CHANGE_PASSWORD = "user/password"
 export const GET_USER_INFO = "user"
 
 export const NEW_WORKOUT = "/workouts"

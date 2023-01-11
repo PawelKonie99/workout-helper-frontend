@@ -16,7 +16,11 @@ import logoutIcon from "../../images/svg/logout-icon.svg"
 
 export const ProfileLayout = () => {
     useTrainerInfo()
-    const { trainerName, username } = useAppSelector((state) => state.userReducer)
+    const {
+        trainerName,
+        username,
+        roles: { trainerRole, adminRole },
+    } = useAppSelector((state) => state.userReducer)
     const [userRequestedTrainers, setUserRequestedTrainers] = useState<IRequestedTrainerData[]>()
 
     const navigate = useNavigate()
@@ -45,32 +49,37 @@ export const ProfileLayout = () => {
                     <div className="flex flex-col lg:flex-row w-full">
                         <div className="mr-10 md:mr-40">
                             <ul>
-                                <MenuListItem
-                                    title="Historia treningów"
-                                    to="profile/allTrainingsHistory"
-                                    imageSrc={workoutIcon}
-                                />
-                                <MenuListItem
-                                    title="Historia posiłków"
-                                    to="profile/allMealsHistory"
-                                    imageSrc={mealIcon}
-                                />
-
-                                <MenuListItem
-                                    title={`Powiadomienia ${
-                                        userRequestedTrainers?.length
-                                            ? `(${userRequestedTrainers?.length})`
-                                            : ""
-                                    }`}
-                                    to="profile/notifications"
-                                    imageSrc={notificationsIcon}
-                                    onClick={loadRequestedTrainer}
-                                />
-                                <MenuListItem
-                                    title="Ustawienia"
-                                    to="profile/settings"
-                                    imageSrc={settingsIcon}
-                                />
+                                {!adminRole && (
+                                    <>
+                                        <MenuListItem
+                                            title="Historia treningów"
+                                            to="profile/allTrainingsHistory"
+                                            imageSrc={workoutIcon}
+                                        />
+                                        <MenuListItem
+                                            title="Historia posiłków"
+                                            to="profile/allMealsHistory"
+                                            imageSrc={mealIcon}
+                                        />
+                                        {!trainerRole && (
+                                            <MenuListItem
+                                                title={`Powiadomienia ${
+                                                    userRequestedTrainers?.length
+                                                        ? `(${userRequestedTrainers?.length})`
+                                                        : ""
+                                                }`}
+                                                to="profile/notifications"
+                                                imageSrc={notificationsIcon}
+                                                onClick={loadRequestedTrainer}
+                                            />
+                                        )}
+                                        <MenuListItem
+                                            title="Ustawienia"
+                                            to="profile/settings"
+                                            imageSrc={settingsIcon}
+                                        />
+                                    </>
+                                )}
                                 <MenuListItem
                                     onClick={logut}
                                     title="Wyloguj"

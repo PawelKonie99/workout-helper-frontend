@@ -1,3 +1,12 @@
+import {
+    TableContainer,
+    Paper,
+    Table,
+    TableHead,
+    TableRow,
+    TableCell,
+    TableBody,
+} from "@mui/material"
 import { toast } from "react-toastify"
 import { useState } from "react"
 import { MacrosSummary, NormalButton } from "@/components"
@@ -14,7 +23,7 @@ export const DietFromTrainer = () => {
         if (!success) {
             toast.error("Błąd podczas pobierania diety!")
         }
-        if (diet && diet?.dailySummary?.totalKcal <= 0) {
+        if (diet && diet?.dailySummary?.kcal <= 0) {
             toast.error("Nie masz aktualnie rozpisanej diety!")
         }
 
@@ -33,13 +42,29 @@ export const DietFromTrainer = () => {
                 onClick={handleGetDietFromTrainer}
                 className="mb-4"
             />
-            {userDiet && userDiet?.dailySummary?.totalKcal > 0 && (
+            {userDiet && userDiet?.dailySummary?.kcal > 0 && (
                 <div className="flex mb-6">
-                    <DietTimeOfMeal timeOfMeal="Sniadanie" mealProducts={breakfast} />
-                    <DietTimeOfMeal timeOfMeal="Drugie sniadanie" mealProducts={brunch} />
-                    <DietTimeOfMeal timeOfMeal="Obiad" mealProducts={dinner} />
-                    <DietTimeOfMeal timeOfMeal="Deser" mealProducts={dessert} />
-                    <DietTimeOfMeal timeOfMeal="Kolacja" mealProducts={supper} />
+                    <TableContainer component={Paper}>
+                        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Czas posiłku</TableCell>
+                                    <TableCell align="right">Nazwa potrawy</TableCell>
+                                    {/* <TableCell align="right">Ilość&nbsp;(g)</TableCell> */}
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                <DietTimeOfMeal timeOfMeal="Sniadanie" mealProducts={breakfast} />
+                                <DietTimeOfMeal
+                                    timeOfMeal="Drugie sniadanie"
+                                    mealProducts={brunch}
+                                />
+                                <DietTimeOfMeal timeOfMeal="Obiad" mealProducts={dinner} />
+                                <DietTimeOfMeal timeOfMeal="Deser" mealProducts={dessert} />
+                                <DietTimeOfMeal timeOfMeal="Kolacja" mealProducts={supper} />
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
                     <MacrosSummary title="W sumie:" dailySummary={dailySummary} />
                 </div>
             )}
