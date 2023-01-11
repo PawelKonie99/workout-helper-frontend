@@ -42,8 +42,7 @@ const AddProduct = () => {
                     handleSetNewlyAddedProductName={handleSetNewlyAddedProductName}
                     handleDeleteProduct={handleDeleteProduct}
                 />
-                {todayProductsData?.todaySummary &&
-                todayProductsData?.todaySummary?.totalKcal > 0 ? (
+                {todayProductsData?.todaySummary && todayProductsData?.todaySummary?.kcal > 0 ? (
                     <div className="ml-16">
                         <MacrosSummary
                             title="Podsumowanie dzisiejszego dnia:"

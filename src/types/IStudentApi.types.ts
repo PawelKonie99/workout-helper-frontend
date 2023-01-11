@@ -1,5 +1,5 @@
 import { MANAGE_REQUESTED_TRAINERS, RESPONSE_CODE } from "@/enums"
-import { IWorkoutFields, IDatabaseProduct, IProductsSummary } from "."
+import { IWorkoutFields, IDatabaseProduct, IMealMacros } from "."
 
 export interface ITrainingPlanResponse {
     code: RESPONSE_CODE
@@ -10,11 +10,11 @@ export interface ITrainingPlanResponse {
 export interface IGetStudenDietResponse {
     code: RESPONSE_CODE
     success: boolean
-    diet?: IUserDietData | Record<string, never>
+    diet?: IUserDietData
 }
 
 export interface IUserDietData extends IDietMeals {
-    dailySummary: IProductsSummary
+    dailySummary: IMealMacros
 }
 
 export interface IDietMeals {

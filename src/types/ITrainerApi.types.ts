@@ -1,5 +1,5 @@
 import { MEAL_TYPES, RESPONSE_CODE } from "@/enums"
-import { IMealMacros, IProductPayload, IProductsSummary } from "./IMealApi.types"
+import { IMealMacros, IProductPayload } from "./IMealApi.types"
 import { IUserWorkoutDataFromDatabase, IWorkoutFields } from "./IWorkoutApi.types"
 
 export interface IAddStudentSchema {
@@ -77,7 +77,7 @@ export interface IGetSingleStudentDataResponse {
     allUserWorkouts?: IUserWorkoutDataFromDatabase[] | []
     mealHistory?:
         | {
-              dailySummary: IProductsSummary
+              dailySummary: IMealMacros
               mealDate: string
               breakfast: IMealMacros
               brunch: IMealMacros
@@ -93,7 +93,7 @@ export interface IChoosenStudentData {
     allUserWorkouts?: IUserWorkoutDataFromDatabase[] | []
     mealHistory?:
         | {
-              dailySummary: IProductsSummary
+              dailySummary: IMealMacros
               mealDate: string
               breakfast: IMealMacros
               brunch: IMealMacros

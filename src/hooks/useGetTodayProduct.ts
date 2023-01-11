@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { getTodayMeals } from "@/api/foodApi/getTodayMeals"
-import { ITodayProducts, IProductsSummary } from "@/types"
+import { IMealMacros, ITodayProducts } from "@/types"
 import { isTodayProductsTypeGuard, isProductsSummaryTypeGuard } from "@/helpers"
 
 export const useGetTodayProduct = () => {
@@ -9,7 +9,7 @@ export const useGetTodayProduct = () => {
 
     const [todayProductsData, setTodayProductsData] = useState<{
         todayProducts: ITodayProducts | Record<string, never>
-        todaySummary?: IProductsSummary
+        todaySummary?: IMealMacros
         allDayMealsId?: string
     }>({ todayProducts: {} })
 

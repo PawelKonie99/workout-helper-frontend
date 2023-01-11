@@ -1,6 +1,13 @@
-import { formatDate } from "@/helpers"
+import {
+    TableContainer,
+    Paper,
+    Table,
+    TableHead,
+    TableRow,
+    TableCell,
+    TableBody,
+} from "@mui/material"
 import { IWorkoutFields } from "@/types"
-import { SingleElementInfo } from "../SingleElementInfo/SingleElementInfo"
 
 interface Props {
     workoutData: IWorkoutFields[]
@@ -9,16 +16,41 @@ interface Props {
 
 export const SingleWorkoutHistory = ({ workoutData, date }: Props) => {
     return (
-        <div className="mb-4">
-            {date && <span className="text-primaryBlue text-lg">{formatDate(date)}</span>}
-            {workoutData.map(({ exerciseName, repsQuantity, seriesQuantity, weightQuantity }) => (
-                <div key={exerciseName} className="flex flex-col md:flex-row mb-1">
-                    <SingleElementInfo name="Nazwa ćwiczenia" value={exerciseName} />
-                    <SingleElementInfo name="Ilość powtórzeń" value={repsQuantity} />
-                    <SingleElementInfo name="Nazwa serii" value={seriesQuantity} />
-                    <SingleElementInfo name="Waga obiązenia" value={weightQuantity} unit="kg" />
-                </div>
-            ))}
+        <div className="mb-8">
+            {date && <span className="text-lg">Data: {date}</span>}
+            <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Nazwa ćwiczenia</TableCell>
+                            <TableCell align="right">Ilość powtórzeń</TableCell>
+                            <TableCell align="right">Ilość serii</TableCell>
+                            <TableCell align="right">Waga obciązenia</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {workoutData.map(
+                            ({ exerciseName, repsQuantity, seriesQuantity, weightQuantity }) => (
+                                <TableRow
+                                    key={exerciseName}
+                                    sx={{
+                                        "&:last-child td, &:last-child th": {
+                                            border: 0,
+                                        },
+                                    }}
+                                >
+                                    <TableCell component="th" scope="row">
+                                        {exerciseName}
+                                    </TableCell>
+                                    <TableCell align="right">{repsQuantity}</TableCell>
+                                    <TableCell align="right">{seriesQuantity}</TableCell>
+                                    <TableCell align="right">{weightQuantity} kg</TableCell>
+                                </TableRow>
+                            ),
+                        )}
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </div>
     )
 }
