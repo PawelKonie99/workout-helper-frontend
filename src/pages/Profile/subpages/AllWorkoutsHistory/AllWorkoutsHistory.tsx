@@ -1,3 +1,4 @@
+import { toast } from "react-toastify"
 import { useEffect, useState } from "react"
 import { getAllUserWorkouts } from "@/api"
 import { WorkoutHistory } from "@/components"
@@ -15,13 +16,22 @@ const AllWorkoutsHistory = () => {
         const loadWorkouts = async () => {
             const { allUserWorkouts } = await getAllUserWorkouts(offset)
             allUserWorkouts && setWorkoutHistory(allUserWorkouts)
+
+            if (allUserWorkouts?.length === workoutHistory?.length) {
+                toast.error("Nie ma więcej dostępnych danych")
+            }
         }
 
         loadWorkouts()
     }, [offset])
 
     return (
-        <WorkoutHistory workoutHistory={workoutHistory} handleChangeOffset={handleChangeOffset} />
+        <div className="mb-10">
+            <WorkoutHistory
+                workoutHistory={workoutHistory}
+                handleChangeOffset={handleChangeOffset}
+            />
+        </div>
     )
 }
 

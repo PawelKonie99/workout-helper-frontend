@@ -3,10 +3,14 @@ import { isAxiosError } from "@/helpers"
 import { IGetSingleStudentDataResponse } from "@/types"
 import { instance } from "../interceptors/sendToken"
 
-export const getSingleStudentData = async (userId: string) => {
+export const getSingleStudentData = async (
+    userId: string,
+    workoutOffset: number,
+    productsOffset: number,
+) => {
     try {
         const { data } = await instance.get<IGetSingleStudentDataResponse>(
-            `${GET_SINGLE_USER}/${userId}`,
+            `${GET_SINGLE_USER}/${userId}/${workoutOffset}/${productsOffset}`,
         )
 
         return data

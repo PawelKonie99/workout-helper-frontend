@@ -90,6 +90,7 @@ export interface IGetSingleStudentDataResponse {
 
 export interface IChoosenStudentData {
     studentName?: string
+    userId?: string
     allUserWorkouts?: IUserWorkoutDataFromDatabase[] | []
     mealHistory?:
         | {

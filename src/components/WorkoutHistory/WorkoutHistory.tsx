@@ -23,7 +23,7 @@ export const WorkoutHistory = ({ workoutHistory, handleChangeOffset }: Props) =>
             {workoutHistory && workoutHistory?.length > 0 && (
                 <NormalButton
                     buttonVariant="primary"
-                    label="Pobierz wiecej historii posiłków"
+                    label="Pobierz wiecej historii treningów"
                     onClick={handleLoadHistory}
                     className="mt-4"
                 />

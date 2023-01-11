@@ -1,3 +1,4 @@
+import { toast } from "react-toastify"
 import { useState, useEffect } from "react"
 import { getMealsHistory } from "@/api"
 import { ProductHistory } from "@/components"
@@ -15,6 +16,10 @@ const AllMealsHistory = () => {
         const loadMeals = async () => {
             const { mealHistory } = await getMealsHistory(offset)
             mealHistory && setMealsHistory(mealHistory)
+
+            if (mealHistory?.length === mealsHistory?.length) {
+                toast.error("Nie ma więcej dostępnych danych")
+            }
         }
 
         loadMeals()
@@ -22,9 +27,9 @@ const AllMealsHistory = () => {
 
     // TODO mozna dodac loader
     return (
-        <>
+        <div className="mb-10">
             <ProductHistory productHistory={mealsHistory} handleChangeOffset={handleChangeOffset} />
-        </>
+        </div>
     )
 }
 
