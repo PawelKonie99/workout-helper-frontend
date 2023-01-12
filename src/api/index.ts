@@ -7,10 +7,12 @@ export { addNewWorkout } from "./workoutApi/addNewWorkout"
 export { getAllUserWorkouts } from "./workoutApi/getAllUserWorkouts"
 export { getAllWorkoutOptions } from "./workoutApi/getAllWorkoutOptions"
 export { getBestExercise } from "./workoutApi/getBestExercise"
+export { getWorkoutByDate } from "./workoutApi/getWorkoutByDate"
 
 export { addNewProduct } from "./foodApi/addNewProduct"
 export { deleteProduct } from "./foodApi/deleteProduct"
 export { getMealsHistory } from "./foodApi/getMealsHistory"
+export { getMealsHisotryByDate } from "./foodApi/getMealsHisotryByDate"
 
 export { addStudent } from "./trainerApi/addStudent"
 export { getAllStudents } from "./trainerApi/getAllStudents"

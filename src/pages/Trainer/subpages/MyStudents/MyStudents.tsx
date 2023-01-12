@@ -37,12 +37,6 @@ const MyStudents = () => {
                 ) {
                     toast.error("Nie ma więcej dostępnych danych")
                 }
-                if (
-                    allUserWorkouts?.length === choosenStudentData.allUserWorkouts?.length &&
-                    mealHistory?.length === choosenStudentData.mealHistory?.length
-                ) {
-                    toast.error("Nie ma więcej dostępnych danych")
-                }
 
                 if (allUserWorkouts) {
                     setChoosenStudentData({
