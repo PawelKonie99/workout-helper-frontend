@@ -1,13 +1,13 @@
+import classNames from "classnames"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useForm, Controller } from "react-hook-form"
 import { toast } from "react-toastify"
 import { useContext, useState } from "react"
 import { NormalButton, TextInput } from "@/components"
 import { PopUpContext } from "@/contexts"
-import { changePassword, changeUserPassword, deleteTrainer } from "@/api"
+import { changePassword, deleteTrainer } from "@/api"
 import { changeUserPasswordSchema } from "@/schema"
 import { IChangeUserPasswordSchema } from "@/types"
-import classNames from "classnames"
 
 interface Props {
     trainerName: string
