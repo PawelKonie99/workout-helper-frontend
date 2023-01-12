@@ -1,16 +1,58 @@
+import classNames from "classnames"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { useForm, Controller } from "react-hook-form"
 import { toast } from "react-toastify"
-import { useContext } from "react"
-import { NormalButton } from "@/components"
+import { useContext, useState } from "react"
+import { NormalButton, TextInput } from "@/components"
 import { PopUpContext } from "@/contexts"
-import { deleteTrainer } from "@/api"
+import { changePassword, deleteTrainer } from "@/api"
+import { changeUserPasswordSchema } from "@/schema"
+import { IChangeUserPasswordSchema } from "@/types"
 
 interface Props {
     trainerName: string
     trainerId: string
 }
 
+const defaultFormValues: IChangeUserPasswordSchema = {
+    password: "",
+}
+
 export const UserSettings = ({ trainerId, trainerName }: Props) => {
     const { openPopup, closePopup } = useContext(PopUpContext)
+
+    const [isLoading, setIsLoading] = useState(false)
+
+    const {
+        handleSubmit,
+        control,
+        formState: { errors },
+        reset,
+    } = useForm<IChangeUserPasswordSchema>({
+        resolver: yupResolver(changeUserPasswordSchema()),
+        defaultValues: defaultFormValues,
+        mode: "all",
+    })
+
+    const changePasswordSubmit = async ({ password }: IChangeUserPasswordSchema) => {
+        try {
+            setIsLoading(true)
+
+            const { success } = await changePassword(password)
+
+            if (success) {
+                toast.success(`Hasło zmienione pomyślnie!`)
+            } else {
+                toast.error("Błąd podczas zmieniania hasła!")
+            }
+
+            reset()
+            setIsLoading(false)
+        } catch (error: unknown) {
+            toast.error("Błąd podczas zmieniania hasła!")
+            setIsLoading(false)
+        }
+    }
 
     const deleteTrainerLastWarning = () => {
         openPopup(
@@ -53,10 +95,14 @@ export const UserSettings = ({ trainerId, trainerName }: Props) => {
         }
     }
 
+    const borderAppearance = classNames({
+        "border-t-2": trainerId && trainerName,
+    })
+
     return (
-        <>
+        <div className="flex flex-col">
             {trainerId && trainerName && (
-                <div>
+                <div className="mb-8">
                     <span className="mr-1">Twój trener:</span>
                     <span className="mr-2 text-primaryBlue">{trainerName}</span>
                     <NormalButton
@@ -69,6 +115,33 @@ export const UserSettings = ({ trainerId, trainerName }: Props) => {
                     />
                 </div>
             )}
-        </>
+
+            <form
+                onSubmit={handleSubmit(changePasswordSubmit)}
+                className={`flex flex-col pt-8 ${borderAppearance}`}
+            >
+                <Controller
+                    name="password"
+                    control={control}
+                    render={({ field: { name, onChange, ref, value } }) => (
+                        <TextInput
+                            autoComplete={"password"}
+                            inputType="password"
+                            isError={errors.password}
+                            name={name}
+                            value={value}
+                            label={"Zmień hasło"}
+                            onChange={onChange}
+                            inputRef={ref}
+                            errorMessage={errors.password?.message}
+                            placeholder={"Zmień hasło"}
+                            classname="pb-4"
+                        />
+                    )}
+                />
+
+                <NormalButton label="Zmien hasło" type="submit" isLoading={isLoading} />
+            </form>
+        </div>
     )
 }

@@ -1,4 +1,4 @@
-import { SingleElementInfo } from "@/components"
+import { TableRow, TableCell } from "@mui/material"
 import { IMealMacros } from "@/types"
 
 interface IProps {
@@ -10,12 +10,14 @@ export const MealSummary = ({ title, timeOfMeal }: IProps) => {
     const { carbons, fat, kcal, proteins } = timeOfMeal
 
     return (
-        <div className="flex flex-col mt-4 lg:mt-0">
-            <span className="text-primaryBlue text-lg">{title}</span>
-            <SingleElementInfo name="Białko" value={proteins.toFixed(2)} unit="g" />
-            <SingleElementInfo name="Węglowodany" value={carbons.toFixed(2)} unit="g" />
-            <SingleElementInfo name="Tłuszcze" value={fat.toFixed(2)} unit="g" />
-            <SingleElementInfo name="Kalorie" value={kcal.toFixed(2)} />
-        </div>
+        <TableRow key={title} sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
+            <TableCell component="th" scope="row">
+                {title}
+            </TableCell>
+            <TableCell align="right">{proteins.toFixed(2)} g</TableCell>
+            <TableCell align="right">{carbons.toFixed(2)} g</TableCell>
+            <TableCell align="right">{fat.toFixed(2)} g</TableCell>
+            <TableCell align="right">{kcal.toFixed(2)} g</TableCell>
+        </TableRow>
     )
 }
