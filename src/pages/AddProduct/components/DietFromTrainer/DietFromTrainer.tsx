@@ -38,7 +38,7 @@ export const DietFromTrainer = () => {
         <div className="flex flex-col justify-center items-center">
             <NormalButton
                 buttonVariant="secondary"
-                label="Pobierz diete od trenera"
+                label="Pobierz dietę od trenera"
                 onClick={handleGetDietFromTrainer}
                 className="mb-4"
             />
