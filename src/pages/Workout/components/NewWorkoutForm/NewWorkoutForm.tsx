@@ -44,7 +44,7 @@ export const NewWorkoutForm = () => {
     }
 
     return (
-        <div>
+        <div className="min-w-max">
             <h1 className="text-2xl mb-8 text-center">Dodaj ćwiczenia wykonane na treningu!</h1>
             <form
                 onSubmit={handleSubmit(onSubmit)}

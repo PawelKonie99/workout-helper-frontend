@@ -18,13 +18,11 @@ const Notifications = () => {
     }
 
     return (
-        <>
-            <RequestedTrainers
-                userRequestedTrainers={userRequestedTrainers}
-                loadRequestedTrainers={loadRequestedTrainers}
-                isTrainer={!!trainerName}
-            />
-        </>
+        <RequestedTrainers
+            userRequestedTrainers={userRequestedTrainers}
+            loadRequestedTrainers={loadRequestedTrainers}
+            isTrainer={!!trainerName}
+        />
     )
 }
 

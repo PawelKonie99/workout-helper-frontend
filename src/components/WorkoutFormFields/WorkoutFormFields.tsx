@@ -179,7 +179,7 @@ export const WorkoutFormFields = ({
                     <span>
                         Twój najlepszy wynik <br /> w tym ćwiczeniu
                     </span>
-                    <span>Cięzar: {bestExercise.weightQuantity}</span>
+                    <span>Cięzar: {bestExercise.weightQuantity} kg</span>
                     <span>Powtórzenia: {bestExercise.repsQuantity}</span>
                     <span>Serie: {bestExercise.seriesQuantity}</span>
                 </div>

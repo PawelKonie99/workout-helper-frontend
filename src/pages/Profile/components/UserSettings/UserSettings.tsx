@@ -8,6 +8,8 @@ import { PopUpContext } from "@/contexts"
 import { changePassword, deleteTrainer } from "@/api"
 import { changeUserPasswordSchema } from "@/schema"
 import { IChangeUserPasswordSchema } from "@/types"
+import { saveUserTrainer } from "@/store/userReducer/actions/saveUserTrainer"
+import { useAppDispatch } from "@/store/hooks/storeHooks"
 
 interface Props {
     trainerName: string
@@ -20,8 +22,8 @@ const defaultFormValues: IChangeUserPasswordSchema = {
 
 export const UserSettings = ({ trainerId, trainerName }: Props) => {
     const { openPopup, closePopup } = useContext(PopUpContext)
-
     const [isLoading, setIsLoading] = useState(false)
+    const dispatch = useAppDispatch()
 
     const {
         handleSubmit,
@@ -88,6 +90,7 @@ export const UserSettings = ({ trainerId, trainerName }: Props) => {
     const sendDeleteTrainer = async () => {
         const { message } = await deleteTrainer()
 
+        saveUserTrainer(dispatch, "", "")
         if (message === "Trener usuniety pomyślnie") {
             toast.success("Trener usuniety pomyślnie")
         } else {
