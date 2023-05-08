@@ -109,7 +109,7 @@ export const RegisterForm = () => {
                                     value={value}
                                     errorMessage={errors.username?.message}
                                     placeholder="Username"
-                                    classname="pb-4"
+                                    classname="pb-4 w-full"
                                 />
                             )}
                         />
@@ -128,7 +128,7 @@ export const RegisterForm = () => {
                                     inputRef={ref}
                                     errorMessage={errors.password?.message}
                                     placeholder={"Hasło"}
-                                    classname="pb-4"
+                                    classname="pb-4 w-full"
                                 />
                             )}
                         />
@@ -146,6 +146,7 @@ export const RegisterForm = () => {
                                     inputRef={ref}
                                     errorMessage={errors.confirmPassword?.message}
                                     placeholder={"Potwierdź hasło"}
+                                    classname="w-full"
                                 />
                             )}
                         />
