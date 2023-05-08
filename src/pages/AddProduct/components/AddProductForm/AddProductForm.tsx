@@ -4,6 +4,7 @@ import { getProductData, translateProduct } from "@/api/externalApi"
 import { NormalButton, TextInput } from "@/components"
 import { MEAL_TYPES } from "@/enums"
 import { IDatabaseProduct, IProductPayload } from "@/types"
+import delteIcon from "../../../../images/svg/delete-icon.svg"
 
 interface Props {
     timeOfTheMeal: MEAL_TYPES
@@ -120,21 +121,19 @@ export const AddProductForm = ({
                 <div className="flex justify-start mt-2">
                     {alreadyAddedProducts?.map(
                         ({ productName, kcal, proteins, carbons, fat, _id }, index) => (
-                            <div
-                                key={`${productName}${index}`}
-                                className="flex flex-col ml-8 relative"
-                            >
-                                <div
-                                    className="absolute -right-3 -top-4 cursor-pointer"
+                            <div key={`${productName}${index}`} className="flex ml-6">
+                                <img
+                                    src={delteIcon}
+                                    className="cursor-pointer flex items-start w-5 h-5 mr-2"
                                     onClick={() => handleDelete(_id, productName)}
-                                >
-                                    x
+                                />
+                                <div className="flex flex-col relative">
+                                    <span className="text-xs">Nazwa produktu: {productName}</span>
+                                    <span className="text-xs">kcal: {kcal}</span>
+                                    <span className="text-xs">białko: {proteins} g</span>
+                                    <span className="text-xs">węglowodany: {carbons} g</span>
+                                    <span className="text-xs">tłuszcz: {fat} g</span>
                                 </div>
-                                <span className="text-xs">Nazwa produktu: {productName}</span>
-                                <span className="text-xs">kcal: {kcal}</span>
-                                <span className="text-xs">białko: {proteins}</span>
-                                <span className="text-xs">węglowodany: {carbons}</span>
-                                <span className="text-xs">tłuszcz: {fat}</span>
                             </div>
                         ),
                     )}

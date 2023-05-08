@@ -11,6 +11,7 @@ import { ISelectOption, IWorkoutFields, IWorkoutSeriesSchema } from "@/types"
 import { useGetAllWorkoutOptions } from "@/hooks"
 import { getBestExercise } from "@/api"
 import { isSelectOptionTypeGuard } from "@/helpers"
+import classNames from "classnames"
 
 interface Props {
     item: FieldArrayWithId<IWorkoutSeriesSchema, "workoutData", "id">
@@ -46,8 +47,15 @@ export const WorkoutFormFields = ({
         }
     }
 
+    const gridAppearance = classNames({
+        "lg:grid-cols-4": index === 0,
+        "lg:grid-cols-5": index >= 1 || (bestExercise && index === 0),
+        "lg:grid-cols-6": index >= 1 && bestExercise,
+    })
+
     return (
-        <div className="flex flex-col lg:flex-row items-start mb-10 lg:h-4.35">
+        // <div className="flex flex-col lg:flex-row items-start mb-10 lg:h-4.35">
+        <div className={`grid grid-cols-1 ${gridAppearance} mb-10 lg:h-24`}>
             {EXERCISE && (
                 <Controller
                     name={`workoutData.${index}.exerciseName`}
@@ -164,7 +172,7 @@ export const WorkoutFormFields = ({
             )}
 
             {index > 0 && (
-                <div className="h-full flex items-end">
+                <div className="flex items-center">
                     <NormalButton
                         onClick={() => remove(index)}
                         buttonVariant="delete"
