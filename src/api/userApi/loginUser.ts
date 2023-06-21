@@ -4,9 +4,13 @@ import { USER_LOGIN } from "@/constants"
 import { isAxiosError } from "@/helpers"
 
 export const loginUser = async (userPayload: IUserLoginPayload) => {
-    const { BASE_URL } = process.env
     try {
-        const { data } = await axios.post<ILoginResponse>(`${BASE_URL}/${USER_LOGIN}`, userPayload)
+        const { REACT_APP_API_URI } = process.env
+
+        const { data } = await axios.post<ILoginResponse>(
+            `${REACT_APP_API_URI}/${USER_LOGIN}`,
+            userPayload,
+        )
 
         return data
     } catch (error: unknown) {

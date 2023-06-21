@@ -4,10 +4,11 @@ import { USER_REGISTER } from "@/constants"
 import { isAxiosError } from "@/helpers"
 
 export const registerUser = async (userPayload: IUserRegisterPayload) => {
-    const { BASE_URL } = process.env
     try {
+        const { REACT_APP_API_URI } = process.env
+
         const { data } = await axios.post<IStandardResponse>(
-            `${BASE_URL}/${USER_REGISTER}`,
+            `${REACT_APP_API_URI}/${USER_REGISTER}`,
             userPayload,
         )
 

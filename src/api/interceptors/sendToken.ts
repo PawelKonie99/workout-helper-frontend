@@ -1,10 +1,10 @@
 import axios, { AxiosRequestConfig } from "axios"
 import { getStorageItem } from "@/helpers"
 
-const { BASE_URL } = process.env
+const { REACT_APP_API_URI } = process.env
 
 export const instance = axios.create({
-    baseURL: BASE_URL,
+    baseURL: REACT_APP_API_URI,
 })
 
 instance.interceptors.request.use(
