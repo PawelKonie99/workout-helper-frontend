@@ -1,8 +1,10 @@
 import axios, { AxiosRequestConfig } from "axios"
 import { getStorageItem } from "@/helpers"
 
+const { BASE_URL } = process.env
+
 export const instance = axios.create({
-    baseURL: "http://localhost:3000", //TODO zmienic potem na odpowiedni link
+    baseURL: BASE_URL,
 })
 
 instance.interceptors.request.use(

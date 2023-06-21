@@ -4,8 +4,12 @@ import { USER_REGISTER } from "@/constants"
 import { isAxiosError } from "@/helpers"
 
 export const registerUser = async (userPayload: IUserRegisterPayload) => {
+    const { BASE_URL } = process.env
     try {
-        const { data } = await axios.post<IStandardResponse>(USER_REGISTER, userPayload)
+        const { data } = await axios.post<IStandardResponse>(
+            `${BASE_URL}/${USER_REGISTER}`,
+            userPayload,
+        )
 
         return data
     } catch (error: unknown) {
