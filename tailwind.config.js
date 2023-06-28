@@ -21,11 +21,11 @@ module.exports = {
             },
         },
         maxWidth: {
-            1200: '1200px',
-          },
-          minHeight: {
-            '120px': '120px',
-          }
+            1200: "1200px",
+        },
+        minHeight: {
+            "120px": "120px",
+        },
     },
     plugins: [],
 }
