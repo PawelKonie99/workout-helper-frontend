@@ -6,7 +6,7 @@ const Workout = () => {
     const { trainerRole } = useAppSelector((state) => state.userReducer.roles)
 
     return (
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center bg-offWhite">
             {!trainerRole && <TrainingPlan />}
             <NewWorkoutForm />
         </div>

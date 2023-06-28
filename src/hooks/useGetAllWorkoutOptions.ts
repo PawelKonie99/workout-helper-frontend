@@ -5,21 +5,19 @@ import { IWorkoutOption } from "@/types"
 export const useGetAllWorkoutOptions = () => {
     const [workoutOptions, setWorkoutOptions] = useState<{
         EXERCISE: IWorkoutOption[]
-        WEIGHT: IWorkoutOption[]
         REPS: IWorkoutOption[]
         SERIES: IWorkoutOption[]
     }>()
 
     useEffect(() => {
         const getWorkoutOptions = async () => {
-            const { exercise, series, reps, weight } = await getAllWorkoutOptions()
+            const { exercise, series, reps } = await getAllWorkoutOptions()
 
-            if (exercise && series && reps && weight) {
+            if (exercise && series && reps) {
                 setWorkoutOptions({
                     EXERCISE: exercise,
                     SERIES: series,
                     REPS: reps,
-                    WEIGHT: weight,
                 })
             }
         }

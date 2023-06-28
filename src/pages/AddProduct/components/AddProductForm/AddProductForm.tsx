@@ -63,7 +63,7 @@ export const AddProductForm = ({
             const { success } = await handleSendProductData(newProductPayload)
 
             if (success) {
-                toast.success(`${food_name} dodany pomyślnie!`)
+                toast.success(`${name} dodany pomyślnie!`)
             } else {
                 toast.error("Błąd podczas dodawania produktu!")
             }

@@ -3,7 +3,7 @@ import { useForm, useFieldArray } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { IWorkoutSeriesSchema } from "@/types"
 import { workoutFormValues, workoutSeriesSchema } from "@/schema"
-import { NormalButton, WorkoutFormFields } from "@/components"
+import { Container, NormalButton, WorkoutFormFields } from "@/components"
 import { addNewWorkout } from "@/api"
 import { parseSubmitedWorkoutData } from "@/helpers"
 
@@ -44,7 +44,7 @@ export const NewWorkoutForm = () => {
     }
 
     return (
-        <div>
+        <Container>
             <h1 className="text-2xl mb-8 text-center">Dodaj ćwiczenia wykonane na treningu!</h1>
             <form
                 onSubmit={handleSubmit(onSubmit)}
@@ -74,6 +74,6 @@ export const NewWorkoutForm = () => {
                     <NormalButton label="Zakończ trening" type="submit" />
                 </div>
             </form>
-        </div>
+        </Container>
     )
 }

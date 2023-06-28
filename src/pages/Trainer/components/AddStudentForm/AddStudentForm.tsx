@@ -2,7 +2,7 @@ import { useForm, SubmitHandler, Controller } from "react-hook-form"
 import { toast } from "react-toastify"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { addStudent } from "@/api"
-import { NormalButton, TextInput } from "@/components"
+import { FormContainer, NormalButton, TextInput } from "@/components"
 import { addStudentSchema } from "@/schema"
 import { IAddStudentSchema } from "@/types"
 
@@ -42,7 +42,7 @@ export const AddStudentForm = () => {
 
     return (
         <div className="flex justify-center items-center md:ml-20">
-            <div className="bg-white px-12 py-12 flex flex-col items-center w-96 rounded-lg">
+            <FormContainer>
                 <h1 className="text-3xl pb-8">Dodaj podopiecznego</h1>
                 <div className="w-full mx-auto flex justify-center">
                     <form
@@ -69,7 +69,7 @@ export const AddStudentForm = () => {
                         <NormalButton className="mt-6" label="Dodaj" type="submit" />
                     </form>
                 </div>
-            </div>
+            </FormContainer>
         </div>
     )
 }

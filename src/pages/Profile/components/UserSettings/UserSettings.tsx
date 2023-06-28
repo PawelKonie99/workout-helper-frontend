@@ -118,7 +118,7 @@ export const UserSettings = ({ trainerId, trainerName }: Props) => {
 
             <form
                 onSubmit={handleSubmit(changePasswordSubmit)}
-                className={`flex flex-col pt-8 ${borderAppearance}`}
+                className={`flex flex-col ${borderAppearance}`}
             >
                 <Controller
                     name="password"

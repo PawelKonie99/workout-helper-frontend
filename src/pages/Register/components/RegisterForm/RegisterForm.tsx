@@ -3,7 +3,7 @@ import { useContext } from "react"
 import { useForm, Controller, SubmitHandler } from "react-hook-form"
 import { useNavigate } from "react-router"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { NormalButton, TextInput, TextLink } from "@/components"
+import { FormContainer, NormalButton, TextInput, TextLink } from "@/components"
 import { IRegisterFormSchema } from "@/types"
 import { registerSchema } from "@/schema"
 import { PopUpContext } from "@/contexts/PopupContext"
@@ -89,7 +89,7 @@ export const RegisterForm = () => {
 
     return (
         <div className="py-12 flex justify-center items-center">
-            <div className="bg-white px-12 py-12 flex flex-col items-center w-96 rounded-lg">
+            <FormContainer>
                 <h1 className="text-3xl pb-8">Zarejestruj sie</h1>
                 <div className="w-full mx-auto flex justify-center">
                     <form
@@ -109,7 +109,7 @@ export const RegisterForm = () => {
                                     value={value}
                                     errorMessage={errors.username?.message}
                                     placeholder="Username"
-                                    classname="pb-4 w-full"
+                                    classname="pb-4 md:pb-6 w-full"
                                 />
                             )}
                         />
@@ -128,7 +128,7 @@ export const RegisterForm = () => {
                                     inputRef={ref}
                                     errorMessage={errors.password?.message}
                                     placeholder={"Hasło"}
-                                    classname="pb-4 w-full"
+                                    classname="pb-4 md:pb-6 w-full"
                                 />
                             )}
                         />
@@ -172,7 +172,7 @@ export const RegisterForm = () => {
                     </form>
                 </div>
                 <TextLink href="login" label="Masz juz konto? Zaloguj się!" />
-            </div>
+            </FormContainer>
         </div>
     )
 }
