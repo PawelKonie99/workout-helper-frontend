@@ -55,7 +55,7 @@ export const WorkoutFormFields = ({
 
     return (
         <div
-            className={`grid grid-cols-1 ${gridAppearance} mb-10 items-end md:min-h-120px border-t-2 pt-4`}
+            className={`grid grid-cols-1 ${gridAppearance} mb-10 items-end lg:min-h-120px border-t-2 pt-4`}
         >
             {EXERCISE && (
                 <Controller
@@ -179,7 +179,7 @@ export const WorkoutFormFields = ({
                     <NormalButton
                         onClick={() => remove(index)}
                         buttonVariant="delete"
-                        className="mt-4 lg:mt-0 ml-2"
+                        className="mt-4 xl:mt-0 ml-2"
                         label="Usuń ćwiczenie"
                     />
                 </div>
