@@ -82,7 +82,7 @@ export const LoginForm = () => {
                                     value={value}
                                     errorMessage={errors.username?.message}
                                     placeholder="Nazwa użytkownika"
-                                    classname="pb-4 lg:pb-6 w-full"
+classname="pb-4 lg:pb-6 w-full"
                                 />
                             )}
                         />
