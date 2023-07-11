@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { NormalButton } from "@/components"
+import { NormalButton, WarningPopup } from "@/components"
 import { PopUpContext } from "@/contexts"
 import { IRole } from "@/types"
 import { ChangeUserPasswordForm } from "../ChangeUserPasswordForm/ChangeUserPasswordForm"
@@ -28,32 +28,13 @@ export const SingleUserData = ({
 
     const handleDeleteUser = async (userId: string) => {
         openPopup(
-            <div className="w-full flex flex-col justify-center items-center">
-                <h1
-                    className="mb-16 text-xl text-center
-                "
-                >
-                    Czy na pewno chcesz usunąc uzytkownika {username}?
-                </h1>
-                <div className="flex">
-                    <NormalButton
-                        label="Usun uzytkownika"
-                        onClick={() => {
-                            sendDeleteUser(userId)
-                            closePopup()
-                        }}
-                        buttonVariant="primary"
-                        className="mr-6"
-                    />
-                    <NormalButton
-                        label="Anuluj"
-                        onClick={() => {
-                            closePopup()
-                        }}
-                        buttonVariant="delete"
-                    />
-                </div>
-            </div>,
+            //TODO testnac
+            <WarningPopup
+                title={`Czy na pewno chcesz usunąc uzytkownika ${username}?`}
+                acceptButtonLabel="Usun uzytkownika"
+                acceptAction={() => sendDeleteUser(userId)}
+                closePopup={closePopup}
+            />,
         )
     }
 
