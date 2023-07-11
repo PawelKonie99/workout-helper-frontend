@@ -31,7 +31,7 @@ export const TrainerLayout = () => {
                                     imageSrc={workoutIcon}
                                 />
                                 <MenuListItem
-                                    title="Dodaj diete dla podopiecznego"
+                                    title="Dodaj dietę dla podopiecznego"
                                     to="trainer/AddStudentDiet"
                                     imageSrc={mealIcon}
                                 />
