@@ -33,9 +33,9 @@ const AddProduct = () => {
     }
 
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col pb-10 bg-offWhite">
             {!trainerRole && <DietFromTrainer />}
-            <div className="bg-offWhite flex justify-center">
+            <div className="bg-offWhite flex flex-col xl:flex-row justify-center mt-8">
                 <AllMealsForm
                     addedProducts={todayProductsData?.todayProducts}
                     handleSendProductData={addNewProduct}

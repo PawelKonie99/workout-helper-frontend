@@ -12,7 +12,7 @@ export const TrainerLayout = () => {
             <Navbar />
             <div className="pt-28">
                 <ContentContainer>
-                    <div className="flex flex-col lg:flex-row w-full">
+                    <div className="flex flex-col xl:flex-row w-full">
                         <div className="mr-40">
                             <ul>
                                 <MenuListItem

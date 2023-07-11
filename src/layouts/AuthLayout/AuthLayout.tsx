@@ -5,7 +5,7 @@ export const AuthLayout = () => {
     return (
         <>
             {/* <Navbar /> */}
-            <div className="bg-background px-6">
+            <div className="px-6">
                 <Outlet />
             </div>
             <Footer />

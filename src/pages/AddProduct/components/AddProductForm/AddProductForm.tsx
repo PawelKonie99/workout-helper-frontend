@@ -63,7 +63,7 @@ export const AddProductForm = ({
             const { success } = await handleSendProductData(newProductPayload)
 
             if (success) {
-                toast.success(`${food_name} dodany pomyślnie!`)
+                toast.success(`${name} dodany pomyślnie!`)
             } else {
                 toast.error("Błąd podczas dodawania produktu!")
             }
@@ -89,10 +89,10 @@ export const AddProductForm = ({
     }
 
     return (
-        <div className="flex flex-col items-center justify-start mb-10">
+        <div className="flex flex-col items-center justify-start mb-4 lg:mb-10">
             <form onSubmit={handleOnSubmit} className="flex flex-col items-center">
-                <h3 className="text-2xl pb-4">{title}</h3>
-                <div className="flex">
+                <h3 className="text-xl lg:text-2xl pb-4">{title}</h3>
+                <div className="flex flex-col lg:flex-row">
                     <TextInput
                         name="product-name"
                         label="Nazwa produktu"
@@ -107,7 +107,7 @@ export const AddProductForm = ({
                         placeholder="Waga produktu (g)"
                         value={weight.replace("g", "")}
                         onChange={handleWeightChange}
-                        classname="pb-4 ml-4"
+                        classname="pb-4 lg:ml-4"
                         inputType="number"
                     />
                 </div>
@@ -118,10 +118,10 @@ export const AddProductForm = ({
                 <span className="mt-2">Dodane produkty</span>
             ) : null}
             <div className="mt-3 flex flex-col items-center">
-                <div className="flex justify-start mt-2">
+                <div className="grid grid-cols-2 gap-4 mt-2">
                     {alreadyAddedProducts?.map(
                         ({ productName, kcal, proteins, carbons, fat, _id }, index) => (
-                            <div key={`${productName}${index}`} className="flex ml-6">
+                            <div key={`${productName}${index}`} className="flex lg:ml-6">
                                 <img
                                     src={delteIcon}
                                     className="cursor-pointer flex items-start w-5 h-5 mr-2"

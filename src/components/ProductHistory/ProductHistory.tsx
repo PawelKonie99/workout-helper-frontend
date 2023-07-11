@@ -85,6 +85,7 @@ export const ProductHistory = ({ productHistory, handleChangeOffset }: Props) =>
                         value={dateToFind}
                         onChange={handleDateChange}
                         classname="w-64"
+                        isLabelAbove
                     />
 
                     <NormalButton

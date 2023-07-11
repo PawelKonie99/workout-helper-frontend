@@ -2,7 +2,7 @@ import { useContext } from "react"
 import { useForm, Controller, SubmitHandler } from "react-hook-form"
 import { useNavigate } from "react-router"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { NormalButton, TextInput, TextLink } from "@/components"
+import { FormContainer, NormalButton, TextInput, TextLink } from "@/components"
 import { saveUserLogin } from "@/store/userReducer/actions/saveUserLogin"
 import { ILoginFormSchema } from "@/types"
 import { loginSchema } from "@/schema"
@@ -61,7 +61,7 @@ export const LoginForm = () => {
 
     return (
         <div className="py-12 flex justify-center items-center">
-            <div className="bg-white px-12 py-12 flex flex-col items-center w-96 rounded-lg">
+            <FormContainer>
                 {/* Consider to make h1 var in tailwind config */}
                 <h1 className="text-3xl pb-8">Zaloguj się</h1>
                 <div className="w-full mx-auto flex justify-center">
@@ -82,7 +82,7 @@ export const LoginForm = () => {
                                     value={value}
                                     errorMessage={errors.username?.message}
                                     placeholder="Nazwa użytkownika"
-                                    classname="pb-4"
+classname="pb-4 lg:pb-6 w-full"
                                 />
                             )}
                         />
@@ -101,7 +101,7 @@ export const LoginForm = () => {
                                     inputRef={ref}
                                     errorMessage={errors.password?.message}
                                     placeholder={"Hasło"}
-                                    classname="pb-4"
+                                    classname="pb-4 lg:pb-6 w-full"
                                 />
                             )}
                         />
@@ -109,7 +109,7 @@ export const LoginForm = () => {
                     </form>
                 </div>
                 <TextLink href="register" label="Nie masz konta? Zarejestruj się!" />
-            </div>
+            </FormContainer>
         </div>
     )
 }
