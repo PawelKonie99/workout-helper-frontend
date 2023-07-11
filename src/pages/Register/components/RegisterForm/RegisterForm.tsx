@@ -103,13 +103,13 @@ export const RegisterForm = () => {
                                 <TextInput
                                     isError={errors.username}
                                     name={name}
-                                    label="Username"
+                                    label="Nazwa użytkownika"
                                     onChange={onChange}
                                     inputRef={ref}
                                     value={value}
                                     errorMessage={errors.username?.message}
-                                    placeholder="Username"
-                                    classname="pb-4 w-full"
+                                    placeholder="Nazwa użytkownika"
+                                    classname="pb-4"
                                 />
                             )}
                         />

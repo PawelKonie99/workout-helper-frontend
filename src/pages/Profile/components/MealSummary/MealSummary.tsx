@@ -17,7 +17,7 @@ export const MealSummary = ({ title, timeOfMeal }: IProps) => {
             <TableCell align="right">{proteins.toFixed(2)} g</TableCell>
             <TableCell align="right">{carbons.toFixed(2)} g</TableCell>
             <TableCell align="right">{fat.toFixed(2)} g</TableCell>
-            <TableCell align="right">{kcal.toFixed(2)} g</TableCell>
+            <TableCell align="right">{kcal.toFixed(2)} kcal</TableCell>
         </TableRow>
     )
 }
