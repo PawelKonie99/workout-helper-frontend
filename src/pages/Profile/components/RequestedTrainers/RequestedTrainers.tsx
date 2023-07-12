@@ -28,7 +28,6 @@ export const RequestedTrainers = ({
     ) => {
         if (isTrainer) {
             openPopup(
-                //TODO Testnac
                 <WarningPopup
                     title="Posiadasz aktualnie trenera, jezeli zaakceptujesz to trener zostanie
                 zmieniony na nowego"

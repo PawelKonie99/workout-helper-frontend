@@ -58,7 +58,6 @@ export const UserSettings = ({ trainerId, trainerName }: Props) => {
 
     const deleteTrainerLastWarning = () => {
         openPopup(
-            //TODO testnac
             <WarningPopup
                 title="Czy na pewno chcesz usunąc trenera?"
                 acceptButtonLabel="Usuń trenera"

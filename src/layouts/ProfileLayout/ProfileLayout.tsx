@@ -47,7 +47,7 @@ export const ProfileLayout = () => {
                 <UserInfo userInfo={{ username, trainerName }} />
                 <ContentContainer>
                     <div className="flex flex-col xl:flex-row w-full">
-                        <div className="mr-10 lg:mr-40">
+                        <div className="lg:mr-40 mb-8 xl:mb-0">
                             <ul>
                                 {!adminRole && (
                                     <>
