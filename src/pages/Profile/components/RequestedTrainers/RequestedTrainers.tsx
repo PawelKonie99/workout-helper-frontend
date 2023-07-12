@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { toast } from "react-toastify"
 import { sendStudentTrainerDecision } from "@/api"
-import { NormalButton } from "@/components"
+import { NormalButton, WarningPopup } from "@/components"
 import { MANAGE_REQUESTED_TRAINERS } from "@/enums"
 import { IRequestedTrainerData } from "@/types"
 import { PopUpContext } from "@/contexts"
@@ -28,33 +28,13 @@ export const RequestedTrainers = ({
     ) => {
         if (isTrainer) {
             openPopup(
-                <div className="w-full flex flex-col justify-center items-center">
-                    <h1
-                        className="mb-16 text-xl text-center
-                    "
-                    >
-                        Posiadasz aktualnie trenera, jezeli zaakceptujesz to trener zostanie
-                        zmieniony na nowego
-                    </h1>
-                    <div className="flex">
-                        <NormalButton
-                            label="Zmien trenera"
-                            onClick={() => {
-                                sendUserDecision(userDecision, trainerId)
-                                closePopup()
-                            }}
-                            buttonVariant="primary"
-                            className="mr-6"
-                        />
-                        <NormalButton
-                            label="Anuluj"
-                            onClick={() => {
-                                closePopup()
-                            }}
-                            buttonVariant="delete"
-                        />
-                    </div>
-                </div>,
+                <WarningPopup
+                    title="Posiadasz aktualnie trenera, jezeli zaakceptujesz to trener zostanie
+                zmieniony na nowego"
+                    acceptButtonLabel="Zmien trenera"
+                    acceptAction={() => sendUserDecision(userDecision, trainerId)}
+                    closePopup={closePopup}
+                />,
             )
         } else {
             sendUserDecision(userDecision, trainerId)

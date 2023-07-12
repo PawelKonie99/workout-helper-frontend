@@ -1,17 +1,17 @@
 import { useState, createContext, useMemo, ReactNode, useCallback } from "react"
 
 interface ContextType {
-    popupContent: JSX.Element | null
-    openPopup: (content: JSX.Element) => void
+    popupContent: ReactNode | null
+    openPopup: (content: ReactNode) => void
     closePopup: () => void
 }
 
 export const PopUpContext = createContext({} as ContextType)
 
 export const PopupProvider = ({ children }: { children: ReactNode }) => {
-    const [popupContent, setPopupContent] = useState<JSX.Element | null>(null)
+    const [popupContent, setPopupContent] = useState<ReactNode | null>(null)
 
-    const openPopup = useCallback((content: JSX.Element) => {
+    const openPopup = useCallback((content: ReactNode) => {
         setPopupContent(content)
     }, [])
 
