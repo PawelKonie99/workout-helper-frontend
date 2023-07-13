@@ -2,7 +2,7 @@ import { useContext } from "react"
 import { useForm, Controller, SubmitHandler } from "react-hook-form"
 import { useNavigate } from "react-router"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { FormContainer, NormalButton, TextInput, TextLink } from "@/components"
+import { FormContainer, InfoPopup, NormalButton, TextInput, TextLink } from "@/components"
 import { saveUserLogin } from "@/store/userReducer/actions/saveUserLogin"
 import { ILoginFormSchema } from "@/types"
 import { loginSchema } from "@/schema"
@@ -42,18 +42,7 @@ export const LoginForm = () => {
         if (message === "User found in databse") {
             navigate("/workout")
         } else {
-            openPopup(
-                <div className="w-full flex flex-col justify-center items-center">
-                    <h1 className="mb-16 text-4xl">Niepowodzenie!</h1>
-                    <NormalButton
-                        label="Spróbuj ponownie!"
-                        onClick={() => {
-                            closePopup()
-                        }}
-                        buttonVariant="secondary"
-                    />
-                </div>,
-            )
+            openPopup(<InfoPopup title="Niepowodzenie!" closePopup={closePopup} />)
         }
 
         reset()
@@ -62,7 +51,6 @@ export const LoginForm = () => {
     return (
         <div className="py-12 flex justify-center items-center">
             <FormContainer>
-                {/* Consider to make h1 var in tailwind config */}
                 <h1 className="text-3xl pb-8">Zaloguj się</h1>
                 <div className="w-full mx-auto flex justify-center">
                     <form

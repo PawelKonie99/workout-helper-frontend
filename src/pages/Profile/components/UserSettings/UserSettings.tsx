@@ -3,7 +3,7 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { useForm, Controller } from "react-hook-form"
 import { toast } from "react-toastify"
 import { useContext, useState } from "react"
-import { NormalButton, TextInput } from "@/components"
+import { NormalButton, TextInput, WarningPopup } from "@/components"
 import { PopUpContext } from "@/contexts"
 import { changePassword, deleteTrainer } from "@/api"
 import { changeUserPasswordSchema } from "@/schema"
@@ -58,32 +58,12 @@ export const UserSettings = ({ trainerId, trainerName }: Props) => {
 
     const deleteTrainerLastWarning = () => {
         openPopup(
-            <div className="w-full flex flex-col justify-center items-center">
-                <h1
-                    className="mb-8 text-xl text-center
-                "
-                >
-                    Czy na pewno chcesz usunąc trenera?
-                </h1>
-                <div className="flex">
-                    <NormalButton
-                        label="Usuń trenera"
-                        onClick={() => {
-                            sendDeleteTrainer()
-                            closePopup()
-                        }}
-                        buttonVariant="delete"
-                        className="mr-6"
-                    />
-                    <NormalButton
-                        label="Anuluj"
-                        onClick={() => {
-                            closePopup()
-                        }}
-                        buttonVariant="primary"
-                    />
-                </div>
-            </div>,
+            <WarningPopup
+                title="Czy na pewno chcesz usunąc trenera?"
+                acceptButtonLabel="Usuń trenera"
+                acceptAction={sendDeleteTrainer}
+                closePopup={closePopup}
+            />,
         )
     }
 

@@ -3,7 +3,7 @@ import { useContext } from "react"
 import { useForm, Controller, SubmitHandler } from "react-hook-form"
 import { useNavigate } from "react-router"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { FormContainer, NormalButton, TextInput, TextLink } from "@/components"
+import { FormContainer, InfoPopup, NormalButton, TextInput, TextLink } from "@/components"
 import { IRegisterFormSchema } from "@/types"
 import { registerSchema } from "@/schema"
 import { PopUpContext } from "@/contexts/PopupContext"
@@ -18,7 +18,6 @@ const defaultFormValues: IRegisterFormSchema = {
 
 export const RegisterForm = () => {
     const { openPopup, closePopup } = useContext(PopUpContext)
-    const navigate = useNavigate()
 
     const {
         handleSubmit,
@@ -44,44 +43,16 @@ export const RegisterForm = () => {
 
         if (success) {
             openPopup(
-                <div className="w-full flex flex-col justify-center items-center">
-                    <h1 className="mb-16 text-4xl">Zarejestrowano pomyślnie!</h1>
-                    <NormalButton
-                        label="Zaloguj się"
-                        onClick={() => {
-                            closePopup()
-                            navigate("/login")
-                        }}
-                        buttonVariant="secondary"
-                    />
-                </div>,
+                <InfoPopup
+                    title="Zarejestrowano pomyślnie!"
+                    closePopup={closePopup}
+                    navigateUrl="/login"
+                />,
             )
         } else if (message === "User already exists") {
-            openPopup(
-                <div className="w-full flex flex-col justify-center items-center">
-                    <h1 className="mb-16 text-4xl">Taki uzytkownik juz istnieje!</h1>
-                    <NormalButton
-                        label="Spróbuj ponownie!"
-                        onClick={() => {
-                            closePopup()
-                        }}
-                        buttonVariant="secondary"
-                    />
-                </div>,
-            )
+            openPopup(<InfoPopup title="Taki uzytkownik juz istnieje!" closePopup={closePopup} />)
         } else {
-            openPopup(
-                <div className="w-full flex flex-col justify-center items-center">
-                    <h1 className="mb-16 text-4xl">Niepowodzenie!</h1>
-                    <NormalButton
-                        label="Spróbuj ponownie!"
-                        onClick={() => {
-                            closePopup()
-                        }}
-                        buttonVariant="secondary"
-                    />
-                </div>,
-            )
+            openPopup(<InfoPopup title="Niepowodzenie!" closePopup={closePopup} />)
         }
 
         reset()

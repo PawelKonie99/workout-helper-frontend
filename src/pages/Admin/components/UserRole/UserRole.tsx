@@ -28,9 +28,8 @@ export const UserRole = ({ isRole, roleName, userId, handleChangeUpdatedUserId }
     }
 
     return (
-        <div className="flex flex-col mr-4 justify-start items-center">
+        <div className="flex flex-col mr-4 justify-start items-center mt-4">
             <span className={`font-semibold ${selectAppearance}`}>{roleName}</span>
-
             <NormalButton
                 buttonVariant="secondary"
                 label={`${isRole ? "Usuń role" : "Aktywuj role"}`}
