@@ -23,7 +23,7 @@ export const Navbar = () => {
                     {adminRole && <NavbarLink link="/admin" title="Centrum Administratora" />}
                 </ul>
             </header>
-            <header className="lg:hidden h-full top-0 z-50 w-full px-10">
+            <header className="lg:hidden h-full top-0 z-50 w-full">
                 <div className="flex justify-end">
                     <MobileMenu />
                 </div>
