@@ -19,7 +19,7 @@ export const SingleWorkoutHistory = ({ workoutData, date }: Props) => {
         <div className="mb-8">
             {date && <span className="text-lg">Data: {date}</span>}
             <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <Table sx={{ minWidth: 550 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
                             <TableCell>Nazwa ćwiczenia</TableCell>
