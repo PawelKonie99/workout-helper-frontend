@@ -9,7 +9,7 @@ import delteIcon from "../../../../images/svg/delete-icon.svg"
 interface Props {
     timeOfTheMeal: MEAL_TYPES
     title: string
-    handleSetNewlyAddedProductName: (newProduct: string) => void
+    // handleSetNewlyAddedProductName: (newProduct: string) => void
     handleSendProductData: (product: IProductPayload) => Promise<{ success: boolean }>
     handleDeleteProduct: (
         productId: string,
@@ -21,7 +21,7 @@ interface Props {
 export const AddProductForm = ({
     timeOfTheMeal,
     title,
-    handleSetNewlyAddedProductName,
+    // handleSetNewlyAddedProductName,
     handleSendProductData,
     handleDeleteProduct,
     alreadyAddedProducts,
@@ -69,7 +69,7 @@ export const AddProductForm = ({
             }
 
             setProductNameAndWeight({ name: "", weight: "" })
-            handleSetNewlyAddedProductName(`${food_name}${Math.random()}`) //TODO refactor
+            // handleSetNewlyAddedProductName(`${food_name}${Math.random()}`) //TODO refactor
             setIsLoading(false)
         } catch (error: unknown) {
             setProductNameAndWeight({ name: "", weight: "" })

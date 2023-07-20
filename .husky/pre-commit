@@ -3,4 +3,3 @@
 
 yarn format-code
 yarn lint
-echo "Husky test"

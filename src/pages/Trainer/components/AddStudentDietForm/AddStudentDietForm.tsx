@@ -1,3 +1,4 @@
+import { useSWRConfig } from "swr"
 import { useState } from "react"
 import { IProductPayload, ISelectOption, IStudentData } from "@/types"
 import { AllMealsForm, CustomSelect } from "@/components"
@@ -5,19 +6,17 @@ import { isSelectOptionTypeGuard } from "@/helpers"
 import { addNewDietProduct, removeDietProduct } from "@/api"
 import { useGetStudentDiet } from "@/hooks"
 import { MEAL_TYPES } from "@/enums"
+import { GET_STUDENT_DIET } from "@/constants"
 
 type Props = {
     myStudents?: IStudentData[]
 }
 
 export const AddStudentDietForm = ({ myStudents }: Props) => {
+    const { mutate } = useSWRConfig()
     const [choosenStudent, setChoosenStudent] = useState<ISelectOption>()
-    const { userDiet, setNewlyAddedProductName, setRemovedProductId } =
-        useGetStudentDiet(choosenStudent)
 
-    const handleSetNewlyAddedProductName = (newProductName: string) => {
-        setNewlyAddedProductName(`${newProductName}${Math.random()}`) //TODO refactor
-    }
+    const { data, error } = useGetStudentDiet(choosenStudent)
 
     const handleChooseStudent = (option: ISelectOption | unknown) => {
         if (isSelectOptionTypeGuard(option)) {
@@ -33,7 +32,7 @@ export const AddStudentDietForm = ({ myStudents }: Props) => {
                 productPayload: product,
                 studentId: choosenStudent?.value,
             })
-
+            await mutate(`${GET_STUDENT_DIET}/${choosenStudent?.value}`)
             return { success }
         }
 
@@ -54,7 +53,7 @@ export const AddStudentDietForm = ({ myStudents }: Props) => {
             }
 
             const { success } = await removeDietProduct(removeProductPayload)
-            setRemovedProductId(productId)
+            await mutate(`${GET_STUDENT_DIET}/${choosenStudent?.value}`)
 
             return { success }
         }
@@ -81,11 +80,10 @@ export const AddStudentDietForm = ({ myStudents }: Props) => {
                     isMargin={false}
                 />
             )}
-            {userDiet && (
+            {data?.diet && (
                 <AllMealsForm
-                    addedProducts={userDiet}
+                    addedProducts={data.diet}
                     handleSendProductData={handleAddDietProduct}
-                    handleSetNewlyAddedProductName={handleSetNewlyAddedProductName}
                     handleDeleteProduct={handleDeleteProduct}
                 />
             )}

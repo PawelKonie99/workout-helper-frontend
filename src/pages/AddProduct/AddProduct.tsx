@@ -1,31 +1,36 @@
+import { useSWRConfig } from "swr"
 import { useGetTodayProduct } from "@/hooks"
 import { addNewProduct, deleteProduct } from "@/api"
 import { AllMealsForm, MacrosSummary } from "@/components"
 import { MEAL_TYPES } from "@/enums"
 import { DietFromTrainer } from "./components"
 import { useAppSelector } from "@/store/hooks/storeHooks"
+import { IMealMacros, IProductPayload } from "@/types"
+import { TODAY_FOOD_PRODUCT } from "@/constants"
 
 const AddProduct = () => {
-    const { trainerRole } = useAppSelector((state) => state.userReducer.roles)
-    const { todayProductsData, setNewlyAddedProductName, setRemovedProductId } =
-        useGetTodayProduct()
+    const { mutate } = useSWRConfig()
+    const { data } = useGetTodayProduct()
 
-    const handleSetNewlyAddedProductName = (newProductName: string) => {
-        setNewlyAddedProductName(newProductName)
+    const { dailySummary, todayUserProducts } = data || {}
+
+    const { trainerRole } = useAppSelector((state) => state.userReducer.roles)
+
+    const handleAddNewProduct = async (product: IProductPayload) => {
+        const { success } = await addNewProduct(product)
+        await mutate(TODAY_FOOD_PRODUCT)
+
+        return { success }
     }
 
     const handleDeleteProduct = async (
         productId: string,
         timeOfTheMeal: MEAL_TYPES,
     ): Promise<{ success: boolean }> => {
-        if (todayProductsData?.allDayMealsId) {
-            const { success } = await deleteProduct(
-                todayProductsData?.allDayMealsId,
-                productId,
-                timeOfTheMeal,
-            )
-            setRemovedProductId(productId)
+        if (todayUserProducts?.id) {
+            const { success } = await deleteProduct(todayUserProducts?.id, productId, timeOfTheMeal)
 
+            await mutate(TODAY_FOOD_PRODUCT)
             return { success }
         }
 
@@ -37,16 +42,15 @@ const AddProduct = () => {
             {!trainerRole && <DietFromTrainer />}
             <div className="bg-offWhite flex flex-col xl:flex-row justify-center mt-8">
                 <AllMealsForm
-                    addedProducts={todayProductsData?.todayProducts}
-                    handleSendProductData={addNewProduct}
-                    handleSetNewlyAddedProductName={handleSetNewlyAddedProductName}
+                    addedProducts={todayUserProducts ?? {}}
+                    handleSendProductData={handleAddNewProduct}
                     handleDeleteProduct={handleDeleteProduct}
                 />
-                {todayProductsData?.todaySummary && todayProductsData?.todaySummary?.kcal > 0 ? (
+                {dailySummary && dailySummary?.kcal > 0 ? (
                     <div className="ml-16">
                         <MacrosSummary
                             title="Podsumowanie dzisiejszego dnia:"
-                            dailySummary={todayProductsData?.todaySummary}
+                            dailySummary={dailySummary as IMealMacros}
                         />
                     </div>
                 ) : null}

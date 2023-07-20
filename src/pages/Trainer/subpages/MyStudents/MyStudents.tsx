@@ -6,7 +6,7 @@ import { IChoosenStudentData } from "@/types"
 import { useLoadMyStudents } from "@/hooks"
 
 const MyStudents = () => {
-    const myStudents = useLoadMyStudents()
+    const { data, error } = useLoadMyStudents()
 
     const [choosenStudentData, setChoosenStudentData] = useState<IChoosenStudentData>()
     const [workoutOffset, setWorkoutOffset] = useState<number>(1)
@@ -61,12 +61,12 @@ const MyStudents = () => {
 
     return (
         <div className="flex flex-col mb-12">
-            {myStudents && myStudents.length <= 0 ? (
+            {data && data.allStudents.length <= 0 ? (
                 <span>Nie masz zadnych podopiecznych!</span>
             ) : (
                 <>
                     <h1 className="mb-4 text-xl">Moi podopieczni:</h1>
-                    {myStudents?.map(({ studentName, id }) => (
+                    {data?.allStudents?.map(({ studentName, id }) => (
                         <div key={studentName} className="mb-6">
                             <span className="mt-4">{studentName}</span>
                             <NormalButton

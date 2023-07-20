@@ -31,7 +31,7 @@ export const WorkoutFormFields = ({
     remove,
     showBestRecord = true,
 }: Props) => {
-    const { EXERCISE, REPS, SERIES } = useGetAllWorkoutOptions() ?? {}
+    const { data } = useGetAllWorkoutOptions()
     const [bestExercise, setBestExercise] = useState<IWorkoutFields>()
 
     const handleExerciseNameChange = async (option: ISelectOption | unknown) => {
@@ -53,11 +53,13 @@ export const WorkoutFormFields = ({
         "xl:grid-cols-6": index >= 1 && bestExercise,
     })
 
+    const { exercise, reps, series } = data ?? {}
+
     return (
         <div
             className={`grid grid-cols-1 ${gridAppearance} mb-10 items-end lg:min-h-120px border-t-2 pt-4 gap-y-1`}
         >
-            {EXERCISE && (
+            {exercise && (
                 <Controller
                     name={`workoutData.${index}.exerciseName`}
                     control={control}
@@ -74,12 +76,12 @@ export const WorkoutFormFields = ({
                             className="w-full"
                             label="Ćwiczenie"
                             placeholder="Wybierz ćwiczenie"
-                            options={EXERCISE}
+                            options={exercise}
                             name={name}
                             onChange={onChange}
                             onChangeCustom={handleExerciseNameChange}
                             inputRef={ref}
-                            value={EXERCISE.find(
+                            value={exercise.find(
                                 (chosenExercise) => chosenExercise.value === value,
                             )}
                             isError={errors?.workoutData?.[index]?.exerciseName?.label}
@@ -90,7 +92,7 @@ export const WorkoutFormFields = ({
                     )}
                 />
             )}
-            {REPS && (
+            {reps && (
                 <Controller
                     name={`workoutData.${index}.repsQuantity`}
                     control={control}
@@ -107,11 +109,11 @@ export const WorkoutFormFields = ({
                             className="w-full"
                             label="Powtórzenia"
                             placeholder="Ilość powtórzeń"
-                            options={REPS}
+                            options={reps}
                             name={name}
                             onChange={onChange}
                             inputRef={ref}
-                            value={REPS.find((chosenReps) => chosenReps.value === value)}
+                            value={reps.find((chosenReps) => chosenReps.value === value)}
                             isError={errors?.workoutData?.[index]?.repsQuantity?.label}
                             errorMessage={
                                 errors?.workoutData?.[index]?.repsQuantity?.label?.message
@@ -120,7 +122,7 @@ export const WorkoutFormFields = ({
                     )}
                 />
             )}
-            {SERIES && (
+            {series && (
                 <Controller
                     name={`workoutData.${index}.seriesQuantity`}
                     control={control}
@@ -137,11 +139,11 @@ export const WorkoutFormFields = ({
                             className="w-full"
                             label="Serie"
                             placeholder="Dodaj ilość serii"
-                            options={SERIES}
+                            options={series}
                             name={name}
                             onChange={onChange}
                             inputRef={ref}
-                            value={SERIES.find((chosenSeries) => chosenSeries.value === value)}
+                            value={series.find((chosenSeries) => chosenSeries.value === value)}
                             isError={errors?.workoutData?.[index]?.seriesQuantity?.label}
                             errorMessage={
                                 errors?.workoutData?.[index]?.seriesQuantity?.label?.message
