@@ -1,18 +1,12 @@
-import { useEffect, useState } from "react"
+import useSWR, { Fetcher } from "swr"
 import { getAllStudents } from "@/api"
-import { IStudentData } from "@/types"
+import { IAllStudentsResponse } from "@/types"
+import { ALL_STUDENTS } from "@/constants"
 
-export const useLoadMyStudents = (refreshStudents?: string) => {
-    const [myStudents, setMyStudents] = useState<IStudentData[]>()
+const fetcher: Fetcher<IAllStudentsResponse, string> = () => getAllStudents()
 
-    useEffect(() => {
-        const getStudents = async () => {
-            const { allStudents } = await getAllStudents()
+export const useLoadMyStudents = () => {
+    const { data, error } = useSWR(ALL_STUDENTS, fetcher)
 
-            allStudents && setMyStudents(allStudents)
-        }
-        getStudents()
-    }, [refreshStudents])
-
-    return myStudents
+    return data?.allStudents
 }
