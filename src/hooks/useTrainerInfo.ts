@@ -9,7 +9,7 @@ const fetcher: Fetcher<IUserDataResponse, string> = () => getUserInfo()
 
 export const useTrainerInfo = () => {
     const dispatch = useAppDispatch()
-    const { data, error } = useSWR(GET_USER_INFO, fetcher)
+    const { data } = useSWR(GET_USER_INFO, fetcher)
 
     const { trainerName, trainerId } = data ?? {}
 

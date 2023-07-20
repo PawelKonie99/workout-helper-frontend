@@ -8,5 +8,5 @@ const fetcher: Fetcher<ITodayProductsResponse> = () => getTodayMeals()
 export const useGetTodayProduct = () => {
     const { data, error } = useSWR(TODAY_FOOD_PRODUCT, fetcher)
 
-    return { data }
+    return { data, error }
 }
