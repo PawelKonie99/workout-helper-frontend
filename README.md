@@ -6,7 +6,6 @@ Workout Helper is a gym-related application that serves as a valuable tool for i
 
 ## Technologies Used
 
--   Frontend:
 -   React
 -   TypeScript
 -   Axios
@@ -60,3 +59,11 @@ Workout Helper is a gym-related application that serves as a valuable tool for i
 -   Change user passwords
 -   Delete user accounts
 -   Search for a specific user
+
+# Backend
+
+[https://github.com/PawelKonie99/workout-helper-backend](https://github.com/PawelKonie99/workout-helper-backend)
+
+# Live version 
+
+In future ...
