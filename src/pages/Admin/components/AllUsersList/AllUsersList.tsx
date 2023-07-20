@@ -15,6 +15,8 @@ export const AllUsersList = () => {
 
     useEffect(() => {
         const loadUsers = async () => {
+            if (!updatedUser.id) return
+
             const { parsedUserData } = await getSingleUserData(updatedUser.id)
             if (parsedUserData?.id) {
                 setUsersToDisplay((prevState) =>

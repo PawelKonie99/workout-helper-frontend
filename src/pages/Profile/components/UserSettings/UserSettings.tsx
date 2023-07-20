@@ -3,11 +3,13 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { useForm, Controller } from "react-hook-form"
 import { toast } from "react-toastify"
 import { useContext, useState } from "react"
-import { NormalButton, TextInput } from "@/components"
+import { NormalButton, TextInput, WarningPopup } from "@/components"
 import { PopUpContext } from "@/contexts"
 import { changePassword, deleteTrainer } from "@/api"
 import { changeUserPasswordSchema } from "@/schema"
 import { IChangeUserPasswordSchema } from "@/types"
+import { saveUserTrainer } from "@/store/userReducer/actions/saveUserTrainer"
+import { useAppDispatch } from "@/store/hooks/storeHooks"
 
 interface Props {
     trainerName: string
@@ -20,8 +22,8 @@ const defaultFormValues: IChangeUserPasswordSchema = {
 
 export const UserSettings = ({ trainerId, trainerName }: Props) => {
     const { openPopup, closePopup } = useContext(PopUpContext)
-
     const [isLoading, setIsLoading] = useState(false)
+    const dispatch = useAppDispatch()
 
     const {
         handleSubmit,
@@ -56,38 +58,19 @@ export const UserSettings = ({ trainerId, trainerName }: Props) => {
 
     const deleteTrainerLastWarning = () => {
         openPopup(
-            <div className="w-full flex flex-col justify-center items-center">
-                <h1
-                    className="mb-8 text-xl text-center
-                "
-                >
-                    Czy na pewno chcesz usunąc trenera?
-                </h1>
-                <div className="flex">
-                    <NormalButton
-                        label="Usuń trenera"
-                        onClick={() => {
-                            sendDeleteTrainer()
-                            closePopup()
-                        }}
-                        buttonVariant="delete"
-                        className="mr-6"
-                    />
-                    <NormalButton
-                        label="Anuluj"
-                        onClick={() => {
-                            closePopup()
-                        }}
-                        buttonVariant="primary"
-                    />
-                </div>
-            </div>,
+            <WarningPopup
+                title="Czy na pewno chcesz usunąc trenera?"
+                acceptButtonLabel="Usuń trenera"
+                acceptAction={sendDeleteTrainer}
+                closePopup={closePopup}
+            />,
         )
     }
 
     const sendDeleteTrainer = async () => {
         const { message } = await deleteTrainer()
 
+        saveUserTrainer(dispatch, "", "")
         if (message === "Trener usuniety pomyślnie") {
             toast.success("Trener usuniety pomyślnie")
         } else {
@@ -118,7 +101,7 @@ export const UserSettings = ({ trainerId, trainerName }: Props) => {
 
             <form
                 onSubmit={handleSubmit(changePasswordSubmit)}
-                className={`flex flex-col pt-8 ${borderAppearance}`}
+                className={`flex flex-col ${borderAppearance}`}
             >
                 <Controller
                     name="password"

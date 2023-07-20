@@ -33,10 +33,9 @@ export interface IUserWorkoutData {
 export interface IAllWorkoutOptionsResponse {
     code: RESPONSE_CODE
     success: boolean
-    exercise?: IWorkoutOption[] | []
-    weight?: IWorkoutOption[] | []
-    reps?: IWorkoutOption[] | []
-    series?: IWorkoutOption[] | []
+    exercise: IWorkoutOption[] | []
+    reps: IWorkoutOption[] | []
+    series: IWorkoutOption[] | []
 }
 
 export interface IWorkoutOption {

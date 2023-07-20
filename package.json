@@ -3,6 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "proxy": "http://localhost:3005",
+    "license": "UNLICENSED",
     "dependencies": {
         "@craco/craco": "^6.4.5",
         "@emotion/react": "^11.10.0",
@@ -22,7 +23,7 @@
         "axios": "^0.27.2",
         "classnames": "^2.3.1",
         "eslint-plugin-react": "^7.30.1",
-        "husky": "^8.0.1",
+        "framer-motion": "^10.12.18",
         "prettier": "^2.7.1",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
@@ -35,6 +36,7 @@
         "react-toastify": "^9.0.8",
         "redux-persist": "^6.0.0",
         "sass": "^1.54.2",
+        "swr": "^2.2.0",
         "typescript": "^4.7.4",
         "web-vitals": "^2.1.4",
         "yup": "^0.32.11"
@@ -68,6 +70,7 @@
     },
     "devDependencies": {
         "autoprefixer": "^10.4.8",
+        "husky": "^8.0.3",
         "postcss": "^8.4.14",
         "tailwindcss": "^3.1.7"
     }

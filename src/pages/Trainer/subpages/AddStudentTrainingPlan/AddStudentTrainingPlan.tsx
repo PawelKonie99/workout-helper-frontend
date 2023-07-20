@@ -3,11 +3,11 @@ import { useLoadMyStudents } from "@/hooks"
 import { AddStudentTrainingPlanForm } from "../../components"
 
 const AddStudentTrainingPlan = () => {
-    const myStudents = useLoadMyStudents()
+    const { data } = useLoadMyStudents()
 
     return (
         <>
-            <AddStudentTrainingPlanForm myStudents={myStudents} />
+            <AddStudentTrainingPlanForm myStudents={data?.allStudents} />
         </>
     )
 }

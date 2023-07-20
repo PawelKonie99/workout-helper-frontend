@@ -29,7 +29,9 @@ export const TrainingPlan = () => {
                 className="mb-4"
             />
             {userTrainingPlan && userTrainingPlan?.length > 0 && (
-                <SingleWorkoutHistory workoutData={userTrainingPlan} />
+                <div className="max-w-xs md:max-w-full">
+                    <SingleWorkoutHistory workoutData={userTrainingPlan} />
+                </div>
             )}
         </div>
     )

@@ -1,31 +1,12 @@
-import { useEffect, useState } from "react"
+import useSWR, { Fetcher } from "swr"
 import { getAllWorkoutOptions } from "@/api"
-import { IWorkoutOption } from "@/types"
+import { IAllWorkoutOptionsResponse } from "@/types"
+import { ALL_WORKOUT_OPTIONS } from "@/constants/apiRoutes"
+
+const fetcher: Fetcher<IAllWorkoutOptionsResponse> = () => getAllWorkoutOptions()
 
 export const useGetAllWorkoutOptions = () => {
-    const [workoutOptions, setWorkoutOptions] = useState<{
-        EXERCISE: IWorkoutOption[]
-        WEIGHT: IWorkoutOption[]
-        REPS: IWorkoutOption[]
-        SERIES: IWorkoutOption[]
-    }>()
+    const { data, error } = useSWR(ALL_WORKOUT_OPTIONS, fetcher)
 
-    useEffect(() => {
-        const getWorkoutOptions = async () => {
-            const { exercise, series, reps, weight } = await getAllWorkoutOptions()
-
-            if (exercise && series && reps && weight) {
-                setWorkoutOptions({
-                    EXERCISE: exercise,
-                    SERIES: series,
-                    REPS: reps,
-                    WEIGHT: weight,
-                })
-            }
-        }
-
-        getWorkoutOptions()
-    }, [])
-
-    return workoutOptions
+    return { data, error }
 }

@@ -69,7 +69,7 @@ export const WorkoutHistory = ({ workoutHistory, handleChangeOffset }: Props) =>
                     />
                 )}
             </div>
-            <div className="flex flex-col mt-10 2xl:ml-4 2xl:pl-4 2xl:mt-0 border-l-2">
+            <div className="flex flex-col mt-10 2xl:ml-4 2xl:pl-4 2xl:mt-0 2xl:border-l-2">
                 <form
                     onSubmit={handleOnSubmit}
                     className=" flex flex-col justify-start items-center"
@@ -81,6 +81,7 @@ export const WorkoutHistory = ({ workoutHistory, handleChangeOffset }: Props) =>
                         value={dateToFind}
                         onChange={handleDateChange}
                         classname="w-64"
+                        isLabelAbove
                     />
 
                     <NormalButton

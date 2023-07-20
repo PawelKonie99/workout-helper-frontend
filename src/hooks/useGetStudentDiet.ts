@@ -1,22 +1,12 @@
-import { useEffect, useState } from "react"
+import useSWR, { Fetcher } from "swr"
 import { getStudentDiet } from "@/api"
-import { IDietMeals, ISelectOption } from "@/types"
+import { IGetStudenDietResponse, ISelectOption } from "@/types"
+import { GET_STUDENT_DIET } from "@/constants"
 
 export const useGetStudentDiet = (choosenStudent?: ISelectOption) => {
-    const [newlyAddedProductName, setNewlyAddedProductName] = useState("")
-    const [removedProductId, setRemovedProductId] = useState("")
-    const [userDiet, setUserDiet] = useState<IDietMeals | Record<string, never>>()
+    const fetcher: Fetcher<IGetStudenDietResponse> = () => getStudentDiet(choosenStudent)
 
-    useEffect(() => {
-        const getUserDiet = async () => {
-            if (choosenStudent) {
-                const { diet } = await getStudentDiet(choosenStudent)
+    const { data, error } = useSWR(`${GET_STUDENT_DIET}/${choosenStudent?.value}`, fetcher)
 
-                diet && setUserDiet(diet)
-            }
-        }
-        getUserDiet()
-    }, [choosenStudent, newlyAddedProductName, removedProductId])
-
-    return { userDiet, setNewlyAddedProductName, setRemovedProductId }
+    return { data, error }
 }

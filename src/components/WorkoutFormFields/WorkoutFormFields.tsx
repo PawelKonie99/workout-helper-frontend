@@ -1,3 +1,4 @@
+import classNames from "classnames"
 import { useState } from "react"
 import {
     Controller,
@@ -11,7 +12,6 @@ import { ISelectOption, IWorkoutFields, IWorkoutSeriesSchema } from "@/types"
 import { useGetAllWorkoutOptions } from "@/hooks"
 import { getBestExercise } from "@/api"
 import { isSelectOptionTypeGuard } from "@/helpers"
-import classNames from "classnames"
 
 interface Props {
     item: FieldArrayWithId<IWorkoutSeriesSchema, "workoutData", "id">
@@ -31,7 +31,7 @@ export const WorkoutFormFields = ({
     remove,
     showBestRecord = true,
 }: Props) => {
-    const { EXERCISE, WEIGHT, REPS, SERIES } = useGetAllWorkoutOptions() ?? {}
+    const { data } = useGetAllWorkoutOptions()
     const [bestExercise, setBestExercise] = useState<IWorkoutFields>()
 
     const handleExerciseNameChange = async (option: ISelectOption | unknown) => {
@@ -48,15 +48,18 @@ export const WorkoutFormFields = ({
     }
 
     const gridAppearance = classNames({
-        "lg:grid-cols-4": index === 0,
-        "lg:grid-cols-5": index >= 1 || (bestExercise && index === 0),
-        "lg:grid-cols-6": index >= 1 && bestExercise,
+        "xl:grid-cols-4": index === 0,
+        "xl:grid-cols-5": index >= 1 || (bestExercise && index === 0),
+        "xl:grid-cols-6": index >= 1 && bestExercise,
     })
 
+    const { exercise, reps, series } = data ?? {}
+
     return (
-        // <div className="flex flex-col lg:flex-row items-start mb-10 lg:h-4.35">
-        <div className={`grid grid-cols-1 ${gridAppearance} mb-10 lg:h-24`}>
-            {EXERCISE && (
+        <div
+            className={`grid grid-cols-1 ${gridAppearance} mb-10 items-end lg:min-h-120px border-t-2 pt-4 gap-y-1`}
+        >
+            {exercise && (
                 <Controller
                     name={`workoutData.${index}.exerciseName`}
                     control={control}
@@ -70,14 +73,15 @@ export const WorkoutFormFields = ({
                         },
                     }) => (
                         <CustomSelect
+                            className="w-full"
                             label="Ćwiczenie"
                             placeholder="Wybierz ćwiczenie"
-                            options={EXERCISE}
+                            options={exercise}
                             name={name}
                             onChange={onChange}
                             onChangeCustom={handleExerciseNameChange}
                             inputRef={ref}
-                            value={EXERCISE.find(
+                            value={exercise.find(
                                 (chosenExercise) => chosenExercise.value === value,
                             )}
                             isError={errors?.workoutData?.[index]?.exerciseName?.label}
@@ -88,7 +92,7 @@ export const WorkoutFormFields = ({
                     )}
                 />
             )}
-            {REPS && (
+            {reps && (
                 <Controller
                     name={`workoutData.${index}.repsQuantity`}
                     control={control}
@@ -102,13 +106,14 @@ export const WorkoutFormFields = ({
                         },
                     }) => (
                         <CustomSelect
+                            className="w-full"
                             label="Powtórzenia"
-                            placeholder="Dodaj ilość powtórzeń"
-                            options={REPS}
+                            placeholder="Ilość powtórzeń"
+                            options={reps}
                             name={name}
                             onChange={onChange}
                             inputRef={ref}
-                            value={REPS.find((chosenReps) => chosenReps.value === value)}
+                            value={reps.find((chosenReps) => chosenReps.value === value)}
                             isError={errors?.workoutData?.[index]?.repsQuantity?.label}
                             errorMessage={
                                 errors?.workoutData?.[index]?.repsQuantity?.label?.message
@@ -117,7 +122,7 @@ export const WorkoutFormFields = ({
                     )}
                 />
             )}
-            {SERIES && (
+            {series && (
                 <Controller
                     name={`workoutData.${index}.seriesQuantity`}
                     control={control}
@@ -131,13 +136,14 @@ export const WorkoutFormFields = ({
                         },
                     }) => (
                         <CustomSelect
+                            className="w-full"
                             label="Serie"
                             placeholder="Dodaj ilość serii"
-                            options={SERIES}
+                            options={series}
                             name={name}
                             onChange={onChange}
                             inputRef={ref}
-                            value={SERIES.find((chosenSeries) => chosenSeries.value === value)}
+                            value={series.find((chosenSeries) => chosenSeries.value === value)}
                             isError={errors?.workoutData?.[index]?.seriesQuantity?.label}
                             errorMessage={
                                 errors?.workoutData?.[index]?.seriesQuantity?.label?.message
@@ -146,50 +152,49 @@ export const WorkoutFormFields = ({
                     )}
                 />
             )}
-            {WEIGHT && (
-                <Controller
-                    name={`workoutData.${index}.weightQuantity`}
-                    control={control}
-                    defaultValue={item.weightQuantity}
-                    render={({ field: { name, onChange, ref, value } }) => (
-                        <div className="ml-2">
-                            <TextInput
-                                inputType="number"
-                                label="Waga (kg)"
-                                placeholder="Dodaj wagę obciązenia"
-                                name={name}
-                                onChange={onChange}
-                                inputRef={ref}
-                                value={value}
-                                isError={errors?.workoutData?.[index]?.weightQuantity}
-                                errorMessage={errors?.workoutData?.[index]?.weightQuantity?.message}
-                                isSmall
-                                isLabelAbove
-                            />
-                        </div>
-                    )}
-                />
-            )}
+
+            <Controller
+                name={`workoutData.${index}.weightQuantity`}
+                control={control}
+                defaultValue={item.weightQuantity}
+                render={({ field: { name, onChange, ref, value } }) => (
+                    <div className="ml-2">
+                        <TextInput
+                            inputType="number"
+                            label="Waga (kg)"
+                            placeholder="Dodaj wagę obciązenia"
+                            name={name}
+                            onChange={onChange}
+                            inputRef={ref}
+                            value={value}
+                            isError={errors?.workoutData?.[index]?.weightQuantity}
+                            errorMessage={errors?.workoutData?.[index]?.weightQuantity?.message}
+                            isSmall
+                            isLabelAbove
+                        />
+                    </div>
+                )}
+            />
 
             {index > 0 && (
-                <div className="flex items-center">
+                <div className="flex items-center mt-4 xl:mt-0">
                     <NormalButton
                         onClick={() => remove(index)}
                         buttonVariant="delete"
-                        className="mt-4 lg:mt-0 ml-2"
+                        className="mt-4 xl:mt-0 ml-2"
                         label="Usuń ćwiczenie"
                     />
                 </div>
             )}
 
             {bestExercise && showBestRecord && (
-                <div className="flex flex-col ml-6">
-                    <span>
-                        Twój najlepszy wynik <br /> w tym ćwiczeniu
-                    </span>
-                    <span>Cięzar: {bestExercise.weightQuantity} kg</span>
-                    <span>Powtórzenia: {bestExercise.repsQuantity}</span>
-                    <span>Serie: {bestExercise.seriesQuantity}</span>
+                <div className="flex justify-end text-sm text-end mt-4 xl:mt-0">
+                    <div className="flex flex-col">
+                        <span className="font-bold">Twój najlepszy wynik w tym ćwiczeniu</span>
+                        <span>Cięzar: {bestExercise.weightQuantity} kg</span>
+                        <span>Powtórzenia: {bestExercise.repsQuantity}</span>
+                        <span>Serie: {bestExercise.seriesQuantity}</span>
+                    </div>
                 </div>
             )}
         </div>

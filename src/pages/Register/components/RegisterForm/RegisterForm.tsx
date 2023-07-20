@@ -3,7 +3,7 @@ import { useContext } from "react"
 import { useForm, Controller, SubmitHandler } from "react-hook-form"
 import { useNavigate } from "react-router"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { NormalButton, TextInput, TextLink } from "@/components"
+import { FormContainer, InfoPopup, NormalButton, TextInput, TextLink } from "@/components"
 import { IRegisterFormSchema } from "@/types"
 import { registerSchema } from "@/schema"
 import { PopUpContext } from "@/contexts/PopupContext"
@@ -18,7 +18,6 @@ const defaultFormValues: IRegisterFormSchema = {
 
 export const RegisterForm = () => {
     const { openPopup, closePopup } = useContext(PopUpContext)
-    const navigate = useNavigate()
 
     const {
         handleSubmit,
@@ -44,44 +43,16 @@ export const RegisterForm = () => {
 
         if (success) {
             openPopup(
-                <div className="w-full flex flex-col justify-center items-center">
-                    <h1 className="mb-16 text-4xl">Zarejestrowano pomyślnie!</h1>
-                    <NormalButton
-                        label="Zaloguj się"
-                        onClick={() => {
-                            closePopup()
-                            navigate("/login")
-                        }}
-                        buttonVariant="secondary"
-                    />
-                </div>,
+                <InfoPopup
+                    title="Zarejestrowano pomyślnie!"
+                    closePopup={closePopup}
+                    navigateUrl="/login"
+                />,
             )
         } else if (message === "User already exists") {
-            openPopup(
-                <div className="w-full flex flex-col justify-center items-center">
-                    <h1 className="mb-16 text-4xl">Taki uzytkownik juz istnieje!</h1>
-                    <NormalButton
-                        label="Spróbuj ponownie!"
-                        onClick={() => {
-                            closePopup()
-                        }}
-                        buttonVariant="secondary"
-                    />
-                </div>,
-            )
+            openPopup(<InfoPopup title="Taki uzytkownik juz istnieje!" closePopup={closePopup} />)
         } else {
-            openPopup(
-                <div className="w-full flex flex-col justify-center items-center">
-                    <h1 className="mb-16 text-4xl">Niepowodzenie!</h1>
-                    <NormalButton
-                        label="Spróbuj ponownie!"
-                        onClick={() => {
-                            closePopup()
-                        }}
-                        buttonVariant="secondary"
-                    />
-                </div>,
-            )
+            openPopup(<InfoPopup title="Niepowodzenie!" closePopup={closePopup} />)
         }
 
         reset()
@@ -89,7 +60,7 @@ export const RegisterForm = () => {
 
     return (
         <div className="py-12 flex justify-center items-center">
-            <div className="bg-white px-12 py-12 flex flex-col items-center w-96 rounded-lg">
+            <FormContainer>
                 <h1 className="text-3xl pb-8">Zarejestruj sie</h1>
                 <div className="w-full mx-auto flex justify-center">
                     <form
@@ -103,13 +74,13 @@ export const RegisterForm = () => {
                                 <TextInput
                                     isError={errors.username}
                                     name={name}
-                                    label="Username"
+                                    label="Nazwa użytkownika"
                                     onChange={onChange}
                                     inputRef={ref}
                                     value={value}
                                     errorMessage={errors.username?.message}
-                                    placeholder="Username"
-                                    classname="pb-4 w-full"
+                                    placeholder="Nazwa użytkownika"
+                                    classname="pb-4 lg:pb-6 w-full"
                                 />
                             )}
                         />
@@ -128,7 +99,7 @@ export const RegisterForm = () => {
                                     inputRef={ref}
                                     errorMessage={errors.password?.message}
                                     placeholder={"Hasło"}
-                                    classname="pb-4 w-full"
+                                    classname="pb-4 lg:pb-6 w-full"
                                 />
                             )}
                         />
@@ -172,7 +143,7 @@ export const RegisterForm = () => {
                     </form>
                 </div>
                 <TextLink href="login" label="Masz juz konto? Zaloguj się!" />
-            </div>
+            </FormContainer>
         </div>
     )
 }
